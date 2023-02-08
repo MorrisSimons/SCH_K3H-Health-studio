@@ -1,7 +1,16 @@
 # K3H Health Studio
 
 ## Quickbar
+
 https://trello.com/b/p2LSsdIw/projekt-i-systemteknik
+
+## Docker
+
+Run:
+"docker build -t docker-name ."
+to build you image. After which you run:
+"docker run -dp 3000:3000 docker-name"
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 ## Getting Started with Create React App
 
