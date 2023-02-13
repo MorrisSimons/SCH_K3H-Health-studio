@@ -11,12 +11,21 @@ function App() {
     var userObject = jwt_decode(response.credential);
     console.log(userObject)
     setUser(userObject);
+    document.getElementById("signInDiv").hidden = true;
+    document.getElementById("profile").hidden = true;
   }
+
+function handleSignOut(event) {
+  setUser({});
+  document.getElementById("signInDiv").hidden = false;
+}
+
+
 
   useEffect(() => {
     /* global google */
     google.accounts.id.initialize({
-      client_id: "",
+      client_id: "72199090145-kr35p8ja4oba9ulkatl3219nq6as6s9j.apps.googleusercontent.com",
       callback: handleCallbackResponse,
     });
 
@@ -25,19 +34,24 @@ function App() {
       { theme: "outline", size: "large"}
     );
     
+    google.accounts.id.prompt();
   }, []);
   //if we have no user show login button
   //if we have a user show log out button 
   return (
     <div className="App">
       <div id= "signInDiv"></div>
-      { user &&
-        <div>
-          <img src={user.picture} alt="user profile" />
-          <h1> Welcome {user.name} </h1>
-          <h2> Email: {user.email} </h2>
-          <h2> User ID: {user.sub} </h2>
-        </div>
+      { Object.keys(user).length !== 0 &&
+        <button onClick= {(e) => handleSignOut(e)}>Sign Out</button>
+      }
+      
+      { Object.keys(user).length !== 0 &&
+        <div id='profile'>
+        <img src={user.picture} alt="user profile" />
+        <h1> Welcome {user.name} </h1>
+        <h2> Email: {user.email} </h2>
+        <h2> User ID: {user.sub} </h2>
+      </div>
       }
     </div>
   );
