@@ -25,7 +25,7 @@ function handleSignOut(event) {
   useEffect(() => {
     /* global google */
     google.accounts.id.initialize({
-      client_id: "72199090145-kr35p8ja4oba9ulkatl3219nq6as6s9j.apps.googleusercontent.com",
+      client_id: "",
       callback: handleCallbackResponse,
     });
 
