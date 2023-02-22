@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import jwt_decode from 'jwt-decode';
 import config from '../config.json';
-import Cookies from 'js-cookie';
+import Cookies from 'js-cookie'; // Add this line
 
 function LoginFunction() {
   const [user, setUser] = useState({});
@@ -10,13 +10,20 @@ function LoginFunction() {
     console.log('Encoded JWT ID token: ' + response.credential);
     var userObject = jwt_decode(response.credential);
     console.log(userObject);
-    Cookies.set('jwt', response.credential);
     setUser(userObject);
+    document.getElementById('signInDiv').hidden = true;
+    document.getElementById('profile').hidden = true;
+
+    // Save the JWT token in local storage
+    localStorage.setItem('jwt', response.credential);
   }
 
   function handleSignOut(event) {
     setUser({});
     document.getElementById('signInDiv').hidden = false;
+
+    // Clear the JWT token from local storage
+    localStorage.removeItem('jwt');
   }
 
   useEffect(() => {
@@ -25,22 +32,25 @@ function LoginFunction() {
       client_id: config['client-id'],
       callback: handleCallbackResponse,
     });
-
+  
     google.accounts.id.renderButton(document.getElementById('signInDiv'), {
       theme: 'outline',
       size: 'large',
     });
-
+  
     google.accounts.id.prompt();
-
+  
     console.log(document.getElementById('signInDiv')); // Add this line
     console.log(document.getElementById('profile')); // Add this line
+  
+    // Check if the JWT cookie exists and decode it
+    const jwtCookie = Cookies.get('jwt');
+    if (jwtCookie) {
+      const userObject = jwt_decode(jwtCookie);
+      setUser(userObject);
+    }
   }, []);
-
-  // Save user state to localStorage whenever it changes
-  useEffect(() => {
-    localStorage.setItem('user', JSON.stringify(user));
-  }, [user]);
+  
 
   return (
     <div className="LoginFunction">
@@ -53,5 +63,5 @@ function LoginFunction() {
   );
 }
 
-
 export default LoginFunction;
+
