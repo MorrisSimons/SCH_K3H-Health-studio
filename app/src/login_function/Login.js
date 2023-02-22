@@ -1,26 +1,23 @@
-import  { useEffect, useState} from 'react';
-import jwt_decode from "jwt-decode";
+import { useEffect, useState } from 'react';
+import jwt_decode from 'jwt-decode';
 import config from '../config.json';
+import Cookies from 'js-cookie';
 
-
-function App() {
-  const [ user, setUser ] = useState({});
+function LoginFunction() {
+  const [user, setUser] = useState({});
 
   function handleCallbackResponse(response) {
-    console.log("Encoded JWT ID token: " + response.credential);
+    console.log('Encoded JWT ID token: ' + response.credential);
     var userObject = jwt_decode(response.credential);
-    console.log(userObject)
+    console.log(userObject);
+    Cookies.set('jwt', response.credential);
     setUser(userObject);
-    document.getElementById("signInDiv").hidden = true;
-    document.getElementById("profile").hidden = true;
   }
 
-function handleSignOut(event) {
-  setUser({});
-  document.getElementById("signInDiv").hidden = false;
-}
-
-
+  function handleSignOut(event) {
+    setUser({});
+    document.getElementById('signInDiv').hidden = false;
+  }
 
   useEffect(() => {
     /* global google */
@@ -29,25 +26,32 @@ function handleSignOut(event) {
       callback: handleCallbackResponse,
     });
 
-    google.accounts.id.renderButton(
-      document.getElementById("signInDiv"),
-      { theme: "outline", size: "large"}
-    );
-    
-    google.accounts.id.prompt();
-  }, []);
-  //if we have no user show login button
-  //if we have a user show log out button 
-  return (
-    <div className="App">
-      <div id= "signInDiv"></div>
-      { Object.keys(user).length !== 0 &&
-        <button onClick= {(e) => handleSignOut(e)}>Sign Out</button>
-        
-      }
+    google.accounts.id.renderButton(document.getElementById('signInDiv'), {
+      theme: 'outline',
+      size: 'large',
+    });
 
+    google.accounts.id.prompt();
+
+    console.log(document.getElementById('signInDiv')); // Add this line
+    console.log(document.getElementById('profile')); // Add this line
+  }, []);
+
+  // Save user state to localStorage whenever it changes
+  useEffect(() => {
+    localStorage.setItem('user', JSON.stringify(user));
+  }, [user]);
+
+  return (
+    <div className="LoginFunction">
+      <div id="signInDiv"></div>
+      {Object.keys(user).length !== 0 && (
+        <button onClick={(e) => handleSignOut(e)}>Sign Out</button>
+      )}
+      <p>hello</p>
     </div>
   );
 }
 
-export default App;
+
+export default LoginFunction;
