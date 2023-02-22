@@ -10,7 +10,7 @@
 
 # testing
 /coverage
-/.garbage
+/.garbag
 
 # production
 /build

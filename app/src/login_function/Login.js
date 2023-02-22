@@ -1,7 +1,7 @@
 import  { useEffect, useState} from 'react';
 import jwt_decode from "jwt-decode";
 import config from '../config.json';
-export const [ user, setUser ] = array;
+
 
 function App() {
   const [ user, setUser ] = useState({});
