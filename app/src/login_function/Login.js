@@ -11,11 +11,13 @@ function LoginFunction() {
     var userObject = jwt_decode(response.credential);
     console.log(userObject);
     setUser(userObject);
+
     document.getElementById('signInDiv').hidden = true;
-    document.getElementById('profile').hidden = true;
 
     // Save the JWT token in local storage
-    localStorage.setItem('jwt', response.credential);
+    localStorage.setItem('user', JSON.stringify(userObject));
+    console.log("success");
+    window.location.reload();
   }
 
   function handleSignOut(event) {
@@ -23,7 +25,8 @@ function LoginFunction() {
     document.getElementById('signInDiv').hidden = false;
 
     // Clear the JWT token from local storage
-    localStorage.removeItem('jwt');
+    localStorage.removeItem('user');
+
   }
 
   useEffect(() => {
@@ -41,7 +44,6 @@ function LoginFunction() {
     google.accounts.id.prompt();
   
     console.log(document.getElementById('signInDiv')); // Add this line
-    console.log(document.getElementById('profile')); // Add this line
   
     // Check if the JWT cookie exists and decode it
     const jwtCookie = Cookies.get('jwt');
@@ -58,10 +60,8 @@ function LoginFunction() {
       {Object.keys(user).length !== 0 && (
         <button onClick={(e) => handleSignOut(e)}>Sign Out</button>
       )}
-      <p>hello</p>
     </div>
   );
 }
 
 export default LoginFunction;
-
