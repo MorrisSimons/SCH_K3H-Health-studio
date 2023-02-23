@@ -2,6 +2,9 @@ import { Routes, Route } from "react-router-dom"
 import Home from "./components/Home"
 import About from "./components/About"
 import NotFound from "./components/NotFound"
+import Contact from "./components/Contact"
+import Policy from "./components/Policy"
+import Terms from "./components/Terms"
 import LoginDashboard from "./components/LoginDashboard"
 
 const Views = () => {
@@ -12,9 +15,9 @@ const Views = () => {
 		<Routes>
 			<Route path="/" element={isLoggedIn ? <LoginDashboard /> : <Home />} />
 			<Route path="/about" element={<About />} />
-			<Route path="/contact" element={<h1>Contact Us</h1>} />
-			<Route path="/policy" element={<h1>Privacy Policy</h1>} />
-			<Route path="/terms" element={<h1>Terms of Service</h1>} />
+			<Route path="/contact" element={<Contact />} />
+			<Route path="/policy" element={<Policy />} />
+			<Route path="/terms" element={<Terms />} />
 			<Route path="*" element={<NotFound />} />
 		</Routes>
 	)
