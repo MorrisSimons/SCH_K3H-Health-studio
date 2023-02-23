@@ -1,6 +1,7 @@
 import React from "react"
 import { Link } from "react-router-dom"
 import Footer from "./Footer"
+import Header from "./Header"
 import Login from "../login_function/Login"
 
 function Home() {
@@ -14,6 +15,7 @@ function Home() {
 
 	return (
 		<div>
+			<Header />
 			<h1>Welcome to the Index page</h1>
 			<button id="loginButton" onClick={onLoginPress}>
 				Login
@@ -22,9 +24,8 @@ function Home() {
 				<Login />
 			</div>
 			<Link to="/about">
-        		<button>Go to About</button>
-      		</Link>
-
+				<button>Go to About</button>
+			</Link>
 
 			<Footer />
 		</div>

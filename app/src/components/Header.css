@@ -1,0 +1,30 @@
+.header {
+	background-color: #1d6976;
+	border-bottom: 1px solid #000000;
+	left: 0;
+	top: 0;
+	height: 80px;
+	width: 100%;
+	position: relative;
+}
+
+.headerLogoLeft {
+	height: 80px;
+	position: absolute;
+	left: 25px;
+	top: 0;
+}
+
+.headerPhantom {
+	display: block;
+	padding: 0px;
+	height: 10px;
+	width: 100%;
+}
+
+.headerLogoRight {
+	height: 80px;
+	position: absolute;
+	right: 25px;
+	top: 0;
+}
