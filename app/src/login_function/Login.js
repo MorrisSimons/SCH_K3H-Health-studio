@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import jwt_decode from 'jwt-decode';
 import config from '../config.json';
-import Cookies from 'js-cookie'; // Add this line
 
 function LoginFunction() {
   const [user, setUser] = useState({});
@@ -18,6 +17,7 @@ function LoginFunction() {
     localStorage.setItem('user', JSON.stringify(userObject));
     console.log("success");
     window.location.reload();
+    
   }
 
   function handleSignOut(event) {
@@ -45,12 +45,6 @@ function LoginFunction() {
   
     console.log(document.getElementById('signInDiv')); // Add this line
   
-    // Check if the JWT cookie exists and decode it
-    const jwtCookie = Cookies.get('jwt');
-    if (jwtCookie) {
-      const userObject = jwt_decode(jwtCookie);
-      setUser(userObject);
-    }
   }, []);
   
 
