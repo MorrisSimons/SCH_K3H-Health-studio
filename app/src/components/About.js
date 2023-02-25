@@ -3,7 +3,6 @@ import Header from "./Header"
 import Footer from "./Footer"
 
 function About() {
-	const user = JSON.parse(localStorage.getItem("user"))
 	return (
 		<div>
 			<Header />
