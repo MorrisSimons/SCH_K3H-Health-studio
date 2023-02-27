@@ -14,7 +14,7 @@ const Views = () => {
 
 	return (
 		<Routes>
-			<Route path="/" element={isLoggedIn ? <LoginDashboardA /> : <Home />} />
+			<Route path="/" element={isLoggedIn ? <LoginDashboardC /> : <Home />} />
 			<Route path="/about" element={<About />} />
 			<Route path="/contact" element={<Contact />} />
 			<Route path="/policy" element={<Policy />} />
