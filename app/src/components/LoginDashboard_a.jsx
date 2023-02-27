@@ -59,11 +59,8 @@ function LoginDashboard() {
               </Link>
             );
           })}
+          <button className="logout" onClick={handleSignOut}>Logga ut</button>
         </div>
-        <button className="logout" onClick={handleSignOut}>Logga ut</button>
-        <h1>Admin</h1>
-        <p>{user?.name}</p>
-        <p>{user?.email}</p>
         <Footer />
       </div>
     </section>

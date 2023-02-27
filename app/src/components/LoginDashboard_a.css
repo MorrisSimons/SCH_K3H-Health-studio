@@ -11,13 +11,13 @@
 
 .dashboard__button {
   background-color: #f5f5f5;
-  padding: 30px;
+  padding: 40px;
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   transition: transform 0.2s ease-in-out;
   cursor: pointer;
   width: calc(100% - 20px);
-  margin: 0 10px 20px;
+  margin: 0 10px 10px;
   border: none;
   outline: none;
   font-size: 1.6rem;
@@ -32,17 +32,16 @@
 .logout {
   grid-column: 1 / -1;
   background-color: #f5f5f5;
-  padding: 30px;
+  padding: 40px;
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   transition: transform 0.2s ease-in-out;
   cursor: pointer;
-  width: calc(90% - 20px);
-  margin: 0 10px 20px;
   border: none;
   outline: none;
   font-size: 1.6rem;
-  margin-left: 20px;
-  margin-right: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 99%;
   color: black;
 }
