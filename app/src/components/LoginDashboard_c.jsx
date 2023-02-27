@@ -60,6 +60,8 @@ function LoginDashboard() {
 
   return (
     <section className="dashboard__section_admin">
+
+    <Header />
         <h1>LoginDashboard</h1>
 
     <div className="panel-container">

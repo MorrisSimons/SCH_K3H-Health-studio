@@ -1,0 +1,13 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+img {
+    max-width: 50%;
+}
+p {
+    font-size: 3rem;
+    font-weight: 600;
+    margin: 0;
+}

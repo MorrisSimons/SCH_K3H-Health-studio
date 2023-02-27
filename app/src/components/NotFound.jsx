@@ -1,17 +1,23 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import "./NotFound.css";
+import image404 from "../images/404.webp";
+import Header from "./Header";
 
 const NotFound = () => {
     const navigate = useNavigate();
     useEffect(() => {
         setTimeout(() => {
             navigate("/");
-        }, 2000);
+        }, 5000);
     }, [navigate]);
     return (
         <div>
-            <h1>404 Not Found!</h1>
-            <p>Redirecting to home page...</p>
+            <Header />
+            <div className="container">
+                <img src={image404} alt="not found page img" className="container__image"/>
+            </div>
+            <p> Redirecting you to the home page... </p>
         </div>
     );
 };
