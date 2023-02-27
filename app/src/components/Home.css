@@ -1,0 +1,29 @@
+.home_section{
+    display: flex;
+    justify-content: center;
+}
+
+.login_box{
+    width: 320px;
+    height: 390px;
+    background: #1d6976;
+    position: absolute;
+    padding: 50px 30px;
+    border-radius: 30px;
+    text-align: center;
+    color: white;
+    justify-content: center;
+}
+
+.login_box_google{
+    display: flex;
+    padding-top: 15%;
+    justify-content: center;
+}
+
+.about_us_button{
+    margin-top: 1rem;
+    background-color: aliceblue;
+    color:black;
+    width: 65%;
+}

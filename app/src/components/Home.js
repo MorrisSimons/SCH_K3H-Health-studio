@@ -3,31 +3,26 @@ import { Link } from "react-router-dom"
 import Footer from "./Footer"
 import Header from "./Header"
 import Login from "../login_function/Login"
+import "./Home.css"
+import K3H2 from "../images/K3H2.png" 
 
 function Home() {
-	function onLoginPress() {
-		const loginButton = document.getElementById("loginButton")
-		const loginPrompt = document.getElementById("loginPrompt")
-
-		loginPrompt.hidden = false
-		loginButton.hidden = true
-	}
 
 	return (
 		<div>
 			<Header />
-			<h1>Welcome to the Index page</h1>
-			<button id="loginButton" onClick={onLoginPress}>
-				Login
-			</button>
-			<div id="loginPrompt" hidden>
-				<Login />
+			<section className="home_section">
+			<div className="login_box">
+				<img className="homeLogo" src={K3H2} alt="K3H2" />
+				<h1>Health Studio Login</h1>
+				<h5>Good health starts with you</h5>
+				<div className="login_box_google">
+					<Login />
+				</div>
+				<Link to="/About"><button className="about_us_button">About us</button></Link>
 			</div>
-			<Link to="/about">
-				<button>Go to About</button>
-			</Link>
-
-			<Footer />
+			</section>
+ 			<Footer />
 		</div>
 	)
 }

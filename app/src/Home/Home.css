@@ -1,0 +1,82 @@
+section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login_button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem;
+
+}
+.create_account_button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: aquamarine;
+    margin: 1rem;
+}
+.home_pagebox {
+    background-color: rgb(163, 159, 159);
+    width: fit-content;
+    padding-left: 5rem;
+    padding-right: 5rem;
+    padding-top: 1rem;
+    padding-bottom: 2rem;
+    border-radius: 30px;
+}
+h4
+{
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.home_pagebox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+    max-width: 500px;
+    background-color: #646464bd;
+    padding: 4rem;
+    border-radius: 25px;
+  }
+  
+  label {
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+  }
+  
+  input[type="text"],
+  input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #f7f7f7;
+  }
+  
+  button[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    cursor: pointer;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #3e8e41;
+  }
+  
