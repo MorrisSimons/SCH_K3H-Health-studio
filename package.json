@@ -1,7 +1,26 @@
 {
-  "dependencies": {
-    "jwt-decode": "^3.1.2",
-    "react-router": "^6.8.1",
-    "react-router-dom": "^6.8.1"
-  }
+	"name": "server",
+	"description": "## Quickbar",
+	"version": "1.0.0",
+	"main": "server.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"start": "node server.js",
+		"app": "cd app && npm start"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/MorrisSimons/SCH_K3H-Health-studio.git"
+	},
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/MorrisSimons/SCH_K3H-Health-studio/issues"
+	},
+	"homepage": "https://github.com/MorrisSimons/SCH_K3H-Health-studio#readme",
+	"dependencies": {
+		"body-parser": "^1.20.2",
+		"cors": "^2.8.5",
+		"express": "^4.18.2"
+	}
 }
