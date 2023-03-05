@@ -1,8 +1,11 @@
 // Import dependencies
 const express = require("express")
-const bodyParser = require("body-parser")
-const cors = require("cors")
-const path = require("path")
+const fs = require("fs")
+const sqlite = require("sql.js")
+
+// Import our database
+const filebuffer = fs.readFileSync("db/usda-nnd.sqlite3")
+const db = new sqlite.Database(filebuffer)
 
 // Create a new express application named 'app'
 const app = express()
