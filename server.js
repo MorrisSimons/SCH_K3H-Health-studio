@@ -1,11 +1,14 @@
 // Import dependencies
 const express = require("express")
 const fs = require("fs")
-const sqlite = require("sql.js")
+const sqlite3 = require("sqlite3").verbose()
+
+//--------------------------------
+// Note app in exspress is diffrent from the app folder in react
+//--------------------------------
 
 // Import our database
-const filebuffer = fs.readFileSync("db/usda-nnd.sqlite3")
-const db = new sqlite.Database(filebuffer)
+const db = new sqlite3.Database("db/k3h.sqlite3")
 
 // Create a new express application named 'app'
 const app = express()
@@ -19,28 +22,18 @@ app.use((req, res, next) => {
 	next()
 })
 
-// Configure the bodyParser middleware
-app.use(bodyParser.json())
-app.use(
-	bodyParser.urlencoded({
-		extended: true,
-	})
-)
-
-// Configure the CORs middleware
-app.use(cors())
-
 // This middleware informs the express application to serve our compiled React files
-if (
-	process.env.NODE_ENV === "production" ||
-	process.env.NODE_ENV === "staging"
-) {
-	app.use(express.static(path.join(__dirname, "client/build")))
-
-	app.get("*", function (req, res) {
-		res.sendFile(path.join(__dirname, "client/build", "index.html"))
-	})
+if (process.env.NODE_ENV === "production") {
+	app.use(express.static(path.join(__dirname, "app/build")))
 }
+
+app.get("/api/getAll", (req, res) => {
+	const sql = "SELECT * FROM k3h"
+	res.json({
+		msg: "Get All",
+		query: db.exec(sql),
+	})
+})
 
 // Catch any bad requests
 app.get("*", (req, res) => {
