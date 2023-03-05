@@ -5,9 +5,9 @@
 	"main": "server.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"start": "cd api && node server.js",
+		"start": "node server.js",
 		"app": "cd app && npm start",
-		"dev": "cd api && nodemon server.js"
+		"startDev": "nodemon server.js"
 	},
 	"repository": {
 		"type": "git",
