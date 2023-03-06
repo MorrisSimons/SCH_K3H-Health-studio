@@ -3,12 +3,20 @@ const express = require("express")
 const fs = require("fs")
 const sqlite3 = require("sqlite3").verbose()
 
+// Import API components
+const controller = require("./api/controllers/controllers")
+
 //--------------------------------
 // Note app in exspress is diffrent from the app folder in react
 //--------------------------------
 
 // Import our database
-const db = new sqlite3.Database("db/k3h.sqlite3")
+const db = new sqlite3.Database("db/k3h.sqlite3", (err) => {
+	if (err) {
+		console.error(err.message)
+	}
+	console.log("Connected to the k3h database.")
+})
 
 // Create a new express application named 'app'
 const app = express()
@@ -27,13 +35,38 @@ if (process.env.NODE_ENV === "production") {
 	app.use(express.static(path.join(__dirname, "app/build")))
 }
 
-app.get("/api/getAll", (req, res) => {
-	const sql = "SELECT * FROM k3h"
-	res.json({
-		msg: "Get All",
-		query: db.exec(sql),
+app.post("/api/addUser", (req, res) => {
+	const sql = "INSERT INTO user (email) VALUES (?)"
+	const params = ["test2@test2.test5"]
+
+	db.run(sql, params, function (err, result) {
+		if (err) {
+			res.status(400).json({ error: err.message })
+			return
+		}
+		res.json({
+			message: "success",
+			data: params,
+		})
 	})
 })
+
+app.get("/api/getUsers", (req, res) => {
+	const sql = 'SELECT * FROM "user"'
+
+	db.exec(sql, (err, result) => {
+		if (err) {
+			res.status(400).json({ error: err.message })
+			return
+		}
+		res.json({
+			message: "success",
+			data: result,
+		})
+	})
+})
+
+app.get("/api/saySomething", controller.saySomething)
 
 // Catch any bad requests
 app.get("*", (req, res) => {
