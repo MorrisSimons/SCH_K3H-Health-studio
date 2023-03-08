@@ -37,7 +37,7 @@ if (process.env.NODE_ENV === "production") {
 
 app.post("/api/addUser", (req, res) => {
 	const sql = "INSERT INTO user (email) VALUES (?)"
-	const params = ["test2@test2.test5"]
+	const params = ["test2@test2.test7"]
 
 	db.run(sql, params, function (err, result) {
 		if (err) {
@@ -52,18 +52,16 @@ app.post("/api/addUser", (req, res) => {
 })
 
 app.get("/api/getUsers", (req, res) => {
-	const sql = 'SELECT * FROM "user"'
-
-	db.exec(sql, (err, result) => {
-		if (err) {
-			res.status(400).json({ error: err.message })
-			return
-		}
-		res.json({
-			message: "success",
-			data: result,
+	getUsers()
+		.then((data) => {
+			res.json({
+				message: "success",
+				data: data,
+			})
 		})
-	})
+		.catch((err) => {
+			res.status(400).json({ error: err.message })
+		})
 })
 
 app.get("/api/saySomething", controller.saySomething)
@@ -74,6 +72,21 @@ app.get("*", (req, res) => {
 		msg: "Catch All",
 	})
 })
+
+async function getUsers() {
+	return new Promise((acc, rej) => {
+		db.all("SELECT * FROM user", (err, rows) => {
+			if (err) return rej(err)
+			acc(
+				rows.map((item) =>
+					Object.assign({}, item, {
+						completed: item.completed === 1,
+					})
+				)
+			)
+		})
+	})
+}
 
 // Configure our server to listen on the port defiend by our port variable
 app.listen(port, () => console.log(`BACK_END_SERVICE_PORT: ${port}`))
