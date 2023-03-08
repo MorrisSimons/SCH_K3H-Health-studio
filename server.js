@@ -1,6 +1,5 @@
 // Import dependencies
 const express = require("express")
-const fs = require("fs")
 const sqlite3 = require("sqlite3").verbose()
 
 // Import API components
@@ -53,14 +52,14 @@ app.post("/api/addUser", (req, res) => {
 
 app.get("/api/getUsers", (req, res) => {
 	getUsers()
-		.then((data) => {
+		.then((users) => {
 			res.json({
 				message: "success",
-				data: data,
+				data: users,
 			})
 		})
-		.catch((err) => {
-			res.status(400).json({ error: err.message })
+		.catch((error) => {
+			res.status(400).json({ error: error.message })
 		})
 })
 
@@ -73,20 +72,14 @@ app.get("*", (req, res) => {
 	})
 })
 
+// Configure our server to listen on the port defiend by our port variable
+app.listen(port, () => console.log(`BACK_END_SERVICE_PORT: ${port}`))
+
 async function getUsers() {
-	return new Promise((acc, rej) => {
+	return new Promise((resolve, reject) => {
 		db.all("SELECT * FROM user", (err, rows) => {
-			if (err) return rej(err)
-			acc(
-				rows.map((item) =>
-					Object.assign({}, item, {
-						completed: item.completed === 1,
-					})
-				)
-			)
+			if (err) return reject(err)
+			resolve(rows)
 		})
 	})
 }
-
-// Configure our server to listen on the port defiend by our port variable
-app.listen(port, () => console.log(`BACK_END_SERVICE_PORT: ${port}`))
