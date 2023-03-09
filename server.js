@@ -27,6 +27,13 @@ db.init()
 		process.exit(1)
 	})
 
+//Add shutdown process
+const gracefulShutdown = () => {
+	db.teardown()
+		.catch(() => {})
+		.then(() => process.exit())
+}
+
 // This application level middleware prints incoming requests to the servers console, useful to see incoming requests
 app.use((req, res, next) => {
 	console.log(`Request_Endpoint: ${req.method} ${req.url}`)
@@ -54,3 +61,6 @@ app.get("*", (req, res) => {
 
 // Configure our server to listen on the port defiend by our port variable
 app.listen(port, () => console.log(`BACK_END_SERVICE_PORT: ${port}`))
+process.on("SIGINT", gracefulShutdown)
+process.on("SIGTERM", gracefulShutdown)
+process.on("SIGUSR2", gracefulShutdown)
