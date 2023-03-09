@@ -29,6 +29,9 @@ app.use((req, res, next) => {
 	next()
 })
 
+// This middleware parses incoming requests with JSON payloads
+app.use(express.json())
+
 // This middleware informs the express application to serve our compiled React files
 if (process.env.NODE_ENV === "production") {
 	app.use(express.static(path.join(__dirname, "app/build")))
