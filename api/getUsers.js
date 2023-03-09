@@ -1,4 +1,4 @@
-const db = require("../persistence")
+const db = require("../db")
 
 module.exports = async (req, res) => {
 	const users = await db.getUsers()

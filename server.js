@@ -1,6 +1,6 @@
 // Import dependencies
 const express = require("express")
-const db = require("./persistence")
+const db = require("./db")
 
 // Import API components
 const addUser = require("./api/addUser")
@@ -20,7 +20,8 @@ const port = process.env.PORT || 5000
 // Import our database
 db.init()
 	.then(() => {
-		app.listen(port, () => console.log("Listening on port ${port}"))
+		// Configure our server to listen on the port defiend by our port variable
+		app.listen(port, () => console.log(`BACK_END_SERVICE_PORT: ${port}`))
 	})
 	.catch((err) => {
 		console.error(err)
@@ -59,8 +60,6 @@ app.get("*", (req, res) => {
 	})
 })
 
-// Configure our server to listen on the port defiend by our port variable
-app.listen(port, () => console.log(`BACK_END_SERVICE_PORT: ${port}`))
 process.on("SIGINT", gracefulShutdown)
 process.on("SIGTERM", gracefulShutdown)
 process.on("SIGUSR2", gracefulShutdown)

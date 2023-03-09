@@ -1,6 +1,6 @@
 const sqlite3 = require("sqlite3").verbose()
 const fs = require("fs")
-const location = process.env.SQLITE_DB_LOCATION || "/db/k3h.sqlite3"
+const location = process.env.SQLITE_DB_LOCATION || "./db/k3h.sqlite3"
 
 let db, dbAll, dbRun
 
@@ -88,7 +88,6 @@ module.exports = {
 	teardown,
 	getUsers,
 	getUser,
-	storeUser,
-	updateUser,
+	addUser,
 	removeUser,
 }
