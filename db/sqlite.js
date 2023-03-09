@@ -58,8 +58,14 @@ async function getUser(email) {
 async function addUser(user) {
 	return new Promise((acc, rej) => {
 		db.run(
-			"INSERT INTO user (email, firstName, lastName, accountType) VALUES (?, ?, ?, ?)",
-			[user.email, user.firstName, user.lastName, user.accountType || "user"],
+			"INSERT INTO user (id, email, firstName, lastName, accountType) VALUES (?, ?, ?, ?, ?)",
+			[
+				user.id,
+				user.email,
+				user.firstName,
+				user.lastName,
+				user.accountType || "user",
+			],
 			(err) => {
 				if (err) return rej(err)
 				acc()
