@@ -7,6 +7,9 @@ const addUser = require("./api/addUser")
 const deleteUser = require("./api/deleteUser")
 const getUsers = require("./api/getUsers")
 
+const getForms = require("./api/getForms")
+const getForm = require("./api/getForm")
+
 //--------------------------------
 // Note app in exspress is diffrent from the app folder in react
 //--------------------------------
@@ -24,6 +27,7 @@ db.init()
 		app.listen(port, () => console.log(`BACK_END_SERVICE_PORT: ${port}`))
 	})
 	.catch((err) => {
+		console.log("Failed to connect to database. Exiting...")
 		console.error(err)
 		process.exit(1)
 	})
@@ -52,6 +56,8 @@ if (process.env.NODE_ENV === "production") {
 app.get("/api/getUsers", getUsers)
 app.post("/api/addUser", addUser)
 app.delete("/api/deleteUser", deleteUser)
+app.get("/api/getForms", getForms)
+app.get("/api/getForm", getForm)
 
 // Catch any bad requests
 app.get("*", (req, res) => {
