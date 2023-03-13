@@ -32,6 +32,7 @@
 		"jwt-decode": "^3.1.2",
 		"nodemon": "^2.0.21",
 		"react-router-dom": "^6.9.0",
+		"react-select": "^5.7.0",
 		"sql": "0.67.0",
 		"sqlite3": "^5.1.4",
 		"uuid": "^9.0.0",

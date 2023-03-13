@@ -59,7 +59,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.post('/api/addUser', (req, res) => {
 	const { email, firstName, lastName, accountType } = req.body;
 	// Validate the email
-	const emailRegex = /\S+@\S+\.\S+/;
+	const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 	if (!emailRegex.test(email)) {
 	  return res.status(400).json({ message: 'Invalid email' });
 	}
@@ -71,7 +71,7 @@ app.post('/api/addUser', (req, res) => {
 	}
   
 	// Validate the account type
-	const allowedTypes = ['user', 'admin'];
+	const allowedTypes = ['user', 'admin', "coach"];
 	if (!allowedTypes.includes(accountType)) {
 	  return res.status(400).json({ message: 'Invalid account type' });
 	}
