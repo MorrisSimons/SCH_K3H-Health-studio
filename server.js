@@ -50,16 +50,17 @@ app.use((req, res, next) => {
 // This middleware allows cross origin requests
 app.use(cors())
 
-
 // This middleware parses incoming requests with JSON payloads
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 
+
 //handel errors for add users
 
-  app.post('/api/addUser', (req, res) => {
+//handel errors for add users
+app.post('/api/addUser', (req, res) => {
 	const { email, firstName, lastName, accountType } = req.body;
-
+  
 	// Validate the email
 	const emailRegex = /\S+@\S+\.\S+/;
 	if (!emailRegex.test(email)) {
@@ -77,18 +78,20 @@ app.use(bodyParser.urlencoded({ extended: false }))
 	if (!allowedTypes.includes(accountType)) {
 	  return res.status(400).json({ message: 'Invalid account type' });
 	}
-	try {
-		addUser(email, firstName, lastName, accountType);
-		res.status(200).json({ message: 'User added successfully' });
-	  } catch (err) {
-		console.error(err);
-		res.status(500).json({ message: 'Failed to add user to database' });
-	  }
-  });
   
-//
-
-
+	// Check if the email already exists in the database
+	User.findOne({ email: email }, function(err, user) {
+	  if (err) {
+		return res.status(500).json({ message: err.message });
+	  }
+	  if (user) {
+		return res.status(409).json({ message: 'Email already exists' });
+	  }
+	  
+	  // If the email doesn't exist, add the user to the database
+	  addUser(req, res);
+	});
+  });
 
 // This middleware informs the express application to serve our compiled React files
 if (process.env.NODE_ENV === "production") {
