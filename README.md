@@ -8,7 +8,7 @@ https://www.figma.com/file/SEQnpyUGgkIsYSH9ZHfZpy/Untitled?node-id=1%3A2&t=qcgGl
 
 https://docs.google.com/spreadsheets/d/1A71pdULP74vXl7q310uMCRC2WnlqLa_422mEqzRx7qQ/edit#gid=215556197
 
-##biblotek/requirements
+## Biblotek/requirements
 https://github.com/MorrisSimons/SCH_K3H-Health-studio/issues/16
 
 ## Node JS SQLITE
