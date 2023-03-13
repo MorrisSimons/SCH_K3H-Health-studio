@@ -56,11 +56,8 @@ app.use(bodyParser.urlencoded({ extended: false }))
 
 
 //handel errors for add users
-
-//handel errors for add users
 app.post('/api/addUser', (req, res) => {
 	const { email, firstName, lastName, accountType } = req.body;
-  
 	// Validate the email
 	const emailRegex = /\S+@\S+\.\S+/;
 	if (!emailRegex.test(email)) {
@@ -70,7 +67,7 @@ app.post('/api/addUser', (req, res) => {
 	// Validate the first name and last name
 	const nameRegex = /^[a-zA-Z]+$/;
 	if (!nameRegex.test(firstName) || !nameRegex.test(lastName)) {
-	  return res.status(400).json({ message: 'Invalid name' });
+	  return res.status(400).json({ message: 'Invalid name, dont use numbers' });
 	}
   
 	// Validate the account type
@@ -80,7 +77,7 @@ app.post('/api/addUser', (req, res) => {
 	}
   
 	// Check if the email already exists in the database
-	User.findOne({ email: email }, function(err, user) {
+	Users.findOne({ email: email }, function(err, user) {
 	  if (err) {
 		return res.status(500).json({ message: err.message });
 	  }
