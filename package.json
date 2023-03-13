@@ -8,7 +8,8 @@
 		"start": "concurrently \"npm run startDev\" \"npm run app\"",
 		"server": "node server.js",
 		"app": "cd app && npm start",
-		"startDev": "nodemon server.js"
+		"dev": "nodemon server.js",
+		"kill": "killall node"
 	},
 	"repository": {
 		"type": "git",
