@@ -50,6 +50,33 @@ app.use((req, res, next) => {
 // This middleware allows cross origin requests
 app.use(cors())
 
+//handel errors for add users
+
+  app.post('/api/addUser', (req, res) => {
+	const { email, firstName, lastName, accountType } = req.body;
+  
+	// Validate the email
+	const emailRegex = /\S+@\S+\.\S+/;
+	if (!emailRegex.test(email)) {
+	  return res.status(400).json({ message: 'Invalid email' });
+	}
+  
+	// Validate the first name and last name
+	const nameRegex = /^[a-zA-Z]+$/;
+	if (!nameRegex.test(firstName) || !nameRegex.test(lastName)) {
+	  return res.status(400).json({ message: 'Invalid name' });
+	}
+  
+	// Validate the account type
+	const allowedTypes = ['user', 'admin'];
+	if (!allowedTypes.includes(accountType)) {
+	  return res.status(400).json({ message: 'Invalid account type' });
+	}
+	addUser(email, firstName, lastName, accountType)
+  });
+  
+//
+
 // This middleware parses incoming requests with JSON payloads
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -60,7 +87,7 @@ if (process.env.NODE_ENV === "production") {
 }
 
 app.get("/api/getUsers", getUsers)
-app.post("/api/addUser", addUser)
+
 app.delete("/api/deleteUser", deleteUser)
 app.get("/api/getForms", getForms)
 app.get("/api/getForm", getForm)
