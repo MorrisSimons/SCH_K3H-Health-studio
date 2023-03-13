@@ -10,17 +10,29 @@ https://docs.google.com/spreadsheets/d/1A71pdULP74vXl7q310uMCRC2WnlqLa_422mEqzRx
 
 ## library/requirements
 `npm install create-react-app`
+
 `npm install react-router-dom`
+
 `npm install jwt-decode`
+
 `npm install react-scripts --save-dev`
+
 `npm install express`
+
 `npm install sqlite3`
+
 `npm install uuid`
+
 `npm install nodemon`
+
 `npm install web-vitals`
+
 `npm install concurrently`
+
 `npm install file-regex -S`
+
 `npm i --save react-select`
+
 `npm install emailjs-com`
 
 ## Node JS SQLITE
