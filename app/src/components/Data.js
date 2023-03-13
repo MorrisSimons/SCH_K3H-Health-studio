@@ -28,7 +28,6 @@ function Data() {
       <ul>
         {users.map(user => (
           <div key={user.id}>
-			<br/>
 			<p>First name: {user.firstName}</p> 
 			<p>Last name: {user.lastName}</p>
 			<p>Email: {user.email}</p>
