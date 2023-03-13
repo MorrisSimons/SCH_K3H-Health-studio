@@ -1,3 +1,4 @@
+
 .home_section{
     display: flex;
     justify-content: center;
@@ -10,15 +11,25 @@
     border-radius: 30px;
     text-align: center;
     color: white;
+    
+    
 }
 
-.about_us_button{
-    margin-top: 2rem;
-    background-color: aliceblue;
+.submit_button{
+    background-color: var(color-success-variant);
     color:black;
     width: 65%;
-    margin-bottom: 50px;
     justify-self: center;
+    margin-top: 20px;
+}
+
+.cancel_button{
+    background-color: var(color-warning-variant);
+    color:black;
+    width: 65%;
+    justify-self: center;
+    margin-top: 10px;
+    margin-bottom: 20px;
 }
 
 .form_add_coach{ 

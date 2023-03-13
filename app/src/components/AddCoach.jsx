@@ -30,7 +30,9 @@ function Home() {
                 <input type="email" name="mailto" className="input_box" placeholder='Email' required/>
                 <input type="text" name="FirstName" className="input_box" placeholder='Förnamn' required/>
                 <input type="text" name="LastName" className="input_box" placeholder='Efternamn' required/>
-                <button type="submit" className='about_us_button'>Send Message</button>
+                <input type="text" name="LagNamn" className="input_box" placeholder='Lagnamn' required/>
+                <button type="submit" className='submit_button'>Skicka inbjudan</button>
+                <Link to="/"><button className="cancel_button">Gå tillbaka</button></Link>
                 </form>
                 </div>
                 </section>
