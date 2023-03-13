@@ -41,7 +41,7 @@ async function getUsers() {
 	return new Promise((acc, rej) => {
 		db.all("SELECT * FROM user", (err, rows) => {
 			if (err) return rej(err)
-			acc(rows)
+			acc(rows.map((users) => Object.assign({}, users)))
 		})
 	})
 }

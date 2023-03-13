@@ -1,5 +1,6 @@
 // Import dependencies
 const express = require("express")
+const bodyParser = require("body-parser")
 const db = require("./db")
 
 // Import API components
@@ -46,7 +47,8 @@ app.use((req, res, next) => {
 })
 
 // This middleware parses incoming requests with JSON payloads
-app.use(express.json())
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: false }))
 
 // This middleware informs the express application to serve our compiled React files
 if (process.env.NODE_ENV === "production") {

@@ -5,6 +5,7 @@ import NotFound from "./components/NotFound"
 import Contact from "./components/Contact"
 import Policy from "./components/Policy"
 import Terms from "./components/Terms"
+import Data from "./components/Data"
 import LoginDashboardA from "./components/LoginDashboard_a"
 import LoginDashboardC from "./components/LoginDashboard_c"
 
@@ -14,7 +15,8 @@ const Views = () => {
 
 	return (
 		<Routes>
-			<Route path="/" element={isLoggedIn ? <LoginDashboardA /> : <Home />} />
+			<Route path="/" element={isLoggedIn ? <LoginDashboardC /> : <Home />} />
+			<Route path="/Data" element={<Data />} />
 			<Route path="/about" element={<About />} />
 			<Route path="/contact" element={<Contact />} />
 			<Route path="/policy" element={<Policy />} />
