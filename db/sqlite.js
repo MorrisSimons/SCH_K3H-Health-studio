@@ -5,33 +5,33 @@ const location = process.env.SQLITE_DB_LOCATION || "./db/k3h.sqlite3"
 let db, dbAll, dbRun
 
 function init() {
-	const dirName = require("path").dirname(location)
-	if (!fs.existsSync(dirName)) {
-		fs.mkdirSync(dirName, { recursive: true })
-	}
+    const dirName = require("path").dirname(location)
+    if (!fs.existsSync(dirName)) {
+        fs.mkdirSync(dirName, { recursive: true })
+    }
 
-	return new Promise((acc, rej) => {
-		db = new sqlite3.Database(location, (err) => {
-			if (err) return rej(err)
+    return new Promise((acc, rej) => {
+        db = new sqlite3.Database(location, (err) => {
+            if (err) return rej(err)
 
-			if (process.env.NODE_ENV !== "test")
-				console.log(`Using sqlite database at ${location}`)
+            if (process.env.NODE_ENV !== "test")
+                console.log(`Using sqlite database at ${location}`)
 
-			// Createt the user tables
-			db.run("CREATE DATABASE IF NOT EXISTS k3h")
-			db.run("USE k3h")
-			db.run(
-				"CREATE TABLE IF NOT EXISTS user (id varchar(36), email varchar(255), firstName varchar(255), lastName varchar(255), accountType varchar(255))",
-				(err, result) => {
-					if (err) return rej(err)
-					acc()
-				}
-			)
-			// Create the Form tabels
-			db.run("CREATE DATABASE IF NOT EXISTS forms")
-		})
-	})
+            // Create the user table
+            db.run(
+                "CREATE TABLE IF NOT EXISTS user (id varchar(36), email varchar(255), firstName varchar(255), lastName varchar(255), accountType varchar(255))"
+            )
+            
+            // Create the Form tables
+            db.run(
+                "CREATE TABLE IF NOT EXISTS forms (id INTEGER PRIMARY KEY, name TEXT)"
+            )
+            
+            acc()
+        })
+    })
 }
+
 
 async function teardown() {
 	return new Promise((acc, rej) => {
