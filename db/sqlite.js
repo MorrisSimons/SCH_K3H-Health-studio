@@ -17,18 +17,13 @@ function init() {
 			if (process.env.NODE_ENV !== "test")
 				console.log(`Using sqlite database at ${location}`)
 
-			// Createt the user tables
-			// db.run("CREATE DATABASE IF NOT EXISTS k3h")
-			//
 			db.run(
-				"CREATE TABLE IF NOT EXISTS user (id varchar(36), email varchar(255), firstName varchar(255), lastName varchar(255), accountType varchar(255))",
+				"CREATE TABLE IF NOT EXISTS user(id varchar(36), email VARCHAR(255) primary key, firstName VARCHAR(255), lastName VARCHAR(255), accountType VARCHAR(255))",
 				(err, result) => {
 					if (err) return rej(err)
 					acc()
 				}
 			)
-			// Create the Form tabels
-			// db.exec("CREATE DATABASE IF NOT EXISTS forms")
 		})
 	})
 }
