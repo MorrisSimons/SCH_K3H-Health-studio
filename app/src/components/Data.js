@@ -6,7 +6,7 @@ import Header from "./Header"
 //Then dispaly them in a table
 
 function Data() {
-	const [users, setUsers] = useState([])
+	const [user, setUsers] = useState([])
 	const [error, setError] = useState(null)
 	useEffect(() => {
 		fetch("http://localhost:5000/api/getUsers", { method: "GET" })
@@ -25,6 +25,16 @@ function Data() {
 				console.log(error)
 			}).finally
 	}, [])
+	console.log(user)
+
+	// Object.keys(user).length !== 0 && (
+	// 	<button onClick={(e) => handleSignOut(e)}>Sign Out</button>
+	// )
+	{
+		;<p>
+			Welcome {user?.firstName} {user?.lastName}
+		</p>
+	}
 
 	return (
 		<div>
@@ -38,13 +48,6 @@ function Data() {
 							<th>Last Name</th>
 							<th>Email</th>
 						</tr>
-						{users.map((user) => (
-							<tr>
-								<td>{user.firstName}</td>
-								<td>{user.lastName}</td>
-								<td>{user.email}</td>
-							</tr>
-						))}
 					</table>
 					<p className="data_text">
 						Here is the data from the database. This data is being fetched from
