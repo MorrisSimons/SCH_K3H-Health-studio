@@ -5,7 +5,7 @@
 	"main": "server.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"start": "concurrently \"npm run startDev\" \"npm run app\"",
+		"start": "concurrently \"npm run server\" \"npm run app\"",
 		"server": "node server.js",
 		"app": "cd app && npm start",
 		"dev": "nodemon server.js",

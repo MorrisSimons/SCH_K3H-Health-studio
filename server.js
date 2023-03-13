@@ -1,5 +1,6 @@
 // Import dependencies
 const express = require("express")
+const cors = require('cors');
 const bodyParser = require("body-parser")
 const db = require("./db")
 
@@ -45,6 +46,9 @@ app.use((req, res, next) => {
 	console.log(`Request_Endpoint: ${req.method} ${req.url}`)
 	next()
 })
+
+// This middleware allows cross origin requests
+app.use(cors())
 
 // This middleware parses incoming requests with JSON payloads
 app.use(bodyParser.json())

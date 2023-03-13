@@ -94,6 +94,7 @@ function LoginDashboard() {
         <p>{user?.name}</p>
         <p>{user?.email}</p>
         <button onClick={handleSignOut}>Sign Out</button>
+        
         <Footer />
     </section>
   );
