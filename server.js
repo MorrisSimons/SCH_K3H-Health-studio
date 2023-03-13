@@ -75,19 +75,7 @@ app.post('/api/addUser', (req, res) => {
 	if (!allowedTypes.includes(accountType)) {
 	  return res.status(400).json({ message: 'Invalid account type' });
 	}
-  
-	// Check if the email already exists in the database
-	Users.findOne({ email: email }, function(err, user) {
-	  if (err) {
-		return res.status(500).json({ message: err.message });
-	  }
-	  if (user) {
-		return res.status(409).json({ message: 'Email already exists' });
-	  }
-	  
-	  // If the email doesn't exist, add the user to the database
-	  addUser(req, res);
-	});
+	addUser(req, res);
   });
 
 // This middleware informs the express application to serve our compiled React files

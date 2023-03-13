@@ -6,14 +6,11 @@ import "./Header.css"
 
 function Header() {
 	return (
-		<div>
-			<div className="header">
-				<Link to="/">
-					<img className="headerLogoLeft" src={K3H2} alt="K3H2" />
-				</Link>
-				<img className="headerLogoRight" src={icon} alt="icon" />
-			</div>
-			<div className="headerPhantom"></div>
+		<div className="header">
+			<Link to="/">
+				<img className="headerLogoLeft" src={K3H2} alt="K3H2" />
+			</Link>
+			<img className="headerLogoRight" src={icon} alt="icon" />
 		</div>
 	)
 }
