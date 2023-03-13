@@ -28,6 +28,7 @@ function init() {
 	})
 }
 
+
 async function teardown() {
 	return new Promise((acc, rej) => {
 		db.close((err) => {
@@ -57,22 +58,27 @@ async function getUser(email) {
 
 async function addUser(user) {
 	return new Promise((acc, rej) => {
+		if (!user.id || !user.email || !user.firstName || !user.lastName) {
+			const error = new Error("Missing required user information.")
+			error.statusCode = 400
+			return rej(error)
+		}
 		db.run(
 			"INSERT INTO user (id, email, firstName, lastName, accountType) VALUES (?, ?, ?, ?, ?)",
-			[
-				user.id,
-				user.email,
-				user.firstName,
-				user.lastName,
-				user.accountType || "user",
-			],
+			[		user.id,		user.email,		user.firstName,		user.lastName,		user.accountType || "user",	],
 			(err) => {
-				if (err) return rej(err)
+				if (err) {
+					console.error(err.message) // log the specific error message
+					const error = new Error("Failed to add user to database.")
+					error.statusCode = 500
+					return rej(error)
+				}
 				acc()
 			}
 		)
 	})
 }
+
 
 async function removeUser(email) {
 	return new Promise((acc, rej) => {

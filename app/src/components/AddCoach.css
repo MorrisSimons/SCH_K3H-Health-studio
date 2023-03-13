@@ -1,0 +1,75 @@
+
+.home_section{
+    display: flex;
+    justify-content: center;
+}
+
+.add_coach_box{
+    width: 35rem;
+    background: #1d6976;
+    padding: 50px 30px;
+    border-radius: 30px;
+    text-align: center;
+    color: white;
+    
+    
+}
+
+.submit_button{
+    background-color: aliceblue;
+    color: white;
+    border: none;
+    padding: 0.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: var(color-success-variant);
+    color:black;
+    width: 65%;
+    justify-self: center;
+    margin-top: 20px;
+}
+
+.cancel_button{
+    background-color: aliceblue;
+    color: white;
+    border: none;
+    padding: 0.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: var(color-warning-variant);
+    color:black;
+    width: 65%;
+    justify-self: center;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.form_add_coach{
+    display: grid;
+    grid-template-columns: 1fr;
+    box-sizing: border-box;
+    grid-gap: 10px;
+    margin-top: 20px;
+}
+
+.input_box{
+    height: 0.1rem;
+    width: 100%;
+    text-align: center;
+    justify-self: center;
+    padding: 1.5rem;
+    border-radius: 0.4rem;
+    border: 2px solid var(--color-bg-variant);
+    resize: none;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+.select_box{
+    width: 100% ;
+    text-align: center;
+    justify-self: center;
+    border-radius: 0.8rem;
+    border: 2px solid var(--color-bg-variant);
+    resize: none;
+    color: black;
+}
