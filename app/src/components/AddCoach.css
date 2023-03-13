@@ -1,0 +1,40 @@
+.home_section{
+    display: flex;
+    justify-content: center;
+}
+
+.add_coach_box{
+    width: 35rem;
+    background: #1d6976;
+    padding: 50px 30px;
+    border-radius: 30px;
+    text-align: center;
+    color: white;
+}
+
+.about_us_button{
+    margin-top: 2rem;
+    background-color: aliceblue;
+    color:black;
+    width: 65%;
+    margin-bottom: 50px;
+    justify-self: center;
+}
+
+.form_add_coach{ 
+    display: grid;
+    grid-template-columns: 1fr;
+    box-sizing: border-box;
+    grid-gap: 10px;
+    margin-top: 20px;
+}
+
+.input_box{
+    width: 85%;
+    text-align: center;
+    justify-self: center;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    border: 2px solid var(--color-bg-variant);
+    resize: none;
+}

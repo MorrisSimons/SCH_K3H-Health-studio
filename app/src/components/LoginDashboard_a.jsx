@@ -41,8 +41,8 @@ function LoginDashboard() {
 		},
 		{
 			id: 6,
-			title: "Se lag",
-			navigation: "/se_lag",
+			title: "Lägg till coach",
+			navigation: "/add_coach",
 		},
 	]
 

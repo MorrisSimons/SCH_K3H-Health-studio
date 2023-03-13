@@ -10,7 +10,9 @@ function Header() {
 			<Link to="/">
 				<img className="headerLogoLeft" src={K3H2} alt="K3H2" />
 			</Link>
+			<Link to="/myprofile">
 			<img className="headerLogoRight" src={icon} alt="icon" />
+			</Link>
 		</div>
 	)
 }

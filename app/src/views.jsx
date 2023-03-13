@@ -8,6 +8,7 @@ import Terms from "./components/Terms"
 import Data from "./components/Data"
 import LoginDashboardA from "./components/LoginDashboard_a"
 import LoginDashboardC from "./components/LoginDashboard_c"
+import AddCoach from "./components/AddCoach"
 
 const Views = () => {
 	const user = JSON.parse(localStorage.getItem("user"))
@@ -15,13 +16,14 @@ const Views = () => {
 
 	return (
 		<Routes>
-			<Route path="/" element={isLoggedIn ? <LoginDashboardC /> : <Home />} />
+			<Route path="/" element={isLoggedIn ? <LoginDashboardA /> : <Home />} />
 			<Route path="/Data" element={<Data />} />
 			<Route path="/about" element={<About />} />
 			<Route path="/contact" element={<Contact />} />
 			<Route path="/policy" element={<Policy />} />
 			<Route path="/terms" element={<Terms />} />
 			<Route path="*" element={<NotFound />} />
+			<Route path="/add_coach" element={<AddCoach />} />
 		</Routes>
 	)
 }

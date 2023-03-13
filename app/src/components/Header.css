@@ -23,7 +23,8 @@
 }
 
 .headerLogoRight {
-	height: 70%;
+	height: 50px;
+	margin-top: -25px;
 	position: absolute;
 	right: 25px;
 }
