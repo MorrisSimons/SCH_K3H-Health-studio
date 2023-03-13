@@ -17,18 +17,13 @@ function init() {
 			if (process.env.NODE_ENV !== "test")
 				console.log(`Using sqlite database at ${location}`)
 
-			// Createt the user tables
-			db.run("CREATE DATABASE IF NOT EXISTS k3h")
-			db.run("USE k3h")
 			db.run(
-				"CREATE TABLE IF NOT EXISTS user (id varchar(36), email varchar(255), firstName varchar(255), lastName varchar(255), accountType varchar(255))",
+				"CREATE TABLE IF NOT EXISTS user(id varchar(36), email VARCHAR(255) primary key, firstName VARCHAR(255), lastName VARCHAR(255), accountType VARCHAR(255))",
 				(err, result) => {
 					if (err) return rej(err)
 					acc()
 				}
 			)
-			// Create the Form tabels
-			db.run("CREATE DATABASE IF NOT EXISTS forms")
 		})
 	})
 }
@@ -46,7 +41,7 @@ async function getUsers() {
 	return new Promise((acc, rej) => {
 		db.all("SELECT * FROM user", (err, rows) => {
 			if (err) return rej(err)
-			acc(rows)
+			acc(rows.map((users) => Object.assign({}, users)))
 		})
 	})
 }
@@ -88,60 +83,56 @@ async function removeUser(email) {
 	})
 }
 
-async function getForms() {
+async function getTabels() {
 	return new Promise((acc, rej) => {
 		try {
-			db.run("USE forms")
-			const result = db.all("SELECT TABLES", (err, rows) => {
-				if (err) return err
-				rows
-			})
-			db.run("USE k3h")
-			acc(result)
+			const result = db.all(
+				'SELECT name FROM sqlite_master WHERE type="table" NOT LIKE "sqlite_%"',
+				(err, rows) => {
+					if (err) return rej(err)
+					acc(rows)
+				}
+			)
 		} catch (err) {
 			rej(err)
 		}
 	})
 }
 
-async function getForm(formName) {
+async function getTable(tableName) {
 	return new Promise((acc, rej) => {
 		try {
-			db.run("USE forms")
-			const result = db.all("SELECT * FROM ?", [formName], (err, rows) => {
-				if (err) return err
-				rows
+			const result = db.all("SELECT * FROM ?", [tableName], (err, rows) => {
+				if (err) return rej(err)
+				acc(rows)
 			})
-			db.run("USE k3h")
-			acc(result)
 		} catch (err) {
 			rej(err)
 		}
 	})
 }
 
-async function addForm(form) {
+async function addTable(table) {
 	return new Promise((acc, rej) => {
 		try {
-			formName = form.name
-			formFields = form.fields
-			formTypes = form.types
+			tableName = table.name
+			tableFields = table.fields
+			tableTypes = table.types
 
-			db.run("USE forms")
-			db.run("CREATE TABLE IF NOT EXISTS ?", [formName], (err, result) => {
+			db.run("CREATE TABLE IF NOT EXISTS ?", [tableName], (err, result) => {
 				if (err) return rej(err)
 			})
 
-			while (formFields.length > 0) {
+			while (tableFields.length > 0) {
 				db.run(
 					"ALTER TABLE ? ADD COLUMN ? ?",
-					[formName, formFields.pop(), formTypes.pop()],
+					[tableName, tableFields.pop(), tableTypes.pop()],
 					(err, result) => {
 						if (err) return rej(err)
 					}
 				)
 			}
-			db.run("USE k3h")
+
 			acc()
 		} catch (err) {
 			rej(err)
@@ -149,14 +140,13 @@ async function addForm(form) {
 	})
 }
 
-async function removeForm(formName) {
+async function removeTable(tableName) {
 	return new Promise((acc, rej) => {
 		try {
-			db.run("USE forms")
-			db.run("DROP TABLE ?", [formName], (err, result) => {
+			db.run("DROP TABLE ?", [tableName], (err, result) => {
 				if (err) return rej(err)
 			})
-			db.run("USE k3h")
+
 			acc()
 		} catch (err) {
 			rej(err)
@@ -171,8 +161,8 @@ module.exports = {
 	getUser,
 	addUser,
 	removeUser,
-	getForms,
-	getForm,
-	addForm,
-	removeForm,
+	getTabels,
+	getTable,
+	addTable,
+	removeTable,
 }

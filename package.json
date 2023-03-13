@@ -5,9 +5,11 @@
 	"main": "server.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"start": "node server.js",
+		"start": "npm run server & npm run app",
+		"server": "node server.js",
 		"app": "cd app && npm start",
-		"startDev": "nodemon server.js"
+		"dev": "nodemon server.js",
+		"kill": "killall node"
 	},
 	"repository": {
 		"type": "git",
