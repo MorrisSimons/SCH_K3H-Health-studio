@@ -6,9 +6,11 @@ import Contact from "./components/Contact"
 import Policy from "./components/Policy"
 import Terms from "./components/Terms"
 import Data from "./components/Data"
+//import Add_form from "./components/Add_form_page"
 import LoginDashboardA from "./components/LoginDashboard_a"
 import LoginDashboardC from "./components/LoginDashboard_c"
 import AddCoach from "./components/AddCoach"
+import Add_form_page from "./components/Add_form_page"
 
 const Views = () => {
 	const user = JSON.parse(localStorage.getItem("user"))
@@ -24,6 +26,7 @@ const Views = () => {
 			<Route path="/terms" element={<Terms />} />
 			<Route path="*" element={<NotFound />} />
 			<Route path="/add_coach" element={<AddCoach />} />
+			<Route path="/createform" element={<Add_form_page	/>} />
 		</Routes>
 	)
 }
