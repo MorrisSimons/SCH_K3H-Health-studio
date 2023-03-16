@@ -1,0 +1,42 @@
+.table {
+	background-color: white;
+	border-collapse: collapse;
+	border-spacing: 0;
+	left: 50%;
+}
+
+.tableStriped {
+	background-color: white;
+	border-collapse: collapse;
+	border-spacing: 0;
+	left: 50%;
+}
+.trRow {
+	background-color: white;
+	border-bottom: 1px solid #ddd;
+	color: #333;
+	font-size: 20px;
+	font-weight: 700;
+	padding: 10px 15px;
+	text-align: left;
+	vertical-align: bottom;
+}
+
+.thText {
+	background-color: white;
+	border-bottom: 1px solid black;
+	font-size: 25px;
+	font-weight: 700;
+	padding: 10px 15px;
+	text-align: left;
+	vertical-align: bottom;
+}
+
+.tdText {
+	border-bottom: 1px solid #ddd;
+	color: #333;
+	font-size: 20px;
+	padding: 10px 15px;
+	text-align: left;
+	vertical-align: top;
+}
