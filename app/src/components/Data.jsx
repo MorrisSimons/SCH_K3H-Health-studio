@@ -18,13 +18,23 @@ function Data() {
 	const forms = [
 		{
 			id: 1,
-			table: "user",
-			columns: ["email", "firstName", "lastName", "accountType"],
+			tableName: "user",
+			columns: [
+				{ name: "email", value: false },
+				{ name: "firstName", value: false },
+				{ name: "lastName", value: false },
+				{ name: "accountType", value: false },
+			],
 		},
 		{
 			id: 2,
-			value: "admin",
-			columns: ["email2", "firstName2", "lastName2", "accountType2"],
+			tableName: "admin",
+			columns: [
+				{ name: "email2", value: false },
+				{ name: "firstName2", value: true },
+				{ name: "lastName2", value: false },
+				{ name: "accountType2", value: false },
+			],
 		},
 	]
 
@@ -87,17 +97,41 @@ function Data() {
 						{selectedForms &&
 							selectedForms.map((forms) => (
 								<div className="formOptionsName" key={forms.id}>
-									{forms.value}
-									{forms.columns &&
-										forms.columns.map((column) => (
-											<div className="formOptionsColumn">
-												{column}
-												<input
-													className="formOptionsColumnButton"
-													type="radio"
-												/>
-											</div>
-										))}
+									<table className="formOptionsNameTable">
+										<thead>
+											<tr>
+												<td className="formOptionsNameTableText">
+													{forms.tableName}
+												</td>
+												<td className="formOptionsNameTableButton">
+													<button className="formOptionsNameTableButton">
+														X
+													</button>
+												</td>
+											</tr>
+										</thead>
+										{forms.columns &&
+											forms.columns.map((column) => (
+												<tbody key={column.name}>
+													<tr>
+														<td className="formOptionsNameTableText">
+															{column.name}
+														</td>
+														<td className="formOptionsNameTableButton">
+															<input
+																className="formOptionsNameTableButton"
+																type="checkbox"
+																value={column.value}
+																onClick={() => {
+																	column.value = !column.value
+																	console.log(column.value)
+																}}
+															/>
+														</td>
+													</tr>
+												</tbody>
+											))}
+									</table>
 								</div>
 							))}
 					</div>
