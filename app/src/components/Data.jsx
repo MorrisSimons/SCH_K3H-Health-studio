@@ -96,43 +96,41 @@ function Data() {
 					<div className="formOptionsSelection">
 						{selectedForms &&
 							selectedForms.map((forms) => (
-								<div className="formOptionsName" key={forms.id}>
-									<table className="formOptionsNameTable">
-										<thead>
-											<tr>
-												<td className="formOptionsNameTableText">
-													{forms.tableName}
-												</td>
-												<td className="formOptionsNameTableButton">
-													<button className="formOptionsNameTableButton">
-														X
-													</button>
-												</td>
-											</tr>
-										</thead>
-										{forms.columns &&
-											forms.columns.map((column) => (
-												<tbody key={column.name}>
-													<tr>
-														<td className="formOptionsNameTableText">
-															{column.name}
-														</td>
-														<td className="formOptionsNameTableButton">
-															<input
-																className="formOptionsNameTableButton"
-																type="checkbox"
-																value={column.value}
-																onClick={() => {
-																	column.value = !column.value
-																	console.log(column.value)
-																}}
-															/>
-														</td>
-													</tr>
-												</tbody>
-											))}
-									</table>
-								</div>
+								<table className="formOptionsNameTable" key={forms.id}>
+									<thead>
+										<tr>
+											<th className="formOptionsNameTableText">
+												{forms.tableName}
+											</th>
+											<td className="formOptionsNameTableButton">
+												<button className="formOptionsNameTableButton">
+													X
+												</button>
+											</td>
+										</tr>
+									</thead>
+									{forms.columns &&
+										forms.columns.map((column) => (
+											<tbody key={column.name}>
+												<tr>
+													<td className="formOptionsNameTableText">
+														{column.name}
+													</td>
+													<td className="formOptionsNameTableButton">
+														<input
+															className="formOptionsNameTableButton"
+															type="checkbox"
+															value={column.value}
+															onClick={() => {
+																column.value = !column.value
+																console.log(column.value)
+															}}
+														/>
+													</td>
+												</tr>
+											</tbody>
+										))}
+								</table>
 							))}
 					</div>
 				</div>
