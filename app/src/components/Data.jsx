@@ -63,14 +63,11 @@ function Data() {
 			console.log("Admin form selected")
 			setSelectedForms((selectedForms) => [...selectedForms, forms[1]])
 		}
-		setSelectedForms((selectedForms) => [...selectedForms, selectedOption])
 	}
 
 	return (
 		<div>
 			<Header />
-			// Get all forms from database and display them in a table for the user to
-			select
 			<div className="form">
 				<div className="formSelect">
 					<label className="formSelectLabel">Select a form:</label>
@@ -89,52 +86,49 @@ function Data() {
 					<div className="formOptionsSelection">
 						{selectedForms &&
 							selectedForms.map((forms) => (
-								<div className="formOptionName" key={forms.id}>
+								<div className="formOptionsName" key={forms.id}>
 									{forms.value}
 									{forms.columns &&
 										forms.columns.map((column) => (
-											<div className="formOptionColumn" key={column}>
+											<div className="formOptionsColumn">
 												{column}
 												<input
-													className="formOptionColumn"
+													className="formOptionsColumnButton"
 													type="radio"
-													checked={true}
 												/>
 											</div>
 										))}
 								</div>
-								// Get the columns from the selected form and display them as radio buttons
 							))}
 					</div>
-					{selectedForms && selectedForms.map((form) => console.log(form))}
 				</div>
+				<center>
+					<div className="table">
+						<table className="tableStriped">
+							<thead>
+								<tr className="trRow">
+									<th className="thText">First Name</th>
+									<th className="thText">Last Name</th>
+									<th className="thText">Email</th>
+									<th className="thText">Account Type</th>
+								</tr>
+							</thead>
+							<tbody>
+								{users &&
+									users.map((user) => (
+										<tr className="trRow" key={user.id}>
+											<td className="tdText">{user.firstName}</td>
+											<td className="tdText">{user.lastName}</td>
+											<td className="tdText">{user.email}</td>
+											<td className="tdText">{user.accountType}</td>
+										</tr>
+									))}
+								{error && <div>Error: {error.message}</div>}
+							</tbody>
+						</table>
+					</div>
+				</center>
 			</div>
-			<center>
-				<div className="table">
-					<table className="tableStriped">
-						<thead>
-							<tr className="trRow">
-								<th className="thText">First Name</th>
-								<th className="thText">Last Name</th>
-								<th className="thText">Email</th>
-								<th className="thText">Account Type</th>
-							</tr>
-						</thead>
-						<tbody>
-							{users &&
-								users.map((user) => (
-									<tr className="trRow" key={user.id}>
-										<td className="tdText">{user.firstName}</td>
-										<td className="tdText">{user.lastName}</td>
-										<td className="tdText">{user.email}</td>
-										<td className="tdText">{user.accountType}</td>
-									</tr>
-								))}
-							{error && <div>Error: {error.message}</div>}
-						</tbody>
-					</table>
-				</div>
-			</center>
 			<Footer />
 		</div>
 	)
