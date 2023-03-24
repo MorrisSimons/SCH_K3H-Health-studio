@@ -40,3 +40,41 @@
 	text-align: left;
 	vertical-align: top;
 }
+
+.form {
+	background-color: white;
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+.formSelect {
+	background-color: white;
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+.formSelectLabel {
+	background-color: white;
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+.formSelectSelection {
+	background-color: white;
+	border-collapse: collapse;
+	border-spacing: 0;
+	max-width: 200px;
+	min-width: 100px;
+}
+
+.formSelectButton {
+	background-color: white;
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+.formSelectOption {
+	background-color: white;
+	border-collapse: collapse;
+	border-spacing: 0;
+}
