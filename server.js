@@ -1,7 +1,6 @@
 // Import dependencies
 const express = require("express")
-const cors = require('cors');
-const bodyParser = require("body-parser")
+const cors = require("cors")
 const db = require("./db")
 
 // Import API components
@@ -51,32 +50,31 @@ app.use((req, res, next) => {
 app.use(cors())
 
 // This middleware parses incoming requests with JSON payloads
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: false }))
-
+app.use(express.json())
+app.use(express.urlencoded({ extended: false }))
 
 //handel errors for add users
-app.post('/api/addUser', (req, res) => {
-	const { email, firstName, lastName, accountType } = req.body;
+app.post("/api/addUser", (req, res) => {
+	const { email, firstName, lastName, accountType } = req.body
 	// Validate the email
-	const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+	const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 	if (!emailRegex.test(email)) {
-	  return res.status(400).json({ message: 'Invalid email' });
+		return res.status(400).json({ message: "Invalid email" })
 	}
-  
+
 	// Validate the first name and last name
-	const nameRegex = /^[a-zA-Z]+$/;
+	const nameRegex = /^[a-zA-Z]+$/
 	if (!nameRegex.test(firstName) || !nameRegex.test(lastName)) {
-	  return res.status(400).json({ message: 'Invalid name, dont use numbers' });
+		return res.status(400).json({ message: "Invalid name, dont use numbers" })
 	}
-  
+
 	// Validate the account type
-	const allowedTypes = ['user', 'admin', "coach"];
+	const allowedTypes = ["user", "admin", "coach"]
 	if (!allowedTypes.includes(accountType)) {
-	  return res.status(400).json({ message: 'Invalid account type' });
+		return res.status(400).json({ message: "Invalid account type" })
 	}
-	addUser(req, res);
-  });
+	addUser(req, res)
+})
 
 // This middleware informs the express application to serve our compiled React files
 if (process.env.NODE_ENV === "production") {

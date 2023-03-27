@@ -1,79 +1,77 @@
-
 .add_form {
-  text-align: center;
+	text-align: center;
 }
 
 .add_form_container {
-  background-color: rgb(146, 170, 170);
-  padding-left: 10px;
-  width: 575px;
-  padding-bottom: 0px;
-  padding-top: 0px;
+	background-color: rgb(146, 170, 170);
+	padding-left: 10px;
+	width: 575px;
+	padding-bottom: 0px;
+	padding-top: 0px;
 }
 
-.nameInput{
-  padding-bottom: 30px;
-  margin-left: 135px;
+.nameInput {
+	padding-top: 30px;
+	padding-bottom: 10px;
+	margin-left: left;
 }
 
 .add_form_field {
-  background-color: rgb(28, 129, 129);
-  width: 550px;
-  height: 50px;
-  margin-bottom: 5px;
-  padding-top: 5px;
-  border-radius: 5px
-
+	background-color: rgb(28, 129, 129);
+	width: 550px;
+	height: 50px;
+	margin-bottom: 5px;
+	padding-top: 5px;
+	border-radius: 5px;
 }
-.add_form_select{
-  margin-left: 5px ;
-  margin-right: 5px;
-  height: 30px;
-  border-radius: 5px;
+.add_form_select {
+	margin-left: 5px;
+	margin-right: 5px;
+	height: 30px;
+	border-radius: 5px;
 }
 
 .add_form_input {
-  margin-left: 10px;
-  margin-right: 10px;
-  width: 250px;
-  height: 25px;
-  
+	margin-left: 10px;
+	margin-right: 10px;
+	width: 250px;
+	height: 25px;
 }
 
 .add {
-  margin-left: 10px;
+	margin-left: 10px;
 }
 
-.delete{
-  display:inline-block;
-  padding:0.2em 1.45em;
-  margin:0.1em;
-  margin-top: 1em;
-  margin-left: 12px;
-  border:0.15em solid #CCCCCC;
-  box-sizing: border-box;
-  text-decoration:none;
-  font-family:'Segoe UI','Roboto',sans-serif;
-  font-weight:400;
-  color:#000000;
-  background-color:#fffefe;
-  text-align:center;
-  position:relative;
-  }
+.delete {
+	display: inline-block;
+	padding: 0.2em 1.45em;
+	margin: 0.1em;
+	margin-top: 1em;
+	margin-left: 12px;
+	border: 0.15em solid #cccccc;
+	box-sizing: border-box;
+	text-decoration: none;
+	font-family: "Segoe UI", "Roboto", sans-serif;
+	font-weight: 400;
+	color: #000000;
+	background-color: #fffefe;
+	text-align: center;
+	position: relative;
+}
 
-.delete:hover{
-  border-color:#7a7a7a;
-  }
+.delete:hover {
+	border-color: #7a7a7a;
+}
 
-.delete:active{
-    background-color:#999999;
-  }
+.delete:active {
+	background-color: #999999;
+}
 
 .submit {
-  margin-top: 10px;
-  margin-left: 10px;
+	margin-top: 10px;
+	margin-left: 10px;
 }
 
 .error {
-  width: 270px;
+	width: 270px;
 }
