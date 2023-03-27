@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import './Add_form.css';
+import './AddForm.css';
 
-function Add_form() {
+function AddForm() {
   const [formFields, setFormFields] = useState([
     { name: '', dataType: '' },
   ])
@@ -110,7 +110,9 @@ function Add_form() {
                 <option value='Datum'>Datum</option>
                 <option value='Tid'>Tid</option>
               </select>
-              <button onClick={() => removeFields(index)} class="delete">Ta bort fält</button>
+              
+              <button type="button" onClick={() => removeFields(index)} class="delete">Ta bort fält</button>
+
             </div>
           )
         })}
@@ -123,4 +125,4 @@ function Add_form() {
     </div>
   );
 }
-export default Add_form;
+export default AddForm;

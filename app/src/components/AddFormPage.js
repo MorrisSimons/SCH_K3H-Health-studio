@@ -1,24 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './Add_form_page.css';
+import './AddFormPage.css';
 import Header from "./Header"
 import Footer from "./Footer"
-import Add_form from './Add_form';
+import AddForm from './AddForm';
 
 
 
-function Add_form_page() {
+function AddFormPage() {
 	return (
 		<div className='add_form_body'>
-      <React.StrictMode>
 			<Header />
-        <Add_form/>
+        		<AddForm/>
 			<Footer />
-      </React.StrictMode>
 		</div>
 	)
 }
 
-export default Add_form_page
+export default AddFormPage
 
 
