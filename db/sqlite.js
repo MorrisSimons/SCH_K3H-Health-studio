@@ -122,6 +122,23 @@ async function getTable(tableName) {
 	})
 }
 
+async function getColumns(table) {
+	return new Promise((acc, rej) => {
+		try {
+			const result = db.all(
+				'SELECT sql FROM sqlite_master WHERE tbl_name = ? AND type = "table"',
+				[table],
+				(err, rows) => {
+					if (err) return rej(err)
+					acc(rows)
+				}
+			)
+		} catch (err) {
+			rej(err)
+		}
+	})
+}
+
 async function addTable(table) {
 	return new Promise((acc, rej) => {
 		try {
@@ -175,4 +192,5 @@ module.exports = {
 	getTable,
 	addTable,
 	removeTable,
+	getColumns,
 }
