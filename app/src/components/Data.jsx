@@ -8,11 +8,7 @@ function Data() {
 	const [users, setUsers] = useState([])
 	const [error, setError] = useState(null)
 	const [selectedOption, setSelectedOption] = useState(null)
-	const options = [
-		{ value: "coach", label: "Coach" },
-		{ value: "user", label: "User" },
-		{ value: "admin", label: "Admin" },
-	]
+	const [options, setOptions] = useState([])
 
 	const [selectedForms, setSelectedForms] = useState([])
 	const forms = [
@@ -54,12 +50,32 @@ function Data() {
 			.catch((error) => {
 				setError(error)
 			})
+		fetch("http://localhost:5000/api/getForms", { method: "GET" })
+			.then((response) => {
+				if (!response.ok) {
+					throw new Error("Network response was not ok")
+				}
+				return response.json()
+			})
+			.then((data) => {
+				for (let i = 0; i < data.length; i++) {
+					data[i].value = data[i].name
+					//Capitalise first letter label
+					data[i].label =
+						data[i].name.charAt(0).toUpperCase() + data[i].name.slice(1)
+				}
+				setOptions(data)
+			})
+			.catch((error) => {
+				setError(error)
+			})
 	}, [])
 
 	const addFormToTable = (e) => {
 		e.preventDefault()
 		console.log("Form selected")
 		console.log(selectedOption)
+		console.log(options)
 		if (selectedOption === null) {
 			console.log("No form selected")
 			return
