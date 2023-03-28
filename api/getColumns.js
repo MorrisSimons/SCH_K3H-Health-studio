@@ -7,31 +7,45 @@ module.exports = async (req, res) => {
 		columns = []
 		types = []
 		//Select the contans within the ()
-		console.log("DB")
+		console.log("DB1")
 		console.log(raw_form)
-		selection = raw_form.sql.split("(")[1].split(")")[0]
-		//Split using the , as a delimiter
-		console.log("selection")
-		selection = selection.split(",")
-		console.log("selection")
+
+		// Take the value of sql from the json object
+		const raw_value = raw_form[0].sql
+		//Get the index of (
+		const start = raw_value.indexOf("(")
+		//Get the index of the last )
+		const end = raw_value.lastIndexOf(")")
+		//Get the substring between the two indexes
+		const selection = raw_value.substring(start + 1, end)
+		// Split the string using the comma as a delimiter
+		const array = selection.split(",")
+
+		console.log(array)
 		//
-		for (let i = 0; i < selection.length; i++) {
+		for (let i = 0; i < array.length; i++) {
+			// Trim the string
+			array[i] = array[i].trim()
 			//Split using the space as a delimiter
-			selection[i] = selection[i].split(" ")
+			array[i] = array[i].split(" ")
 			//Push the first element of the array to the columns array
 
-			columns.push(selection[i][0])
+			columns.push(array[i][0])
 			//Push the second element of the array to the types array
-			types.push(selection[i][1])
+			types.push(array[i][1])
 		}
 		console.log("columns")
-		//Create a new object with the columns and types arrays
-		form.fields = columns
-		form.types = types
+
+		const form = {
+			fields: columns,
+			types: types,
+		}
+
 		//Send the new object
 
 		res.send(form)
 	} catch (err) {
 		res.status(500).send(err)
+		console.log(err)
 	}
 }
