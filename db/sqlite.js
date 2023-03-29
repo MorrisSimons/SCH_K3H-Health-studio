@@ -28,7 +28,6 @@ function init() {
 	})
 }
 
-
 async function teardown() {
 	return new Promise((acc, rej) => {
 		db.close((err) => {
@@ -65,7 +64,13 @@ async function addUser(user) {
 		}
 		db.run(
 			"INSERT INTO user (id, email, firstName, lastName, accountType) VALUES (?, ?, ?, ?, ?)",
-			[		user.id,		user.email,		user.firstName,		user.lastName,		user.accountType || "user",	],
+			[
+				user.id,
+				user.email,
+				user.firstName,
+				user.lastName,
+				user.accountType || "user",
+			],
 			(err) => {
 				if (err) {
 					console.error(err.message) // log the specific error message
@@ -78,7 +83,6 @@ async function addUser(user) {
 		)
 	})
 }
-
 
 async function removeUser(email) {
 	return new Promise((acc, rej) => {
@@ -93,7 +97,7 @@ async function getTabels() {
 	return new Promise((acc, rej) => {
 		try {
 			const result = db.all(
-				'SELECT name FROM sqlite_master WHERE type="table" NOT LIKE "sqlite_%"',
+				'SELECT name FROM sqlite_master WHERE type="table" NOT LIKE "sqlite_%" AND name NOT LIKE "sqlite_%"',
 				(err, rows) => {
 					if (err) return rej(err)
 					acc(rows)
@@ -112,6 +116,23 @@ async function getTable(tableName) {
 				if (err) return rej(err)
 				acc(rows)
 			})
+		} catch (err) {
+			rej(err)
+		}
+	})
+}
+
+async function getColumns(table) {
+	return new Promise((acc, rej) => {
+		try {
+			const result = db.all(
+				'SELECT sql FROM sqlite_master WHERE tbl_name = ? AND type = "table"',
+				[table],
+				(err, rows) => {
+					if (err) return rej(err)
+					acc(rows)
+				}
+			)
 		} catch (err) {
 			rej(err)
 		}
@@ -171,4 +192,5 @@ module.exports = {
 	getTable,
 	addTable,
 	removeTable,
+	getColumns,
 }

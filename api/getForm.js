@@ -1,6 +1,11 @@
 const db = require("../db")
 
 module.exports = async (req, res) => {
-	const form = await db.getTable(req.params.formId)
-	res.send(form)
+	try {
+		if (!req.body.formId) return res.status(400).send("No form ID provided")
+		const form = await db.getTable(req.body.formId)
+		res.send(form)
+	} catch (err) {
+		res.status(500).send(err)
+	}
 }
