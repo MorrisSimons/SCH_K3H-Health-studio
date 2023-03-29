@@ -73,24 +73,55 @@ function Data() {
 
 	const addFormToTable = (e) => {
 		e.preventDefault()
-		console.log("Form selected")
-		console.log(selectedOption)
-		console.log(options)
 		if (selectedOption === null) {
 			console.log("No form selected")
 			return
 		} else if (selectedForms.includes(selectedOption)) {
 			console.log("Form already selected")
 			return
-		} else if (selectedOption.value === "user") {
-			console.log("User form selected")
-			setSelectedForms((selectedForms) => [...selectedForms, forms[0]])
-		} else if (selectedOption.value === "admin") {
-			console.log("Admin form selected")
-			setSelectedForms((selectedForms) => [...selectedForms, forms[1]])
+		} else {
+			fetch("http://localhost:5000/api/getColumns", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+					formId: selectedOption.value,
+				}),
+			})
+				.then((response) => {
+					if (!response.ok) {
+						throw new Error("Network response was not ok")
+					}
+					console.log(response)
+					return response.json()
+				})
+				.then((data) => {
+					console.log(data)
+
+					// Get the fields from data and put them into name and value
+					let tempData = []
+					console.log(data.fields.length)
+					console.log(data.fields[2])
+
+					// Loop through the data and put them into an array
+					for (let i = 0; i < data.fields.length; i++) {
+						tempData.push({ name: data.fields[i], value: false })
+					}
+					console.log(tempData)
+					console.log(data)
+					let tempResult = {
+						id: selectedOption.value,
+						tableName: selectedOption.label,
+						columns: tempData,
+					}
+					setSelectedForms((selectedForms) => [...selectedForms, tempResult])
+				})
+				.catch((error) => {
+					setError(error)
+				})
 		}
 	}
-
 	return (
 		<div>
 			<Header />
@@ -171,10 +202,10 @@ function Data() {
 											<td className="tdText">{user.accountType}</td>
 										</tr>
 									))}
-								{error && <div>Error: {error.message}</div>}
 							</tbody>
 						</table>
 					</div>
+					{error && <div>Error: {error.message}</div>}
 				</center>
 			</div>
 			<Footer />

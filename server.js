@@ -87,7 +87,7 @@ app.get("/api/getUsers", getUsers)
 app.delete("/api/deleteUser", deleteUser)
 app.get("/api/getForms", getForms)
 app.get("/api/getForm", getForm)
-app.get("/api/getColumns", getColumns)
+app.post("/api/getColumns", getColumns)
 
 // Catch any bad requests
 app.get("*", (req, res) => {
