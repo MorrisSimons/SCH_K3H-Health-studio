@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { AddForm }from './AddForm.css';
+import './AddForm.css';
 
 function AddForm() {
   const [formFields, setFormFields] = useState([
