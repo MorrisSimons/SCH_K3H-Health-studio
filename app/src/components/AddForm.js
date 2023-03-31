@@ -11,6 +11,7 @@ function AddForm() {
     const { name, value } = event.target;
     data[index][name] = value;
     setFormFields(data);
+    
   }
 
   const [formName, setFormName] = useState("");
