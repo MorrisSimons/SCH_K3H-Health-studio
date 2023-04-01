@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import './DoTest.css';
 
 
 function DoTest(props) {
@@ -98,19 +99,20 @@ function DoTest(props) {
     //}
 
     return (
-        <div className="App" class="container">
+        <div className="App" class="DoTest_container">
             <h1>{props.formName}</h1>
 
 
             <form onSubmit={submit}>
                 {formFields.map((form, index) => {
                     return (
-                        <div key={index} class="field">
-                            <text>
+                        <div key={index} class="DoTest_field">
+                            <text class="DoTest_formName">
                                 <div key={index}>{form.name}</div>
                             </text>
 
                             <input
+                                class="DoTest_input"
                                 name='field'
                                 placeholder={form.dataType}
 
@@ -122,7 +124,7 @@ function DoTest(props) {
             </form>
 
             <br />
-            <button onClick={submit} class="submit">Skicka</button>
+            <button onClick={submit} class="submit_button">Skicka</button>
             <div class="error" id="errorMessage">{errorMessage}</div>
             <div class="error" id="errorMessageType">{errorMessageType}</div>
 
