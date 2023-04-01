@@ -6,6 +6,7 @@ function AddForm() {
     { name: '', dataType: '' },
   ])
 
+  //Handle value changes. Updates field with correct value and datatype
   const handleFormChange = (event, index) => {
     let data = [...formFields];
     const { name, value } = event.target;
@@ -19,41 +20,45 @@ function AddForm() {
   const [errorMessage, setErrorMessage] = useState("");
 
 
-
+  //Handle submit
   const submit = (e) => {
     let error = 0;
     formFields.forEach((field, index) => {
-
+      //Check if field is empty
       if (field.name.trim() === '') {
         console.log(`Field number ${index + 1} has an empty name.`);
         setErrorMessage(`Field number ${index + 1} has an empty name.`)
         error = 1
 
       }
+      //Check if datatype is selected
       else if (field.dataType.trim() === '') {
         console.log(`Missing datatype at field number ${index + 1}`)
         setErrorMessage(`Missing datatype at field number ${index + 1}`)
         error = 1
       }
+      //Check if formname is empty
       else if (formName === '') {
         console.log("Name of form missing")
         setErrorMessage("Name of form missing")
         error = 1
       }
     });
-
+    //If no errors Submit form to database
     if (error === 0) {
       console.log(formName)
       console.log(formFields)
       setErrorMessage("")
       document.getElementById('error-message').innerText = " ";
     }
+    //Else set error message
     else {
       document.getElementById('error-message').innerText = errorMessage;
     }
 
   };
 
+  //create new field
   const addFields = () => {
     let object = {
       name: '',
@@ -63,6 +68,7 @@ function AddForm() {
     setFormFields([...formFields, object])
   }
 
+  //Remove field
   const removeFields = (index) => {
     let data = [...formFields];
     data.splice(index, 1)
@@ -88,7 +94,7 @@ function AddForm() {
 
 
       <form onSubmit={submit}>
-        {formFields.map((form, index) => {
+        {formFields.map((form, index) => { //rendering out each formfield 
           return (
             <div key={index} class="add_form_field">
               <input

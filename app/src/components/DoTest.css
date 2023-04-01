@@ -22,6 +22,8 @@
     width: calc(95%);
     height: 2.5rem;
     font-size: 1.2rem;
+    resize: vertical;
+    box-sizing: border-box;
 }
 
 .DoTest_formName{
@@ -44,9 +46,24 @@
     position: absolute;
     left: 50%;
 
+
     
   }
   
   .submit_button:hover {
     transform: translateY(-5px);
   }
+
+.File_drop {
+    border-radius: 7px;
+    border-style: dashed;
+    border: solid 2px black;
+    border-style: dashed;
+    background-color: rgb(255, 255, 255);
+    padding: 4rem;
+    margin: 0.5rem;
+}
+
+.File_drop:hover {
+    background-color: rgb(202, 227, 235);
+}

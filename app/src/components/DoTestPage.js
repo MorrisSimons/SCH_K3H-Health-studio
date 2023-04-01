@@ -12,6 +12,7 @@ function DoTestPage() {
 	const [formData, setFormData] = useState([])
 	const [formName, setFormName] = useState('');
 	
+	//Get all tablenames
 	useEffect(() => {
 		fetch("http://localhost:5000/api/getForms", { method: "GET" })
 			.then((response) => {
@@ -34,6 +35,7 @@ function DoTestPage() {
 			})
 	}, [])
 	
+	//Get columns from selected form
 	useEffect(() => {
 		if (selectedOption) {
 			fetch("http://localhost:5000/api/getColumns", {
