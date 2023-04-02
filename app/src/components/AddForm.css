@@ -3,60 +3,106 @@
 }
 
 .add_form_container {
-	background-color: rgb(146, 170, 170);
-	padding-left: 10px;
-	width: 575px;
-	padding-bottom: 0px;
-	padding-top: 0px;
+	box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+    left: 0;
+    right: 0;
+    margin: auto;
+	width: 36rem;
+	padding-bottom: 10px;
+	border-radius: 5px;
+}
+
+.elementsContainer {
+	grid-template-columns: repeat(1fr);
 }
 
 .nameInput {
-	padding-top: 30px;
-	padding-bottom: 10px;
-	margin-left: left;
+	text-align: center;
+	padding-top: 25px;
+	padding-bottom: 20px;
 }
 
 .add_form_field {
-	background-color: rgb(28, 129, 129);
-	width: 550px;
+	text-align: justify;
+	background-color: #1d6976;
+	width: 33.5rem;
+	margin-left: 1rem;
 	height: 50px;
 	margin-bottom: 5px;
-	padding-top: 5px;
+	padding: 5px;
 	border-radius: 5px;
 }
-.add_form_select {
-	margin-left: 5px;
-	margin-right: 5px;
-	height: 30px;
+
+.formNameInput {
+	font-size: 16px;
+	box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+	outline: transparent;
+	padding: 10px 16px;
+	width: 50%;
+	text-align: center;
+	border-style: solid;
+	border-color: #ffffff;
 	border-radius: 5px;
 }
 
 .add_form_input {
-	margin-left: 10px;
-	margin-right: 10px;
-	width: 250px;
-	height: 25px;
+	margin-left: 1rem;
+	margin-top: 10px;
+	outline: transparent;
+	padding: 5px 16px;
+	width: 12rem;
+	text-align: left;
+	border-style: solid;
+	border-color: #ffffff;
+	border-radius: 5px;
 }
 
-.add {
-	margin-left: 10px;
+.add_form_select {
+	margin-left: 1rem;
+	padding: 5px 16px;
+	width: 8rem;
+	border-radius: 5px;
+	outline: transparent;
+	border-color: #ffffff;
+	border-radius: 5px;
 }
 
 .delete {
+	margin-left: 1rem;
+	padding: 5px 16px;
+	width: 7rem;
+	border-radius: 5px;
 	display: inline-block;
-	padding: 0.2em 1.45em;
-	margin: 0.1em;
-	margin-top: 1em;
-	margin-left: 12px;
-	border: 0.15em solid #cccccc;
-	box-sizing: border-box;
-	text-decoration: none;
-	font-family: "Segoe UI", "Roboto", sans-serif;
-	font-weight: 400;
-	color: #000000;
-	background-color: #fffefe;
+	outline: transparent;
+	border-style: solid;
+	border-color: #ffffff;
 	text-align: center;
-	position: relative;
+}
+
+.add {
+	box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+	margin-left: 1rem;
+	padding: 5px 16px;
+	border-radius: 5px;
+	display: inline-block;
+	outline: transparent;
+	border-style: solid;
+	border-color: #dadada;
+	text-align: center;
+	margin-top: 0.5rem;
+}
+
+.submit {
+	box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+	margin-left: 1rem;
+	padding: 5px 16px;
+	border-radius: 5px;
+	display: inline-block;
+	outline: transparent;
+	border-style: solid;
+	border-color: #dadada;
+	text-align: center;
+	margin-top: 0.5rem;
 }
 
 .delete:hover {
@@ -67,9 +113,20 @@
 	background-color: #999999;
 }
 
-.submit {
-	margin-top: 10px;
-	margin-left: 10px;
+.add:hover {
+	border-color: #7a7a7a;
+}
+
+.add:active {
+	background-color: #999999;
+}
+
+.submit:hover {
+	border-color: #7a7a7a;
+}
+
+.submit:active {
+	background-color: #999999;
 }
 
 .error {

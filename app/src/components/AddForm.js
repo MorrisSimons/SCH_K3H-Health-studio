@@ -82,13 +82,15 @@ function AddForm() {
   return (
     <div className="App" class="add_form_container">
       <div class='nameInput'>
-        <input
+        
+          <input class='formNameInput'
 
-          name='name'
-          placeholder='Namn på formulär'
+            name='name'
+            placeholder='Namn på formulär'
 
-          onChange={setName}
-        />
+            onChange={setName}
+          />
+        
 
       </div>
 
@@ -96,30 +98,31 @@ function AddForm() {
       <form onSubmit={submit}>
         {formFields.map((form, index) => { //rendering out each formfield 
           return (
-            <div key={index} class="add_form_field">
-              <input
-                class = "add_form_input"
-                onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }}
-                name='name'
-                placeholder='Namn'
-                onChange={event => handleFormChange(event, index)}
-                value={form.name}
-              />
-              <select
-                class = "add_form_select"
-                name='dataType'
-                onChange={event => handleFormChange(event, index)}
-                value={form.dataType}
-              >
-                <option value=''>Välj datatyp</option>
-                <option value='int'>Tal</option>
-                <option value='string'>Text</option>
-                <option value='Datum'>Datum</option>
-                <option value='Tid'>Tid</option>
-              </select>
-              
-              <button type="button" onClick={() => removeFields(index)} class="delete">Ta bort fält</button>
-
+            <div className='elementsContainer'>
+              <div key={index} class="add_form_field">
+                <input
+                  class = "add_form_input"
+                  onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }}
+                  name='name'
+                  placeholder='Namn'
+                  onChange={event => handleFormChange(event, index)}
+                  value={form.name}
+                />
+                <select
+                  class = "add_form_select"
+                  name='dataType'
+                  onChange={event => handleFormChange(event, index)}
+                  value={form.dataType}
+                >
+                  <option value=''>Välj datatyp</option>
+                  <option value='int'>Tal</option>
+                  <option value='string'>Text</option>
+                  <option value='Datum'>Datum</option>
+                  <option value='Tid'>Tid</option>
+                </select>
+                
+                <button type="button" onClick={() => removeFields(index)} class="delete">Ta bort fält</button>
+              </div>
             </div>
           )
         })}
