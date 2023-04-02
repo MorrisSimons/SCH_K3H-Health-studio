@@ -1,0 +1,10 @@
+.DoTestPage_select {
+    position: relative;
+    left: 50%;
+    padding: 0.7rem;
+    width: 40%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1rem;
+
+}

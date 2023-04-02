@@ -1,135 +1,188 @@
-import { useState } from 'react';
-
+import { useState } from "react";
+import "./DoTest.css";
+import * as XLSX from 'xlsx';
 
 function DoTest(props) {
-    const [formFields, setFormFields] = useState(
-        props.data
-    );
+  const [formFields, setFormFields] = useState(props.data);
 
+  const [inputFields, setInputFields] = useState([]);
+
+  function addFields() {
+    if (inputFields.length !== formFields.length) {
+      for (let i = 0; i < formFields.length; i++) {
+        inputFields.push({ field: formFields[i].name, value: "" });
+      }
+    }
+  }
+
+  addFields();
+
+  const handleFormChange = (event, index) => {
+    let data = [...inputFields];
+    const { field, value } = event.target;
+    data[index].value = value;
+    setInputFields(data);
+  };
+
+  //const [formName, setFormName] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [errorMessageType, setErrorMessageType] = useState("");
+
+  function containsNumbers(str) {
+    return /^\d+$/.test(str);
+  }
+
+  function containsOnlyNumbers(str) {
+    return /^\d+$/.test(str);
+  }
+
+
+  const submit = () => {
+    
+    let error = 0;
+    let errorType = 0;
+    let emptyList = [];
+    let wrongType = [];
+    inputFields.forEach((field, index) => {
+      if (field.value.trim() === "") {
+        emptyList.push(index + 1);
+        console.log(`Field number ${emptyList} has no value.`);
+        setErrorMessage(`Field number ${emptyList} has no value.`);
+        error = 1;
+      } else if (
+        formFields[index].dataType === "int" &&
+        containsOnlyNumbers(field.value) === false
+      ) {
+        wrongType.push(index + 1);
+        setErrorMessageType(
+          `Field number ${wrongType} has the wrong datatype.`
+        );
+        errorType = 1;
+      }
+    });
+
+    if (error === 0) {
+      setErrorMessage("");
+      document.getElementById("errorMessage").innerText = " ";
+    }
+    if (errorType === 0) {
+      setErrorMessageType("");
+      document.getElementById("errorMessageType").innerText = " ";
+    }
+    //Om inga fel skicka
+    if (error === 0 && errorType === 0) {
+      
+      const bodyData = {}
+      inputFields.forEach((field) => {
+      bodyData[field.field] = field.value;
+
+      });
+
+      delete bodyData.id;
+      console.log(bodyData)
+      console.log("Här")
+      
+      const addTestData = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(bodyData)
+
+      }
+      
+      fetch("http://localhost:5000/api/addTestdata", addTestData)
+        .then((response) => response.json())
+        .then((data) => console.log(data))
+      
+      console.log(addTestData)
+      
+      
+
+
+
+      
+
+
+
+
+
+
+
+      
+      console.log(inputFields);
+      
+    } else {
+      document.getElementById("errorMessage").innerText = errorMessage;
+      document.getElementById("errorMessageType").innerText = errorMessageType;
+    }
 
     
-    const [inputFields, setInputFields] = useState([
-    ]);
 
+    
+  };
 
-    function addFields() {
-        if (inputFields.length !== formFields.length) {
-            for (let i = 0; i < formFields.length; i++) {
-                inputFields.push({ field: formFields[i].name, value: "" })
-            }
+  function handleFileUpload(event) {
+    const file = event.target.files[0];
+    console("file")
+    const reader = new FileReader();
 
-        }
-    }
+    reader.onload = (event) => {
+      const contents = event.target.result;
 
-    addFields();
+      // Parse the contents of the file into an array of field values
+      const fieldValues = contents.split(",");
 
-    const handleFormChange = (event, index) => {
-        let data = [...inputFields];
-        const { field, value } = event.target;
-        data[index].value = value;
-        setInputFields(data);
-
+      // Update the input fields with the parsed values
+      const updatedInputFields = inputFields.map((field, index) => ({
+        field: field.field,
+        value: fieldValues[index] || "",
+      }));
+      setInputFields(updatedInputFields);
     };
 
-    //const [formName, setFormName] = useState("");
-    const [errorMessage, setErrorMessage] = useState("");
-    const [errorMessageType, setErrorMessageType] = useState("");
+    reader.readAsText(file);
+  }
 
-    function containsNumbers(str) {
-        return /^\d+$/.test(str);
-    }
+  //const setName = (event) => {
+  //    setFormName(event.target.value);
+  //}
 
-    function containsOnlyNumbers(str) {
-        return /^\d+$/.test(str);
-    }
+  return (
+    <div className="App" class="DoTest_container">
+      <h1>{props.formName}</h1>
 
+      <form onSubmit={submit}>
+        {formFields.map((form, index) => {
+          return (
+            <div key={index} class="DoTest_field">
+              <text class="DoTest_formName">
+                <div key={index}>{form.name}</div>
+              </text>
 
+              <input
+                class="DoTest_input"
+                name="field"
+                placeholder={form.dataType}
+                onChange={(event) => handleFormChange(event, index)}
+                value={form.field}
+              ></input>
+            </div>
+          );
+        })}
+      </form>
 
-    const submit = () => {
-        let error = 0;
-        let errorType = 0;
-        let emptyList = []
-        let wrongType = []
-        inputFields.forEach((field, index) => {
-            if (field.value.trim() === '') {
-                emptyList.push(index + 1)
-                console.log(`Field number ${emptyList} has no value.`);
-                setErrorMessage(`Field number ${emptyList} has no value.`)
-                error = 1
-
-            }
-            else if (formFields[index].dataType === "int" && containsOnlyNumbers(field.value) === false) {
-                wrongType.push(index + 1)
-                setErrorMessageType(`Field number ${wrongType} has the wrong datatype.`)
-                errorType = 1
-            }
-
-
-        });
-
-        if (error === 0) {
-
-            setErrorMessage("")
-            document.getElementById('errorMessage').innerText = " ";
-
-        }
-        if (errorType === 0) {
-            setErrorMessageType("")
-            document.getElementById('errorMessageType').innerText = " "
-        }
-        if (error === 0 && errorType == 0) {//Om inga fel skicka
-            console.log(inputFields)
-        }
-        else {
-            document.getElementById('errorMessage').innerText = errorMessage;
-            document.getElementById('errorMessageType').innerText = errorMessageType;
-        }
-
-    };
-
-
-
-
-
-
-
-    //const setName = (event) => {
-    //    setFormName(event.target.value);
-    //}
-
-    return (
-        <div className="App" class="container">
-            <h1>{props.formName}</h1>
-
-
-            <form onSubmit={submit}>
-                {formFields.map((form, index) => {
-                    return (
-                        <div key={index} class="field">
-                            <text>
-                                <div key={index}>{form.name}</div>
-                            </text>
-
-                            <input
-                                name='field'
-                                placeholder={form.dataType}
-
-                                onChange={event => handleFormChange(event, index)}
-                                value={form.field}></input>
-                        </div>
-                    )
-                })}
-            </form>
-
-            <br />
-            <button onClick={submit} class="submit">Skicka</button>
-            <div class="error" id="errorMessage">{errorMessage}</div>
-            <div class="error" id="errorMessageType">{errorMessageType}</div>
-
-
-
-        </div>
-    );
+      <br />
+      <button onClick={submit} class="submit_button">
+        Skicka
+      </button>
+      <input type="file" onChange={handleFileUpload} class="File_drop" />
+      <div class="error" id="errorMessage">
+        {errorMessage}
+      </div>
+      <div class="error" id="errorMessageType">
+        {errorMessageType}
+      </div>
+    </div>
+  );
 }
 
 export default DoTest;
