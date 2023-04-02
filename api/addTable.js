@@ -2,7 +2,7 @@ const db = require("../db")
 const { v4: uuid } = require("uuid")
 
 module.exports = async (req, res) => {
-	const user = {
+	const table = {
 		id: uuid(),
 		email: req.body.email,
 		firstName: req.body.firstName,
@@ -10,6 +10,6 @@ module.exports = async (req, res) => {
 		accountType: req.body.accountType,
 	}
 
-	await db.addUser(user)
-	res.send(user)
+	await db.addUser(table)
+	res.send(table)
 }

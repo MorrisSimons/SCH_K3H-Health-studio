@@ -38,6 +38,7 @@ function DoTest(props) {
 
 
   const submit = () => {
+    
     let error = 0;
     let errorType = 0;
     let emptyList = [];
@@ -68,13 +69,55 @@ function DoTest(props) {
       setErrorMessageType("");
       document.getElementById("errorMessageType").innerText = " ";
     }
+    //Om inga fel skicka
     if (error === 0 && errorType === 0) {
-      //Om inga fel skicka
+      
+      const bodyData = {}
+      inputFields.forEach((field) => {
+      bodyData[field.field] = field.value;
+
+      });
+
+      delete bodyData.id;
+      console.log(bodyData)
+      console.log("Här")
+      
+      const addTestData = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(bodyData)
+
+      }
+      
+      fetch("http://localhost:5000/api/addTestdata", addTestData)
+        .then((response) => response.json())
+        .then((data) => console.log(data))
+      
+      console.log(addTestData)
+      
+      
+
+
+
+      
+
+
+
+
+
+
+
+      
       console.log(inputFields);
+      
     } else {
       document.getElementById("errorMessage").innerText = errorMessage;
       document.getElementById("errorMessageType").innerText = errorMessageType;
     }
+
+    
+
+    
   };
 
   function handleFileUpload(event) {
