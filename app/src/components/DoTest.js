@@ -1,6 +1,5 @@
 import { useState } from "react";
 import "./DoTest.css";
-import * as XLSX from 'xlsx';
 
 function DoTest(props) {
   const [formFields, setFormFields] = useState(props.data);
