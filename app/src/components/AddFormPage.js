@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './AddFormPage.css';
 import Header from "./Header"
 import Footer from "./Footer"
-import AddForm from './AddForm';
+import {AddForm} from './AddForm';
 
 
 
