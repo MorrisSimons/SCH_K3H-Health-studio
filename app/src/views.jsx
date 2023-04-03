@@ -9,6 +9,7 @@ import Data from "./components/Data"
 //import Add_form from "./components/Add_form_page"
 import LoginDashboardA from "./components/LoginDashboard_a"
 import LoginDashboardC from "./components/LoginDashboard_c"
+import LoginDashboardP from "./components/LoginDashboard_p"
 import AddCoach from "./components/AddCoach"
 import DoTestPage from "./components/DoTestPage"
 
@@ -18,7 +19,7 @@ const Views = () => {
 
 	return (
 		<Routes>
-			<Route path="/" element={isLoggedIn ? <LoginDashboardC /> : <Home />} />
+			<Route path="/" element={isLoggedIn ? <LoginDashboardP /> : <Home />} />
 			<Route path="/Data" element={<Data />} />
 			<Route path="/about" element={<About />} />
 			<Route path="/contact" element={<Contact />} />
