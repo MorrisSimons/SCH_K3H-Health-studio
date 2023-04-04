@@ -147,24 +147,19 @@ async function getColumns(table) {
 async function addTable(table) {
 	return new Promise((acc, rej) => {
 		try {
-			tableName = table.name
-			tableFields = table.fields
-			tableTypes = table.types
-
-			db.run("CREATE TABLE IF NOT EXISTS ?", [tableName], (err, result) => {
+			console.log(table)
+			req_text = "CREATE TABLE IF NOT EXISTS " + table.name + " ("
+			for (i = 0; i < table.fields.length; i++) {
+				req_text += table.fields[i] + " " + table.types[i]
+				if (i != table.fields.length - 1) {
+					req_text += ", "
+				}
+			}
+			req_text += ")"
+			console.log(req_text)
+			db.exec(req_text, (err, result) => {
 				if (err) return rej(err)
 			})
-
-			while (tableFields.length > 0) {
-				db.run(
-					"ALTER TABLE ? ADD COLUMN ? ?",
-					[tableName, tableFields.pop(), tableTypes.pop()],
-					(err, result) => {
-						if (err) return rej(err)
-					}
-				)
-			}
-
 			acc()
 		} catch (err) {
 			rej(err)

@@ -12,6 +12,8 @@ const getForms = require("./api/getForms")
 const getForm = require("./api/getForm")
 const getColumns = require("./api/getColumns")
 
+const addTable = require("./api/addTable")
+
 //--------------------------------
 // Note app in exspress is diffrent from the app folder in react
 //--------------------------------
@@ -88,6 +90,7 @@ app.delete("/api/deleteUser", deleteUser)
 app.get("/api/getForms", getForms)
 app.get("/api/getForm", getForm)
 app.post("/api/getColumns", getColumns)
+app.post("/api/addTable", addTable)
 
 // Catch any bad requests
 app.get("*", (req, res) => {
