@@ -1,4 +1,5 @@
 const sqlite3 = require("sqlite3").verbose()
+const { text } = require("body-parser")
 const fs = require("fs")
 const location = process.env.SQLITE_DB_LOCATION || "./db/k3h.sqlite3"
 
@@ -111,14 +112,18 @@ async function getTabels() {
 
 async function getTable(tableName) {
 	return new Promise((acc, rej) => {
+		// Get all the data in the table provided 
 		try {
-			const result = db.all("SELECT * FROM ?", [tableName], (err, rows) => {
+			req_text = "SELECT * FROM " + tableName
+			const result = db.all(req_text, (err, rows) => {
 				if (err) return rej(err)
 				acc(rows)
 			})
-		} catch (err) {
+		}
+		catch (err) {
 			rej(err)
 		}
+
 	})
 }
 
