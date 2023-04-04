@@ -9,32 +9,7 @@ function Data() {
 	const [error, setError] = useState(null)
 	const [selectedOption, setSelectedOption] = useState(null)
 	const [options, setOptions] = useState([])
-
 	const [selectedForms, setSelectedForms] = useState([])
-	const forms = [
-		{
-			id: 1,
-			tableName: "user",
-			columns: [
-				{ name: "email", value: false },
-				{ name: "firstName", value: false },
-				{ name: "lastName", value: false },
-				{ name: "accountType", value: false },
-			],
-		},
-		{
-			id: 2,
-			tableName: "admin",
-			columns: [
-				{ name: "email2", value: false },
-				{ name: "firstName2", value: true },
-				{ name: "lastName2", value: false },
-				{ name: "accountType2", value: false },
-			],
-		},
-	]
-
-	// Insert forms into selectedForms array
 
 	useEffect(() => {
 		fetch("http://localhost:5000/api/getUsers", { method: "GET" })
@@ -98,18 +73,12 @@ function Data() {
 				})
 				.then((data) => {
 					console.log(data)
-
 					// Get the fields from data and put them into name and value
 					let tempData = []
-					console.log(data.fields.length)
-					console.log(data.fields[2])
-
 					// Loop through the data and put them into an array
 					for (let i = 0; i < data.fields.length; i++) {
 						tempData.push({ name: data.fields[i], value: false })
 					}
-					console.log(tempData)
-					console.log(data)
 					let tempResult = {
 						id: selectedOption.value,
 						tableName: selectedOption.label,
