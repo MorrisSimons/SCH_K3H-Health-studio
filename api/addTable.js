@@ -1,5 +1,4 @@
 const db = require("../db")
-const { v4: uuid } = require("uuid")
 
 module.exports = async (req, res) => {
 	try {
@@ -9,7 +8,7 @@ module.exports = async (req, res) => {
 			types: req.body.types,
 		}
 		await db.addTable(table)
-		res.send(table)
+		res.status(200).send("Table created successfully")
 	}
 	catch (err) {
 		res.status(500).send(err)

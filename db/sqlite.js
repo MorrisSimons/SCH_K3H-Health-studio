@@ -160,21 +160,22 @@ async function addTable(table) {
 			db.exec(req_text, (err, result) => {
 				if (err) return rej(err)
 			})
-			acc()
+			acc("Table created successfully")
 		} catch (err) {
 			rej(err)
 		}
 	})
 }
 
-async function removeTable(tableName) {
+async function dropTable(table) {
 	return new Promise((acc, rej) => {
 		try {
-			db.run("DROP TABLE ?", [tableName], (err, result) => {
+			console.log(table)
+			req_text = "DROP TABLE " + table.name
+			db.exec(req_text, (err, result) => {
 				if (err) return rej(err)
 			})
-
-			acc()
+			acc("Table dropped successfully")
 		} catch (err) {
 			rej(err)
 		}
@@ -191,6 +192,6 @@ module.exports = {
 	getTabels,
 	getTable,
 	addTable,
-	removeTable,
+	dropTable,
 	getColumns,
 }
