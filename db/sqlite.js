@@ -147,7 +147,6 @@ async function getColumns(table) {
 async function addTable(table) {
 	return new Promise((acc, rej) => {
 		try {
-			console.log(table)
 			req_text = "CREATE TABLE IF NOT EXISTS " + table.name + " ("
 			for (i = 0; i < table.fields.length; i++) {
 				req_text += table.fields[i] + " " + table.types[i]
@@ -156,7 +155,6 @@ async function addTable(table) {
 				}
 			}
 			req_text += ")"
-			console.log(req_text)
 			db.exec(req_text, (err, result) => {
 				if (err) return rej(err)
 			})
@@ -182,6 +180,37 @@ async function dropTable(table) {
 	})
 }
 
+async function addIntoTable(table, data) {
+	return new Promise((acc, rej) => {
+		try {
+			console.log("Adding data into table " + table.name)
+			req_text = "INSERT INTO " + table.name + " ("
+			for (i = 0; i < table.fields.length; i++) {
+				req_text += table.fields[i]
+				if (i != table.fields.length - 1) {
+					req_text += ", "
+				}
+			}
+			req_text += ") VALUES ("
+			for (i = 0; i < data.values.length; i++) {
+				req_text += data.values[i]
+				if (i != data.values.length - 1) {
+					req_text += ", "
+				}
+			}
+			req_text += ")"
+			console.log(req_text)
+			db.exec(req_text, (err, result) => {
+				if (err) return rej(err)
+			})
+			acc("Data added successfully")
+		} catch (err) {
+			rej(err)
+		}
+	})
+}
+
+
 module.exports = {
 	init,
 	teardown,
@@ -194,4 +223,5 @@ module.exports = {
 	addTable,
 	dropTable,
 	getColumns,
+	addIntoTable,
 }
