@@ -11,9 +11,10 @@ p {
     text-align: left;
 }
 
-.dashboard__section_player {
+.main_layout {
     display: grid;
-    grid-template-columns: 80rem 10rem;
+    grid-template-columns: 27rem 59rem 14rem;
+    grid-column-gap: 2rem;
 }
 
 .playerInfo {
@@ -22,11 +23,13 @@ p {
     margin: 1rem 1rem 1rem;
     padding-top: 1rem;
     display: grid;
-    width: 34rem;
-    grid-template-columns: repeat(2, 15rem)
+    width: 28rem;
+    height: 16rem;
+    grid-template-columns: repeat(2, 14rem)
 }
 
 .playerPicture {
+    scale: 120%;
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -38,12 +41,12 @@ p {
 }
 
 .side_buttons {
-    margin-left: 1000rem;
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
-    margin: 20rem 1rem 1rem;
-    padding-top: 1rem;
-    width: 34rem;
+    margin: 1rem 1rem 1rem;
+    padding-top: 0.5rem;
+    width: 28rem;
+    height:22.5rem;
 }
 
 .tests {
@@ -52,10 +55,19 @@ p {
     border-radius: 10px;
     margin: 1rem 1rem 1rem;
     padding-top: 1rem;
-    width: 75rem;
+    width: 60rem;
 }
 
 .test_buttons {
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    margin: 1rem 1.5rem 1rem;
+    padding-top: 10px;
+    background-color:#1d6976;
     display: grid;
-    grid-template-columns: repeat(3, 25rem);
+    grid-template-columns: repeat(3, 19rem);
+}
+
+.load_button {
+    padding-top: 2rem;
 }
