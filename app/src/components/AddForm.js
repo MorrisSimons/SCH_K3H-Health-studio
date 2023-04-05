@@ -2,7 +2,7 @@ import { useState } from 'react';
 import './AddForm.css';
 import Header from './Header';
 import Footer from './Footer';
-import addTable from '../../../api/addTable';
+
 
 function AddForm() {
   const [formFields, setFormFields] = useState([

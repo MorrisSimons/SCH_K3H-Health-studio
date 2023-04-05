@@ -204,7 +204,7 @@ async function addIntoTable(table, data) {
 				if (err) return rej(err)
 			})
 			console.log("Data added successfully")
-			acc()
+			acc({})
 		} catch (err) {
 			rej(err)
 		}
