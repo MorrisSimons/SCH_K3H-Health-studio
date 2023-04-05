@@ -44,6 +44,7 @@ function LoginDashboard() {
 			title: "Lägg till coach",
 			navigation: "/add_coach",
 		},
+
 	]
 
 	return (

@@ -35,13 +35,12 @@ function DoTest(props) {
     return /^\d+$/.test(str);
   }
 
-
   const submit = () => {
-    
     let error = 0;
     let errorType = 0;
     let emptyList = [];
     let wrongType = [];
+
     inputFields.forEach((field, index) => {
       if (field.value.trim() === "") {
         emptyList.push(index + 1);
@@ -68,60 +67,46 @@ function DoTest(props) {
       setErrorMessageType("");
       document.getElementById("errorMessageType").innerText = " ";
     }
-    //Om inga fel skicka
+    //if no errors submit
     if (error === 0 && errorType === 0) {
       
-      const bodyData = {}
-      inputFields.forEach((field) => {
-      bodyData[field.field] = field.value;
-
+      //create object to store fieldnames and values
+      const bodyData = {}; 
+      //iterate each field and store into bodydata
+      inputFields.forEach((i) => { 
+        bodyData[i.field] = i.value; 
       });
 
-      delete bodyData.id;
-      console.log(bodyData)
-      console.log("Här")
-      
-      const addTestData = {
+      const fieldsList = Object.keys(bodyData);
+      const valuesList = Object.values(bodyData);
+
+      //Send to database
+      const addIntoTable = {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(bodyData)
+        body: JSON.stringify({
+          name: props.formName,
+          fields: fieldsList,
+          values: valuesList,
+        }),
+      };
+      console.log(addIntoTable);
 
-      }
-      
-      fetch("http://localhost:5000/api/addTestdata", addTestData)
+      fetch("http://localhost:5000/api/addIntoTable", addIntoTable)
         .then((response) => response.json())
-        .then((data) => console.log(data))
-      
-      console.log(addTestData)
-      
-      
-
-
+        .then((data) => console.log(data));
 
       
 
-
-
-
-
-
-
-      
-      console.log(inputFields);
-      
     } else {
       document.getElementById("errorMessage").innerText = errorMessage;
       document.getElementById("errorMessageType").innerText = errorMessageType;
     }
-
-    
-
-    
   };
 
   function handleFileUpload(event) {
     const file = event.target.files[0];
-    console("file")
+    console("file");
     const reader = new FileReader();
 
     reader.onload = (event) => {

@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import './AddForm.css';
+import Header from './Header';
+import Footer from './Footer';
 
 function AddForm() {
   const [formFields, setFormFields] = useState([
@@ -50,6 +52,21 @@ function AddForm() {
       console.log(formFields)
       setErrorMessage("")
       document.getElementById('error-message').innerText = " ";
+
+      //create object to store fieldnames and values
+      const bodyData = {}; 
+      //iterate each field and store into bodydata
+      formFields.forEach((i) => { 
+        bodyData[i.field] = i.value; 
+      });
+
+      const dataTypesList = Object.key(formFields)
+      console.log(dataTypesList)
+
+
+      
+
+
     }
     //Else set error message
     else {
@@ -80,6 +97,8 @@ function AddForm() {
   }
 
   return (
+    <div>
+    <Header/>
     <div className="App" class="add_form_container">
       <div class='nameInput'>
         
@@ -131,7 +150,9 @@ function AddForm() {
       <br />
       <button onClick={submit} class="submit">Skicka</button>
       <div class="error" id="errorMessage">{errorMessage}</div>
-
+      
+    </div>
+    <Footer/>
     </div>
   );
 }
