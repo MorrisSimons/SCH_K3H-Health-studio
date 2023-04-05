@@ -59,7 +59,7 @@ function AddForm() {
       //iterate each field and store into bodydata
       formFields.forEach((i) => { 
         bodyData[i.name] = i.dataType; 
-      });
+      })
       
       const dataTypesList = formFields.name
       console.log(bodyData)

@@ -5,10 +5,10 @@ module.exports = async (req, res) => {
 		const table = {
 			name: req.body.name,
 			fields: req.body.fields,
-			types: req.body.types,
+			types: req.body.dataType,
 		}
 		await db.addTable(table)
-		res.status(200).send("Table created successfully")
+		res.status(200).send({ message: "Success"})
 	}
 	catch (err) {
 		res.status(500).send(err)
