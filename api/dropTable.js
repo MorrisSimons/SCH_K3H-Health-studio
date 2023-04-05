@@ -6,7 +6,7 @@ module.exports = async (req, res) => {
 			name: req.body.formName,
 		}
 		await db.dropTable(table)
-		res.status(200).send("Table dropped successfully")
+		res.status(200).send({ message: "success"})
 	}
 	catch (err) {
 		res.status(500).send(err)

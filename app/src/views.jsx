@@ -12,6 +12,7 @@ import LoginDashboardC from "./components/LoginDashboard_c"
 import AddCoach from "./components/AddCoach"
 import DoTestPage from "./components/DoTestPage"
 import AddForm from "./components/AddForm"
+import ManageForms from "./components/ManageForms"
 
 const Views = () => {
 	const user = JSON.parse(localStorage.getItem("user"))
@@ -29,6 +30,8 @@ const Views = () => {
 			<Route path="/add_coach" element={<AddCoach />} />
 			<Route path="/do_test" element={<DoTestPage/>} />
 			<Route path="/createform" element={<AddForm/>} />
+			<Route path="/forms" element={<ManageForms/>} />
+			
 		</Routes>
 	)
 }
