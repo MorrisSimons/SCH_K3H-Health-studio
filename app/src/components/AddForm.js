@@ -2,6 +2,7 @@ import { useState } from 'react';
 import './AddForm.css';
 import Header from './Header';
 import Footer from './Footer';
+import addTable from '../../../api/addTable';
 
 function AddForm() {
   const [formFields, setFormFields] = useState([
@@ -48,26 +49,47 @@ function AddForm() {
     });
     //If no errors Submit form to database
     if (error === 0) {
+      console.log("errors = 0")
       console.log(formName)
       console.log(formFields)
-      setErrorMessage("")
-      document.getElementById('error-message').innerText = " ";
+      
 
-      //create object to store fieldnames and values
+      //create object to store fieldnames and datatypes
       const bodyData = {}; 
       //iterate each field and store into bodydata
       formFields.forEach((i) => { 
-        bodyData[i.field] = i.value; 
+        bodyData[i.name] = i.dataType; 
       });
-
-      const dataTypesList = Object.key(formFields)
+      
+      const dataTypesList = formFields.name
+      console.log(bodyData)
+      console.log("hej")
       console.log(dataTypesList)
 
+      const fieldsList = Object.keys(bodyData);
+      const dataTypeList = Object.values(bodyData);
+
+      const addTable = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formName,
+          fields: fieldsList,
+          dataType: dataTypeList,
+        }),
+      };
+      console.log(addTable);
+
+      fetch("http://localhost:5000/api/addTable", addTable)
+        .then((response) => response.json())
+        .then((data) => console.log(data));
 
       
-
-
+      //Reset error message
+      setErrorMessage("")
+      document.getElementById('error-message').innerText = " ";
     }
+
     //Else set error message
     else {
       document.getElementById('error-message').innerText = errorMessage;

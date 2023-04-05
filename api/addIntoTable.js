@@ -15,7 +15,7 @@ module.exports = async (req, res) => {
         console.log(table.fields)
         console.log(data.values)
 		await db.addIntoTable(table, data)
-		res.status(200).send("Table created successfully")
+		res.status(200).send()
 	}
 	catch (err) {
 		

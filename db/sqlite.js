@@ -203,7 +203,8 @@ async function addIntoTable(table, data) {
 			db.exec(req_text, (err, result) => {
 				if (err) return rej(err)
 			})
-			acc("Data added successfully")
+			console.log("Data added successfully")
+			acc()
 		} catch (err) {
 			rej(err)
 		}
