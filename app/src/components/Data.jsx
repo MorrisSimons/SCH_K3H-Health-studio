@@ -220,10 +220,10 @@ function Data() {
 					<div className="table">
 						<table className="tableStriped">
 							<thead>
-								<tr>
+								<tr className="trRow">
 									{overview &&
 										overview.map((column) => (
-											<th className="tableText" key={column.columnName}>
+											<th className="thText" key={column.columnName}>
 												{column.columnName}
 											</th>
 										))}
@@ -232,16 +232,16 @@ function Data() {
 							<tbody>
 								{information &&
 									information.map((row) => (
-										<tr key={row.id}>
+										<tr className="trRow" key={row.id}>
 											{overview &&
 												overview.map((column) => (
-													<td className="tableText" key={column.columnName}>
+													<td className="tdText" key={column.columnName}>
 														{row[column.columnName]}
 													</td>
 												))}
 										</tr>
 									))}
-									
+
 
 							</tbody>
 						</table>
