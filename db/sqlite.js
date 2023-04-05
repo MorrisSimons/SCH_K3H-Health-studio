@@ -1,6 +1,7 @@
 const sqlite3 = require("sqlite3").verbose()
 const { text } = require("body-parser")
 const fs = require("fs")
+const { getEnvironmentData } = require("worker_threads")
 const location = process.env.SQLITE_DB_LOCATION || "./db/k3h.sqlite3"
 
 let db, dbAll, dbRun
@@ -127,6 +128,40 @@ async function getTable(tableName) {
 	})
 }
 
+async function getData(table) {
+	return new Promise((acc, rej) => {
+		try {
+			tableNames = table.names
+			tableColumns = table.columns
+			req_text = "SELECT "
+			// Loop through the tabels and get the data from each one
+			for (i = 0; i < tableColumns.length; i++) {
+				req_text += tableColumns[i]
+				if (i != tableColumns.length - 1) {
+					req_text += ", "
+				}
+			}
+			console.log(req_text)
+			req_text += " FROM "
+			for (i = 0; i < tableNames.length; i++) {
+				req_text += tableNames[i]
+				if (i != tableNames.length - 1) {
+					req_text += ", "
+				}
+			}
+			console.log(req_text)
+			const result = db.all(req_text, (err, rows) => {
+				if (err) return rej(err)
+				acc(rows)
+			}
+
+			)
+		} catch (err) {
+			rej(err)
+		}
+	})
+}
+
 async function getColumns(table) {
 	return new Promise((acc, rej) => {
 		try {
@@ -225,4 +260,5 @@ module.exports = {
 	dropTable,
 	getColumns,
 	addIntoTable,
+	getData,
 }
