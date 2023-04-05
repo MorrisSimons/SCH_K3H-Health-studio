@@ -2,12 +2,17 @@ const db = require("../db")
 
 module.exports = async (req, res) => {
 	try {
+        console.log(req.body)
 		const table = {
 			name: req.body.name,
 			fields: req.body.fields,
-			types: req.body.types,
 		}
-		await db.addTable(table)
+		const data = {
+            values: req.body.data,
+		}
+        console.log(table)
+        console.log(data)
+		await db.addIntoTable(table, data)
 		res.status(200).send("Table created successfully")
 	}
 	catch (err) {

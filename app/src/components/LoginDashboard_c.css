@@ -1,3 +1,10 @@
+.dashboard__section_coach{
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  margin: 0px 1rem 1rem;
+  padding-top: 1rem;
+}
+
 /* --------------------search-bar start --------------------*/
 .search-bar {
     display: flex;
@@ -6,24 +13,57 @@
     margin: 1rem;
   }
   
-  .input[type="text"] {
-    padding: 0.5rem;
-    margin-right: 0.5rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
   
-  .button {
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    padding: 0.5rem;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
+.search-input[type="text"] {
+  padding: 0.5rem;
+  margin-right: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 50%;
+  font-size: 1.2rem;
+}
+
+.button-search {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
 
 /* --------------------search-bar END --------------------*/
+
+/* --------------------pannel container start --------------------*/
+
+.panel-container{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  padding: 10px;
+  margin-left: 7%;
+  margin-right: 7%;
+  text-align: center;
+  row-gap: 20px;
+}
+
+.coach_panel_btn{
+  background-color: #f0ecec;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease-in-out;
+  cursor: pointer;
+  width: calc(100% - 20px);
+  margin: 0 10px 10px;
+  border: none;
+  outline: none;
+  font-size: 1.3rem;
+  color: black;
+}
+
+
+/* --------------------pannel container end --------------------*/
+
 
 
 /* --------------------container start --------------------*/
@@ -42,12 +82,21 @@
     align-items: center;
     background-color: #fff;
     color: #333;
-    border-radius: 5px;
+    border-radius: 8px;
     padding: 10px;
     transition: all 0.3s ease-in-out;
     cursor: pointer;
+    width: 100%;
+    border: 1px solid #ccc;
+    
   }
-  
+  .player__article {
+    color: #000000;
+  }
+
+  .dashboard__article:hover {
+    transform: translateY(-5px);
+  }
   .dashboard__article--active {
     border-left: 10px solid #8bc34a;
   }
@@ -64,19 +113,29 @@
 
   
 /* --------------------container END --------------------*/
+  
+.site__settings {
+  max-width: 1000px;
+  position: relative;
+  margin: auto;
+}
 
-  
-  h1 {
-    font-size: 24px;
-    margin-bottom: 20px;
-    text-align: center;
-  }
-  
-  p {
-    font-size: 16px;
-    margin-bottom: 10px;
-    text-align: center;
-  }
-  
+h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  text-align: center;
+  font-family: 'kanit-thin', sans-serif;
+  font-weight: 100;
+}
 
+p {
+  font-size: 16px;
+  margin-bottom: 10px;
+  text-align: center;
+  
+}
+
+a{
+  text-decoration: none;
+}
   
