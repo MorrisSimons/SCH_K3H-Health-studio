@@ -80,30 +80,32 @@ function LoginDashboard() {
 				<div className="main_layout">
 					<div className="playerInfo">
 						<img className="playerPicture" src={icon} alt="icon" />
-						<div className="info">
-							<p>Coach</p>
-							<p>Tel.nr.</p>
-							<p>Mail</p>
-							<p>Ålder</p>
-							<p>Pers.nr.</p>
-							<p>Adress</p>
-							<p>Antal tester</p>
-							<p>Senaste testet</p>
-							<p>Sport</p>
-						</div>
 						<h2 className="playerName">John Doe</h2>
+						<div className="info">
+							<p>Coach:</p>
+							<p>Tel.nr.:</p>
+							<p>Mail:</p>
+							<p>Ålder:</p>
+							<p>Pers.nr.:</p>
+							<p>Adress:</p>
+							<p>Antal tester:</p>
+							<p>Senaste testet:</p>
+							<p>Sport:</p>
+						</div>
 					</div>
 					<div className="tests">
 						<h2>Senaste tester</h2>
-						<div className="test_buttons">
-							{test_buttons.map(({ id, title, navigation }) => {
-								return (
-									<Link to={navigation} key={id}>
-										<button className="dashboard__button">{title}</button>
-									</Link>
-								)
-							})}
-						</div>
+							<div className="test_buttons_background">
+								<div className="test_buttons">
+									{test_buttons.map(({ id, title, navigation }) => {
+										return (
+											<Link to={navigation} key={id}>
+												<button className="dashboard__button">{title}</button>
+											</Link>
+										)
+									})}
+								</div>
+							</div>
 						<div className="load_button">
 							{load_more.map(({ id, title, navigation }) => {
 								return (
