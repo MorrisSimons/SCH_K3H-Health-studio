@@ -2,7 +2,7 @@
 	background-color: #1d6976;
 	height: 5rem;
 	width: 100%;
-	position: relative;
+	position: fixed;
 	margin-bottom: 3rem;
 	display: flex;
 	align-items: center;
