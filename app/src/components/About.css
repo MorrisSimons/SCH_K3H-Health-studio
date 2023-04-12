@@ -1,0 +1,10 @@
+.textbox {
+    position: absolute;
+    text-align: center;
+    background: #ececec;
+    border-radius: 20px;
+    width: 75vw;
+    left: calc((100vw - 75vw) / 2);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    line-height: 2;
+}

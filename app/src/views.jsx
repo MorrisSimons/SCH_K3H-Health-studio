@@ -10,7 +10,9 @@ import Data from "./components/Data"
 import LoginDashboardA from "./components/LoginDashboard_a"
 import LoginDashboardC from "./components/LoginDashboard_c"
 import AddCoach from "./components/AddCoach"
-import Add_form_page from "./components/Add_form_page"
+import DoTestPage from "./components/DoTestPage"
+import AddForm from "./components/AddForm"
+import ManageForms from "./components/ManageForms"
 
 const Views = () => {
 	const user = JSON.parse(localStorage.getItem("user"))
@@ -26,7 +28,10 @@ const Views = () => {
 			<Route path="/terms" element={<Terms />} />
 			<Route path="*" element={<NotFound />} />
 			<Route path="/add_coach" element={<AddCoach />} />
-			<Route path="/createform" element={<Add_form_page	/>} />
+			<Route path="/do_test" element={<DoTestPage/>} />
+			<Route path="/createform" element={<AddForm/>} />
+			<Route path="/forms" element={<ManageForms/>} />
+			
 		</Routes>
 	)
 }

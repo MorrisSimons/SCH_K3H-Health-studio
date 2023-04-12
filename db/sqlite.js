@@ -1,5 +1,7 @@
 const sqlite3 = require("sqlite3").verbose()
+const { text } = require("body-parser")
 const fs = require("fs")
+const { getEnvironmentData } = require("worker_threads")
 const location = process.env.SQLITE_DB_LOCATION || "./db/k3h.sqlite3"
 
 let db, dbAll, dbRun
@@ -27,7 +29,6 @@ function init() {
 		})
 	})
 }
-
 
 async function teardown() {
 	return new Promise((acc, rej) => {
@@ -65,7 +66,13 @@ async function addUser(user) {
 		}
 		db.run(
 			"INSERT INTO user (id, email, firstName, lastName, accountType) VALUES (?, ?, ?, ?, ?)",
-			[		user.id,		user.email,		user.firstName,		user.lastName,		user.accountType || "user",	],
+			[
+				user.id,
+				user.email,
+				user.firstName,
+				user.lastName,
+				user.accountType || "user",
+			],
 			(err) => {
 				if (err) {
 					console.error(err.message) // log the specific error message
@@ -78,7 +85,6 @@ async function addUser(user) {
 		)
 	})
 }
-
 
 async function removeUser(email) {
 	return new Promise((acc, rej) => {
@@ -93,7 +99,7 @@ async function getTabels() {
 	return new Promise((acc, rej) => {
 		try {
 			const result = db.all(
-				'SELECT name FROM sqlite_master WHERE type="table" NOT LIKE "sqlite_%"',
+				'SELECT name FROM sqlite_master WHERE type="table" NOT LIKE "sqlite_%" AND name NOT LIKE "sqlite_%"',
 				(err, rows) => {
 					if (err) return rej(err)
 					acc(rows)
@@ -107,11 +113,66 @@ async function getTabels() {
 
 async function getTable(tableName) {
 	return new Promise((acc, rej) => {
+		// Get all the data in the table provided 
 		try {
-			const result = db.all("SELECT * FROM ?", [tableName], (err, rows) => {
+			req_text = "SELECT * FROM " + tableName
+			const result = db.all(req_text, (err, rows) => {
 				if (err) return rej(err)
 				acc(rows)
 			})
+		}
+		catch (err) {
+			rej(err)
+		}
+
+	})
+}
+
+async function getData(table) {
+	return new Promise((acc, rej) => {
+		try {
+			tableNames = table.names
+			tableColumns = table.columns
+			req_text = "SELECT "
+			// Loop through the tabels and get the data from each one
+			for (i = 0; i < tableColumns.length; i++) {
+				req_text += tableColumns[i]
+				if (i != tableColumns.length - 1) {
+					req_text += ", "
+				}
+			}
+			console.log(req_text)
+			req_text += " FROM "
+			for (i = 0; i < tableNames.length; i++) {
+				req_text += tableNames[i]
+				if (i != tableNames.length - 1) {
+					req_text += ", "
+				}
+			}
+			console.log(req_text)
+			const result = db.all(req_text, (err, rows) => {
+				if (err) return rej(err)
+				acc(rows)
+			}
+
+			)
+		} catch (err) {
+			rej(err)
+		}
+	})
+}
+
+async function getColumns(table) {
+	return new Promise((acc, rej) => {
+		try {
+			const result = db.all(
+				'SELECT sql FROM sqlite_master WHERE tbl_name = ? AND type = "table"',
+				[table],
+				(err, rows) => {
+					if (err) return rej(err)
+					acc(rows)
+				}
+			)
 		} catch (err) {
 			rej(err)
 		}
@@ -121,44 +182,70 @@ async function getTable(tableName) {
 async function addTable(table) {
 	return new Promise((acc, rej) => {
 		try {
-			tableName = table.name
-			tableFields = table.fields
-			tableTypes = table.types
-
-			db.run("CREATE TABLE IF NOT EXISTS ?", [tableName], (err, result) => {
+			req_text = "CREATE TABLE IF NOT EXISTS " + table.name + " ("
+			for (i = 0; i < table.fields.length; i++) {
+				req_text += table.fields[i] + " " + table.types[i]
+				if (i != table.fields.length - 1) {
+					req_text += ", "
+				}
+			}
+			req_text += ")"
+			db.exec(req_text, (err, result) => {
 				if (err) return rej(err)
 			})
-
-			while (tableFields.length > 0) {
-				db.run(
-					"ALTER TABLE ? ADD COLUMN ? ?",
-					[tableName, tableFields.pop(), tableTypes.pop()],
-					(err, result) => {
-						if (err) return rej(err)
-					}
-				)
-			}
-
-			acc()
+			acc("Table created successfully")
 		} catch (err) {
 			rej(err)
 		}
 	})
 }
 
-async function removeTable(tableName) {
+async function dropTable(table) {
 	return new Promise((acc, rej) => {
 		try {
-			db.run("DROP TABLE ?", [tableName], (err, result) => {
+			console.log(table)
+			req_text = "DROP TABLE " + table.name
+			db.exec(req_text, (err, result) => {
 				if (err) return rej(err)
 			})
-
-			acc()
+			acc("Table dropped successfully")
 		} catch (err) {
 			rej(err)
 		}
 	})
 }
+
+async function addIntoTable(table, data) {
+	return new Promise((acc, rej) => {
+		try {
+			console.log("Adding data into table " + table.name)
+			req_text = "INSERT INTO " + table.name + " ("
+			for (i = 0; i < table.fields.length; i++) {
+				req_text += table.fields[i]
+				if (i != table.fields.length - 1) {
+					req_text += ", "
+				}
+			}
+			req_text += ") VALUES ("
+			for (i = 0; i < data.values.length; i++) {
+				req_text += data.values[i]
+				if (i != data.values.length - 1) {
+					req_text += ", "
+				}
+			}
+			req_text += ")"
+			console.log(req_text)
+			db.exec(req_text, (err, result) => {
+				if (err) return rej(err)
+			})
+			console.log("Data added successfully")
+			acc({})
+		} catch (err) {
+			rej(err)
+		}
+	})
+}
+
 
 module.exports = {
 	init,
@@ -170,5 +257,8 @@ module.exports = {
 	getTabels,
 	getTable,
 	addTable,
-	removeTable,
+	dropTable,
+	getColumns,
+	addIntoTable,
+	getData,
 }

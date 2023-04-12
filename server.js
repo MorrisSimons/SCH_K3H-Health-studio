@@ -10,6 +10,13 @@ const getUsers = require("./api/getUsers")
 
 const getForms = require("./api/getForms")
 const getForm = require("./api/getForm")
+const getColumns = require("./api/getColumns")
+
+const addTable = require("./api/addTable")
+const dropTable = require("./api/dropTable")
+const addIntoTable = require("./api/addIntoTable")
+
+const getData = require("./api/getData")
 
 //--------------------------------
 // Note app in exspress is diffrent from the app folder in react
@@ -86,6 +93,11 @@ app.get("/api/getUsers", getUsers)
 app.delete("/api/deleteUser", deleteUser)
 app.get("/api/getForms", getForms)
 app.get("/api/getForm", getForm)
+app.post("/api/getColumns", getColumns)
+app.post("/api/addTable", addTable)
+app.delete("/api/dropTable", dropTable)
+app.post("/api/addIntoTable", addIntoTable)
+app.post("/api/getData", getData)
 
 // Catch any bad requests
 app.get("*", (req, res) => {

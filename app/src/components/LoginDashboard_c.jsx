@@ -59,44 +59,52 @@ function LoginDashboard() {
   ];
 
   return (
-    <section className="dashboard__section_admin">
-
-    <Header />
-        <h1>LoginDashboard</h1>
+    <div>
+       <Header />
+    <div className="site__settings">
+    {/* Sök bar och panel*/}
+    
+    <h1>Coach Dashboard</h1>
+    <section className="dashboard__section_coach">  
+    
+   
+    <div className="search-bar">
+        <input className="search-input" type="text" placeholder="Sök spelare..." />
+        <button className="button-search">Sök</button>
+    </div>
+    
+    
 
     <div className="panel-container">
-        <div className="search-bar">
-        <input type="text" placeholder="Search..." />
-        <button>Search</button>
+    <Link to="/se_data"><button className="coach_panel_btn">Se data</button></Link>
+    <Link to="/analys"><button className="coach_panel_btn"> analys</button></Link>
+    <Link to="/add_user"><button className="coach_panel_btn">Lägg till spelare</button></Link>
+    <div></div>
+      <button className="coach_panel_btn" onClick={handleSignOut}>Logga ut</button>
     </div>
+   
+    </section>
 
-    <Link to="/se_data"><button>Se data</button></Link>
-    <Link to="/analys"><button>analys</button></Link>
-    <Link to="/add_user"><button>Lägg till spelare</button></Link>
-    <button onClick={handleSignOut}>Logga ut</button>
 
-    </div>
+    {/*END av Sök bar och panel*/}
 
-        
 
         <div className="container dashboard__container">
           {data.map(({ id, status, name, navigation }) => {
             return (
               <Link key={id} to={navigation}>
                 <button className={`dashboard__article dashboard__article--${status}`}>
-                  <h2>{name}</h2>
+                  <h2 className="player__article">{name}</h2>
                 </button>
               </Link>
             );
           })}
         </div>
-        <h1>Admin</h1>
-        <p>{user?.name}</p>
-        <p>{user?.email}</p>
-        <button onClick={handleSignOut}>Sign Out</button>
-        
+
         <Footer />
-    </section>
+    
+    </div>
+    </div>
   );
 }
 

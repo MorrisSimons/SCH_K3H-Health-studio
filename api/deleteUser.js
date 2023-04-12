@@ -1,6 +1,10 @@
 const db = require("../db")
 
 module.exports = async (req, res) => {
-	await db.removeUser(req.params.email)
-	res.sendStatus(200)
+	try {
+		await db.removeUser(req.params.email)
+		res.sendStatus(200)
+	} catch (err) {
+		res.status(500).send(err)
+	}
 }
