@@ -75,23 +75,64 @@ function DoTestPage() {
 
 	const handleSelectChange = (selected) => {
 		setSelectedOption(selected)
-
+		setShow(false)
+		console.log("Updating")
+		if (selectedOption) {
+			fetch("http://localhost:5000/api/getColumns", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+					formId: selectedOption.value,
+				}),
+			})
+			.then((response) => {
+				if (!response.ok) {
+					throw new Error("Network response was not ok")
+				}
+				return response.json()
+			})
+			.then((data) => {
+				const tempData = data.fields.map((field, index) => {
+					return {
+						name: field,
+						value: false,
+						dataType: data.types[index],
+					}
+				})
+				setFormData(tempData)
+				setFormName(selectedOption.label)
+			})
+			.catch((error) => {
+				setError(error)
+			})
+		} else {
+			setFormData([])
+			setFormName('')
+		}
 	}
 
+	const [show,setShow]=useState(true)
+	
 	return (
 		<div className='DoTestBody'>
 			<Header />
 			<div>
-				<Select
+				{
+				show?<Select
 					value={selectedOption}
 					options={options}
 					onChange={handleSelectChange}
-				/>
+				/>:null
+				
+				}
+				{show?<p>Please select a form.</p>:null}
 			</div>
 			{formData.length > 0 ? (
 				<DoTest data={formData} formName={formName} />
 			) : (
-				<p>Please select a form.</p>
+				<p></p>
 			)}
 			<Footer />
 		</div>
