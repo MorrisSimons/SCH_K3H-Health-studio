@@ -17,19 +17,23 @@ function ManageForms() {
 				method: "DELETE",
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify({
-					formName: name,
+					formName: name.toLowerCase(),
 				}),
 			}
 			fetch("http://localhost:5000/api/dropTable", dropTable)
 				.then((response) => response.json())
 				.then((data) => console.log(data))
+				.catch((error) => {
+					setError(error)
+				})
+				
 
 			// Remove table from state
 			const newTables = tables.filter((table) => table.name !== name)
-			setTables(newTables)
-			// Update the page
-			window.location.reload()
-			
+			//setSelectedForms((selectedForms) => [...selectedForms, tempResult])
+			setTables((tables) => [...newTables])
+			// Update the page to reflect the change
+
 
 		}
 	}
@@ -75,6 +79,7 @@ function ManageForms() {
 						</div>
 					)
 				})}
+			{error && <div>{error.message}</div>}
 			</div>
 			<Footer />
 		</div>
