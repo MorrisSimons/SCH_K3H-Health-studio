@@ -29,7 +29,7 @@ function init() {
 			// Create a team 
 			// Really should use a foreign key, but long story short, It would ruin more than it would help.
 			db.run(
-				"CREATE TABLE IF NOT EXISTS team(name VARCHAR(255), teamMembers VARCHAR(255), PRIMARY KEY (name, teamMembers))",
+				"CREATE TABLE IF NOT EXISTS team(name VARCHAR(255), emails VARCHAR(255), PRIMARY KEY (name, emails))",
 				(err, result) => {
 					if (err) return rej(err)
 					acc()
@@ -256,6 +256,22 @@ async function addIntoTable(table, data) {
 	})
 }
 
+async function getTeamMembers(teamName) {
+	return new Promise((acc, rej) => {
+		try {
+			req_text = "SELECT * FROM user INNER JOIN team ON user.email = team.emails WHERE team.name = \"" + teamName + "\"";
+
+			db.all(req_text, (err, rows) => {
+				if (err) return rej(err)
+				acc(rows)
+			})
+		} catch (err) {
+			rej(err)
+		}
+	})
+}
+
+
 
 module.exports = {
 	init,
@@ -271,4 +287,5 @@ module.exports = {
 	getColumns,
 	addIntoTable,
 	getData,
+	getTeamMembers,
 }
