@@ -1,10 +1,15 @@
 import { useState } from "react";
 import "./DoTest.css";
+import * as XLSX from "xlsx";
 
 function DoTest(props) {
   const [formFields, setFormFields] = useState(props.data);
 
   const [inputFields, setInputFields] = useState([]);
+
+  //const [items, setItems] = useState([]);
+  //const [columns, setColumns] = useState([]);
+
 
   function addFields() {
     if (inputFields.length !== formFields.length) {
@@ -27,9 +32,9 @@ function DoTest(props) {
   const [errorMessage, setErrorMessage] = useState("");
   const [errorMessageType, setErrorMessageType] = useState("");
 
-  function containsNumbers(str) {
-    return /^\d+$/.test(str);
-  }
+  //function containsNumbers(str) {
+  //  return /^\d+$/.test(str);
+  //}
 
   function containsOnlyNumbers(str) {
     return /^\d+$/.test(str);
@@ -104,31 +109,76 @@ function DoTest(props) {
     }
   };
 
-  function handleFileUpload(event) {
-    const file = event.target.files[0];
-    console("file");
-    const reader = new FileReader();
+  const readExcel = (file) => {
+    const promise = new Promise((resolve, reject) => {
+      const fileReader = new FileReader();
+      fileReader.readAsArrayBuffer(file);
 
-    reader.onload = (event) => {
-      const contents = event.target.result;
+      fileReader.onload = (e) => {
+        const bufferArray = e.target.result;
 
-      // Parse the contents of the file into an array of field values
-      const fieldValues = contents.split(",");
+        const wb = XLSX.read(bufferArray, { type: "buffer" });
 
-      // Update the input fields with the parsed values
-      const updatedInputFields = inputFields.map((field, index) => ({
-        field: field.field,
-        value: fieldValues[index] || "",
-      }));
-      setInputFields(updatedInputFields);
-    };
+        const wsname = wb.SheetNames[0];
 
-    reader.readAsText(file);
-  }
+        const ws = wb.Sheets[wsname];
 
-  //const setName = (event) => {
-  //    setFormName(event.target.value);
-  //}
+        const data = XLSX.utils.sheet_to_json(ws);
+
+        // Extract column names from the first row
+        const cols = [];
+        for (const key in data[0]) {
+          cols.push(key);
+        }
+
+        const mappedData = data.map((items) => {
+          const newItem = {};
+          for (const column of cols) {
+            newItem[column] = items[column];
+          }
+          
+          console.log("fdggfddgfgfdgfdfdggfdfgdfdggfddfggfd")
+          //console.log(newItem)
+          return newItem;
+        });
+
+        //setColumns(cols);
+        //setItems(mappedData);
+        
+
+        const valueList = Object.values(mappedData);
+        console.log(valueList);
+        console.log(valueList);
+        
+        
+        for (let i = 0; i < inputFields.length; i++) {
+          const field = inputFields[i].field;
+          const value = mappedData[0][field];
+          inputFields[i].value = value;
+        }
+
+        
+
+        //console.log(mappedData);
+        console.log("mappedData");
+        console.log(inputFields)
+        
+        resolve();
+      };
+
+      fileReader.onerror = (error) => {
+        reject(error);
+      };
+    });
+
+    return promise;
+  };
+  const handleDrop = (e) => {
+    e.preventDefault();
+    const file = e.dataTransfer.files[0];
+    readExcel(file);
+  };
+
 
   return (
     <div className="App" class="DoTest_container">
@@ -146,7 +196,10 @@ function DoTest(props) {
                 class="DoTest_input"
                 name="field"
                 placeholder={form.dataType}
-                onChange={(event) => handleFormChange(event, index)}
+                onChange={(e) => {
+                  const file = e.target.files[0];
+                  readExcel(file);
+                }}
                 value={form.field}
               ></input>
             </div>
@@ -158,7 +211,15 @@ function DoTest(props) {
       <button onClick={submit} class="submit_button">
         Skicka
       </button>
-      <input type="file" onChange={handleFileUpload} class="File_drop" />
+      
+      <div class="drop" onDrop={handleDrop} onDragOver={(e) => e.preventDefault()}>
+      <input
+        type="file"
+        onChange={(e) => {
+          const file = e.target.files[0];
+          readExcel(file);
+        }}
+      /></div>
       <div class="error" id="errorMessage">
         {errorMessage}
       </div>
