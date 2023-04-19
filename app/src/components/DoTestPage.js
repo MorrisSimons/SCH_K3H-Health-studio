@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Header from "./Header"
 import Footer from "./Footer"
 import DoTest from './DoTest';
+import DoTestExcel from './DoTestExcel';
 import Select from "react-select"
 
 function DoTestPage() {
@@ -130,7 +131,8 @@ function DoTestPage() {
 				{show?<p>Please select a form.</p>:null}
 			</div>
 			{formData.length > 0 ? (
-				<DoTest data={formData} formName={formName} />
+				//<DoTest data={formData} formName={formName} />
+				<DoTestExcel data={formData} formName={formName}/>
 			) : (
 				<p></p>
 			)}

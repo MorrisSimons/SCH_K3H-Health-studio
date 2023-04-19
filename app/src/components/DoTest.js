@@ -199,6 +199,7 @@ function DoTest(props) {
                 onChange={(e) => {
                   const file = e.target.files[0];
                   readExcel(file);
+                  //handleFormChange(e, index);
                 }}
                 value={form.field}
               ></input>
