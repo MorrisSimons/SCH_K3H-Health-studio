@@ -11,6 +11,7 @@ import Data from "./components/Data"
 //import Add_form from "./components/Add_form_page"
 import LoginDashboardA from "./components/LoginDashboard_a"
 import LoginDashboardC from "./components/LoginDashboard_c"
+import LoginDashboardP from "./components/LoginDashboard_p"
 import AddCoach from "./components/AddCoach"
 import DoTestPage from "./components/DoTestPage"
 import AddForm from "./components/AddForm"
@@ -48,6 +49,9 @@ const Views = () => {
 						setDashboard(<LoginDashboardA />)
 					} else if (data[0].accountType === "coach") {
 						setDashboard(<LoginDashboardC />)
+					}
+					else if (data[0].accountType === "user") {
+						setDashboard(<LoginDashboardP />)
 					}
 					else {
 						setDashboard(<Home />)
