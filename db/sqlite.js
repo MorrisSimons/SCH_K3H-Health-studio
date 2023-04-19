@@ -61,7 +61,7 @@ async function getUser(email) {
 	return new Promise((acc, rej) => {
 		db.all("SELECT * FROM user WHERE email=?", [email], (err, rows) => {
 			if (err) return rej(err)
-			acc(rows)[0]
+			acc(rows)
 		})
 	})
 }
@@ -271,6 +271,20 @@ async function getTeamMembers(teamName) {
 	})
 }
 
+async function getUserType(email) {
+	return new Promise((acc, rej) => {
+		try {
+			req_text = "SELECT accountType FROM user WHERE email = \"" + email + "\"";
+			
+			db.all(req_text, (err, rows) => {
+				if (err) return rej(err)
+				acc(rows)
+			})
+		} catch (err) {
+			rej(err)
+		}
+	})
+}
 
 
 module.exports = {
@@ -288,4 +302,5 @@ module.exports = {
 	addIntoTable,
 	getData,
 	getTeamMembers,
+	getUserType,
 }
