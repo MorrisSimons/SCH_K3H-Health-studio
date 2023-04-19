@@ -1,4 +1,6 @@
 import { Routes, Route } from "react-router-dom"
+import { useState, useEffect } from "react"
+
 import Home from "./components/Home"
 import About from "./components/About"
 import NotFound from "./components/NotFound"
@@ -15,12 +17,57 @@ import AddForm from "./components/AddForm"
 import ManageForms from "./components/ManageForms"
 
 const Views = () => {
+	const [dashboard, setDashboard] = useState(<LoginDashboardA />)
 	const user = JSON.parse(localStorage.getItem("user"))
 	const isLoggedIn = user && Object.keys(user).length !== 0
+	const envirioment = "Dv"
+
+	useEffect(() => {
+		// Set the dashboard to admin
+		(async () => {
+			await getDashboard()
+		  })();
+	}, [])
+
+	async function getDashboard() {
+		if (isLoggedIn) {
+			if (envirioment === "Dev") {
+			const data_2 = "Console log"
+			console.log("End?")
+			console.log(data_2)
+			fetch("/api/getUserType", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({ email: user.email }),
+			})
+				.then((res) => res.json())
+				.then((data) => {
+					if (data[0].accountType === "admin") {
+						setDashboard(<LoginDashboardA />)
+					} else if (data[0].accountType === "coach") {
+						setDashboard(<LoginDashboardC />)
+					}
+					else {
+						setDashboard(<Home />)
+					}
+				})
+
+			}
+			else {
+				// Enter the dashboard you want to develop in here
+				setDashboard(<LoginDashboardC />)
+			}
+
+		} else {
+			setDashboard(<Home />)
+		}
+	}
 
 	return (
 		<Routes>
-			<Route path="/" element={isLoggedIn ? <LoginDashboardA /> : <Home />} />
+			<Route path="/" element={dashboard} />
 			<Route path="/Data" element={<Data />} />
 			<Route path="/about" element={<About />} />
 			<Route path="/contact" element={<Contact />} />

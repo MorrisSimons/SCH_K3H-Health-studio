@@ -18,7 +18,7 @@ function init() {
 
 			if (process.env.NODE_ENV !== "test")
 				console.log(`Using sqlite database at ${location}`)
-
+			// Create a user table 
 			db.run(
 				"CREATE TABLE IF NOT EXISTS user(id varchar(36), email VARCHAR(255) primary key, firstName VARCHAR(255), lastName VARCHAR(255), accountType VARCHAR(255))",
 				(err, result) => {
@@ -26,6 +26,15 @@ function init() {
 					acc()
 				}
 			)
+			// Create a team 
+			// Really should use a foreign key, but long story short, It would ruin more than it would help.
+			db.run(
+				"CREATE TABLE IF NOT EXISTS team(name VARCHAR(255), emails VARCHAR(255), PRIMARY KEY (name, emails))",
+				(err, result) => {
+					if (err) return rej(err)
+					acc()
+					}
+				)
 		})
 	})
 }
@@ -52,7 +61,7 @@ async function getUser(email) {
 	return new Promise((acc, rej) => {
 		db.all("SELECT * FROM user WHERE email=?", [email], (err, rows) => {
 			if (err) return rej(err)
-			acc(rows)[0]
+			acc(rows)
 		})
 	})
 }
@@ -114,6 +123,7 @@ async function getTabels() {
 async function getTable(tableName) {
 	return new Promise((acc, rej) => {
 		// Get all the data in the table provided 
+		console.log("Getting table: " + tableName)
 		try {
 			req_text = "SELECT * FROM " + tableName
 			const result = db.all(req_text, (err, rows) => {
@@ -246,6 +256,36 @@ async function addIntoTable(table, data) {
 	})
 }
 
+async function getTeamMembers(teamName) {
+	return new Promise((acc, rej) => {
+		try {
+			req_text = "SELECT * FROM user INNER JOIN team ON user.email = team.emails WHERE team.name = \"" + teamName + "\"";
+
+			db.all(req_text, (err, rows) => {
+				if (err) return rej(err)
+				acc(rows)
+			})
+		} catch (err) {
+			rej(err)
+		}
+	})
+}
+
+async function getUserType(email) {
+	return new Promise((acc, rej) => {
+		try {
+			req_text = "SELECT accountType FROM user WHERE email = \"" + email + "\"";
+			
+			db.all(req_text, (err, rows) => {
+				if (err) return rej(err)
+				acc(rows)
+			})
+		} catch (err) {
+			rej(err)
+		}
+	})
+}
+
 
 module.exports = {
 	init,
@@ -261,4 +301,6 @@ module.exports = {
 	getColumns,
 	addIntoTable,
 	getData,
+	getTeamMembers,
+	getUserType,
 }
