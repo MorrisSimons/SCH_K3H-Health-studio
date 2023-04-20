@@ -94,7 +94,7 @@ app.get("/api/getUsers", getUsers)
 
 app.delete("/api/deleteUser", deleteUser)
 app.get("/api/getForms", getForms)
-app.get("/api/getForm", getForm)
+app.post("/api/getForm", getForm)
 app.post("/api/getColumns", getColumns)
 app.post("/api/addTable", addTable)
 app.delete("/api/dropTable", dropTable)
