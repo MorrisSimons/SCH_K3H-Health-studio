@@ -3,6 +3,7 @@ import Header from "./Header"
 import Footer from "./Footer"
 import DoTest from './DoTest';
 import Select from "react-select"
+import "./DoTestPage.css"
 
 function DoTestPage() {
 	const [error, setError] = useState(null)
@@ -82,7 +83,7 @@ function DoTestPage() {
 		<div className='DoTestBody'>
 			<Header />
 			<div>
-				<Select
+				<Select className='selector'
 					value={selectedOption}
 					options={options}
 					onChange={handleSelectChange}

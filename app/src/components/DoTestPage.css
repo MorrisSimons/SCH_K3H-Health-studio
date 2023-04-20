@@ -1,10 +1,7 @@
-.DoTestPage_select {
-    position: relative;
-    left: 50%;
+.selector {
     padding: 0.7rem;
-    width: 40%;
+    width: 50%;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 1rem;
-
 }
