@@ -1,44 +1,10 @@
 import "./DoTest.css";
 import * as XLSX from "xlsx";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 function DoTestExcel(props) {
-  const [formFields, setFormFields] = useState(props.data);
+  //const [formFields, setFormFields] = useState(props.data);
   const [json, setJson] = useState([]);
-  //const [excelHeaders, setExcelHeaders ] = useState([]);
-
-  //const [items, setItems] = useState([]);
-  //const [columns, setColumns] = useState([]);
-
-  //const [formName, setFormName] = useState("")
-
-  //function containsNumbers(str) {
-  //  return /^\d+$/.test(str);
-  //}
-
-  //function compareNames() {
-  //  console.log(props.data)
-  //  console.log("props.data")
-  //
-  //  const names = []
-  //  for (let i = 0; i < props.data.length; i++) {
-  //    names.push(props.data[i].name)
-  //
-  //    console.log(names)
-  //    if (excelHeaders[i] === names[i]) {
-  //      console.log("match")
-  //    } else {
-  //      console.log("no match")
-  //    }
-  //  }
-
-  //excelHeaders.forEach((header) => {
-  //  if (header === names[i]) {
-  //    console.log("match")
-  //  } else {
-  //    console.log("no match")
-  //  }
-  //} )
 
   const readExcel = (file) => {
     console.log(props.data);
@@ -89,29 +55,26 @@ function DoTestExcel(props) {
         <td key={index}>{cell}</td>
       ))}
     </tr>
-  )
-);
+  ));
 
-const submit = () => {
+  const submit = () => {
+    for (let i = 1; i < json.length; i++) {
+      const addIntoTable = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: props.formName,
+          fields: json[0],
+          values: json[i],
+        }),
+      };
+      console.log(addIntoTable.body);
 
-  for (let i = 1; i < json.length; i++) {
-    const addIntoTable = {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        name: props.formName,
-        fields: json[0],
-        values: json[i],
-      }),
-      
-    };
-    console.log(addIntoTable.body)
-
-    fetch("http://localhost:5000/api/addIntoTable", addIntoTable)
-    .then((response) => response.json())
-    .then((data) => console.log(data));
-  }
-}
+      fetch("http://localhost:5000/api/addIntoTable", addIntoTable)
+        .then((response) => response.json())
+        .then((data) => console.log(data));
+    }
+  };
 
   return (
     <div className="App" class="DoTest_container">
@@ -120,11 +83,11 @@ const submit = () => {
       <br />
 
       <table>
-      <tbody>
-        {listItems}
-      </tbody>
-    </table>
-      <button class="submit_button" onClick={submit}>Skicka</button>
+        <tbody>{listItems}</tbody>
+      </table>
+      <button class="submit_button" onClick={submit}>
+        Skicka
+      </button>
 
       <div
         class="drop"
@@ -139,7 +102,6 @@ const submit = () => {
           }}
         />
       </div>
-      
     </div>
   );
 }
