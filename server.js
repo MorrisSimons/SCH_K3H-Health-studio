@@ -20,6 +20,9 @@ const getData = require("./api/getData")
 const getTeamMembers = require("./api/getTeamMembers")
 const getUserType = require("./api/getUserType")
 
+const getTeamStatus = require("./api/getTeamStatus")
+const getTeam = require("./api/getTeam")
+
 //--------------------------------
 // Note app in exspress is diffrent from the app folder in react
 //--------------------------------
@@ -102,6 +105,8 @@ app.post("/api/addIntoTable", addIntoTable)
 app.post("/api/getData", getData)
 app.post("/api/getTeamMembers", getTeamMembers)
 app.post("/api/getUserType", getUserType)
+app.post("/api/getTeamStatus", getTeamStatus)
+app.post("/api/getTeam", getTeam)
 
 // Catch any bad requests
 app.get("*", (req, res) => {

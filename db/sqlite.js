@@ -286,6 +286,22 @@ async function getUserType(email) {
 	})
 }
 
+async function getTeam(email) {
+	return new Promise((acc, rej) => {
+		try {
+			req_text = "SELECT * FROM team WHERE emails = \"" + email + "\"";
+			
+			db.all(req_text, (err, rows) => {
+				if (err) return rej(err)
+				acc(rows)
+			})
+		} catch (err) {
+			rej(err)
+		}
+	})
+}
+
+
 
 module.exports = {
 	init,
@@ -303,4 +319,5 @@ module.exports = {
 	getData,
 	getTeamMembers,
 	getUserType,
+	getTeam,
 }
