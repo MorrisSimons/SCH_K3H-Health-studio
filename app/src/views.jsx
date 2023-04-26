@@ -13,7 +13,7 @@ import AddCoach from "./components/AddCoach"
 import DoTestPage from "./components/DoTestPage"
 import AddForm from "./components/AddForm"
 import ManageForms from "./components/ManageForms"
-import Excel from "./components/Excel"
+
 
 const Views = () => {
 	const user = JSON.parse(localStorage.getItem("user"))

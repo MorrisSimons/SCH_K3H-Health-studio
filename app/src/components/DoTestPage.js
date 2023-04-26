@@ -14,6 +14,8 @@ function DoTestPage() {
   const [formName, setFormName] = useState("");
   const [pageName, setPageName] = useState("DoTest");
 
+
+  
   //Get all tablenames
   useEffect(() => {
     fetch("http://localhost:5000/api/getForms", { method: "GET" })
@@ -81,39 +83,37 @@ function DoTestPage() {
     console.log("Getting columns");
     console.log(tempData);
     console.log(selected.label);
+    
     setPage(<DoTest data={tempData} formName={selected.label} />);
+    
+    setShowDoTest(true)
     return "Done";
   }
 
   const [show, setShow] = useState(true);
   const [showSwitch, setShowSwitch] = useState(false);
-
-  function handlePage(){
-	if (pageName==="DoTest"){
-	  console.log("Switching to Excel")
-	  console.log(formData)
-	  console.log(formName)
-	  setPage(<DoTestExcel data={formData} formName={formName}/>)
-	  setPageName("DoTestExcel")
-	}
-	else {
-	  console.log("Switching to Do Test")
-	  console.log(formData)
-	  console.log(formName)
-	  getColumns(selectedOption)
-	  setPage(<DoTest data={formData} formName={formName}/>)
-	  setPageName("DoTest")
-	}
-  }
+  const [showDoTest, setShowDoTest] = useState(false);
+  const [showDoTestExcel, setShowDoTestExcel] = useState(false);
   
-
+  function handleSwitch(){
+    if (showDoTest === true) {
+      setShowDoTest(false)
+      setShowDoTestExcel(true)
+    }
+    else {
+      setShowDoTest(true)
+      setShowDoTestExcel(false)
+    }
+  }
   const [page, setPage] = useState(
     <DoTest data={formData} formName={formName} />
   );
 
   //<DoTest data={formData} formName={formName} />
   //<DoTestExcel data={formData} formName={formName}/>
-
+  //{formData.length > 0 ? <div>{page}</div> : <p></p>}
+  //{showSwitch ? <button onClick={handlePage}>Switch</button>: null}
+  //{showDoTest?  < DoTest data={formData} formName={formName} /> : null}
   return (
     <div className="DoTestBody">
       <Header/>
@@ -127,8 +127,11 @@ function DoTestPage() {
         ) : null}
         {show ? <p>Please select a form.</p> : null}
       </div>
-      {formData.length > 0 ? <div>{page}</div> : <p></p>}
-      {showSwitch ? <button onClick={handlePage}>Switch</button>: null} 
+      
+      {formData.length > 0 && showDoTest? <div>{page}</div> : <p></p>}
+      {showDoTestExcel?  <DoTestExcel data={formData} formName={formName}/> : null}  
+        
+      {showSwitch ? <button onClick={handleSwitch}>Switch</button>: null} 
       <Footer/>
     </div>
   );

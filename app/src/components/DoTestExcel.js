@@ -5,7 +5,10 @@ import React, { useState } from "react";
 function DoTestExcel(props) {
   //const [formFields, setFormFields] = useState(props.data);
   const [json, setJson] = useState([]);
-
+  console.log(props.data)
+  console.log("hej")
+  console.log(props.data.length)
+  console.log(props.data.n)
   const readExcel = (file) => {
     console.log(props.data);
     const promise = new Promise((resolve, reject) => {
@@ -29,10 +32,13 @@ function DoTestExcel(props) {
 
         //compareNames()
         const names = [];
+        console.log(props.data)
+        
         for (let i = 0; i < props.data.length; i++) {
+          //names.push(props.data.name[i]);
           names.push(props.data[i].name);
-
-          if (props.data[i].name === json[0][i]) {
+          console.log(String(names))
+          if (names[i] === json[0][i]) {
             console.log("match");
           } else {
             console.log("no Match");
@@ -58,6 +64,10 @@ function DoTestExcel(props) {
   ));
 
   const submit = () => {
+    //Felhantering
+
+    
+    
     for (let i = 1; i < json.length; i++) {
       const addIntoTable = {
         method: "POST",
