@@ -16,27 +16,20 @@ import AddCoach from "./components/AddCoach"
 import DoTestPage from "./components/DoTestPage"
 import AddForm from "./components/AddForm"
 import ManageForms from "./components/ManageForms"
+const API_PATH = process.env.REACT_APP_API_PATH
+const envirioment =  process.env.REACT_APP_DEV_ENVIRONMENT
 
 const Views = () => {
 	const [dashboard, setDashboard] = useState(<LoginDashboardA />)
 	const user = JSON.parse(localStorage.getItem("user"))
 	const isLoggedIn = user && Object.keys(user).length !== 0
-	const envirioment = "Dv"
-
-	useEffect(() => {
-		// Set the dashboard to admin
-		(async () => {
-			await getDashboard()
-		  })();
-	}, [])
-
 	async function getDashboard() {
 		if (isLoggedIn) {
-			if (envirioment === "Dev") {
+			if (envirioment === "False") {
 			const data_2 = "Console log"
 			console.log("End?")
 			console.log(data_2)
-			fetch("/api/getUserType", {
+			fetch(API_PATH + "api/getUserType", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
@@ -65,9 +58,18 @@ const Views = () => {
 			}
 
 		} else {
+			// Should log out people as well.
 			setDashboard(<Home />)
 		}
 	}
+
+	useEffect(() => {
+		// Set the dashboard to admin
+		(async () => {
+			await getDashboard()
+		  })();
+	}, [])
+
 
 	return (
 		<Routes>

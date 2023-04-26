@@ -3,6 +3,7 @@ import Header from "./Header"
 import Footer from "./Footer"
 import DoTest from './DoTest';
 import Select from "react-select"
+const API_PATH = process.env.REACT_APP_API_PATH;
 
 function DoTestPage() {
 	const [error, setError] = useState(null)
@@ -14,7 +15,7 @@ function DoTestPage() {
 	
 	//Get all tablenames
 	useEffect(() => {
-		fetch("http://localhost:5000/api/getForms", { method: "GET" })
+		fetch(API_PATH + "api/getForms", { method: "GET" })
 			.then((response) => {
 				if (!response.ok) {
 					throw new Error("Network response was not ok")
@@ -38,7 +39,7 @@ function DoTestPage() {
 	//Get columns from selected form
 	useEffect(() => {
 		if (selectedOption) {
-			fetch("http://localhost:5000/api/getColumns", {
+			fetch(API_PATH + "api/getColumns", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",

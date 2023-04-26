@@ -3,6 +3,7 @@ import Header from "./Header"
 import Footer from "./Footer"
 import Select from "react-select"
 import "./Data.css"
+const API_PATH = process.env.REACT_APP_API_PATH;
 
 function Data() {
 	const [overview, setOverview] = useState([])
@@ -16,7 +17,7 @@ function Data() {
 	useEffect(() => {
 		
 		// Fetch the forms from the database using overlord
-		fetch("http://localhost:5000/api/getData", {
+		fetch(API_PATH + "api/getData", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -38,7 +39,7 @@ function Data() {
 			.catch((error) => {
 				setError(error)
 			})
-		fetch("http://localhost:5000/api/getForms", { method: "GET" })
+		fetch(API_PATH + "api/getForms", { method: "GET" })
 			.then((response) => {
 				if (!response.ok) {
 					throw new Error("Network response was not ok")
@@ -68,7 +69,7 @@ function Data() {
 			console.log("Form already selected")
 			return
 		} else {
-			fetch("http://localhost:5000/api/getColumns", {
+			fetch(API_PATH + "api/getColumns", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
@@ -126,7 +127,7 @@ function Data() {
 	const updateInformation = (fields) => {
 		
 		// Using the information found in the overview, get the information from the database
-		fetch ("http://localhost:5000/api/getData", {
+		fetch (API_PATH + "api/getData", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",

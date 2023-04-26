@@ -3,6 +3,7 @@ import Header from "./Header";
 import Footer from "./Footer";
 import "./LoginDashboard_c.css";
 import { Link } from "react-router-dom";
+const API_PATH = process.env.REACT_APP_API_PATH;
 
 function LoginDashboard() {
   const user = JSON.parse(localStorage.getItem("user"))
@@ -21,7 +22,7 @@ function LoginDashboard() {
   }, []);
 
   async function getTeam() {
-    fetch("http://localhost:5000/api/getTeam", {
+    fetch(API_PATH +"api/getTeam", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -45,7 +46,7 @@ function LoginDashboard() {
   }
 
   async function getTeamMembers(team) {
-    fetch("http://localhost:5000/api/getTeamStatus", {
+    fetch(API_PATH +"api/getTeamStatus", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

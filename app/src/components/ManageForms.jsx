@@ -3,6 +3,8 @@ import Header from "./Header"
 import Footer from "./Footer"
 import "./ManageForms.css"
 
+const API_PATH = process.env.REACT_APP_API_PATH;
+
 function ManageForms() {
 	const [error, setError] = useState(null)
 	const [tables, setTables] = useState([])
@@ -20,7 +22,7 @@ function ManageForms() {
 					formName: name.toLowerCase(),
 				}),
 			}
-			fetch("http://localhost:5000/api/dropTable", dropTable)
+			fetch(API_PATH + "api/dropTable", dropTable)
 				.then((response) => response.json())
 				.then((data) => console.log(data))
 				.catch((error) => {
@@ -33,13 +35,14 @@ function ManageForms() {
 			//setSelectedForms((selectedForms) => [...selectedForms, tempResult])
 			setTables((tables) => [...newTables])
 			// Update the page to reflect the change
+			
 
 
 		}
 	}
 
 	useEffect(() => {
-		fetch("http://localhost:5000/api/getForms", { method: "GET" })
+		fetch(API_PATH + "api/getForms", { method: "GET" })
 			.then((response) => {
 				if (!response.ok) {
 					throw new Error("Network response was not ok")

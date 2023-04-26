@@ -2,6 +2,7 @@ import { useState } from 'react';
 import './AddForm.css';
 import Header from './Header';
 import Footer from './Footer';
+const API_PATH = process.env.REACT_APP_API_PATH;
 
 
 function AddForm() {
@@ -80,7 +81,7 @@ function AddForm() {
       };
       console.log(addTable);
 
-      fetch("http://localhost:5000/api/addTable", addTable)
+      fetch(API_PATH + "api/addTable", addTable)
         .then((response) => response.json())
         .then((data) => console.log(data));
 

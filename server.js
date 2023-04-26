@@ -22,6 +22,7 @@ const getUserType = require("./api/getUserType")
 
 const getTeamStatus = require("./api/getTeamStatus")
 const getTeam = require("./api/getTeam")
+const getTeam2 = require("./api/getTeam")
 
 //--------------------------------
 // Note app in exspress is diffrent from the app folder in react
@@ -59,8 +60,9 @@ app.use((req, res, next) => {
 })
 
 // This middleware allows cross origin requests
-app.use(cors())
-
+app.use(cors({
+    origin: '*'
+}));
 // This middleware parses incoming requests with JSON payloads
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
