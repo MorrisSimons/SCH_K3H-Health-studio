@@ -238,7 +238,15 @@ async function addIntoTable(table, data) {
 			}
 			req_text += ") VALUES ("
 			for (i = 0; i < data.values.length; i++) {
-				req_text += data.values[i]
+				// Check if the value is a number
+				if (isNaN(data.values[i])) {
+					stringify = "\"" + data.values[i] + "\""
+					req_text += stringify
+				} else {
+					//Note if you enter a date, we might need a check for that
+					req_text += data.values[i]
+				}
+				
 				if (i != data.values.length - 1) {
 					req_text += ", "
 				}
