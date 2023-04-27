@@ -7,6 +7,9 @@ module.exports = async (req, res) => {
         }
 		email = req.body.email
 		const accountType = await db.getUserType(email)
+		if (accountType.length === 0) {
+			res.status(400).send("No account found")
+		}
 		res.send(accountType)
 	} catch (err) {
 		console.log(err)

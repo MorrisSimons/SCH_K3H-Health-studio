@@ -17,7 +17,7 @@ import DoTestPage from "./components/DoTestPage"
 import AddForm from "./components/AddForm"
 import ManageForms from "./components/ManageForms"
 const API_PATH = process.env.REACT_APP_API_PATH
-const envirioment =  'True' //process.env.REACT_APP_DEV_ENVIRONMENT
+const envirioment =  'False' //process.env.REACT_APP_DEV_ENVIRONMENT
 
 
 const Views = () => {
@@ -28,9 +28,6 @@ const Views = () => {
 		if (isLoggedIn) {
 
 			if (envirioment === "False") {
-			const data_2 = "Console log"
-			console.log("End?")
-			console.log(data_2)
 			fetch(API_PATH + "api/getUserType", {
 				method: "POST",
 				headers: {
@@ -40,6 +37,8 @@ const Views = () => {
 			})
 				.then((res) => res.json())
 				.then((data) => {
+					console.log(data)
+					console.log(data[0].accountType)
 					if (data[0].accountType === "admin") {
 						setDashboard(<LoginDashboardA />)
 					} else if (data[0].accountType === "coach") {

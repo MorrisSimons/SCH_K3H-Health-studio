@@ -283,9 +283,10 @@ async function getUserType(email) {
 	return new Promise((acc, rej) => {
 		try {
 			req_text = "SELECT accountType FROM user WHERE email = \"" + email + "\"";
-			
+			console.log(req_text)
 			db.all(req_text, (err, rows) => {
 				if (err) return rej(err)
+				console.log(rows)
 				acc(rows)
 			})
 		} catch (err) {

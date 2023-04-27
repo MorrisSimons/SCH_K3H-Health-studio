@@ -55,7 +55,8 @@ function Data() {
 					for (let j = 0; j < selectedForms[i].columns.length; j++) {
 						if (selectedForms[i].columns[j].value === true) {
 							tempOverview.push({
-								tableName: selectedForms[i].tableName,
+								// Not sure why this started to give Capital letters, but this fixes it
+								tableName: selectedForms[i].tableName.toLowerCase(),
 								columnName: selectedForms[i].columns[j].name,
 							})
 						}
@@ -83,7 +84,9 @@ function Data() {
 
 
 					}
-					fetchCoachData(request_body);
+					// Should be specfic to user
+					// but be able to get all data
+					fetchData(request_body);
 				}
 				else {
 					console.log("Error, not a user")
