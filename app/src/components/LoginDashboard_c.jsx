@@ -88,7 +88,7 @@ function LoginDashboard() {
     
 
     <div className="panel-container">
-    <Link to="/se_data"><button className="coach_panel_btn">Se data</button></Link>
+    <Link to="/data"><button className="coach_panel_btn">Se data</button></Link>
     <Link to="/analys"><button className="coach_panel_btn"> analys</button></Link>
     <Link to="/add_user"><button className="coach_panel_btn">Lägg till spelare</button></Link>
     <div></div>

@@ -4,6 +4,7 @@ import Footer from "./Footer";
 import icon from "../images/icon.png"
 import "./LoginDashboard_p.css";
 import { Link } from "react-router-dom";
+const API_PATH = process.env.REACT_APP_API_PATH;
 
 function LoginDashboard() {
 	function handleSignOut() {
@@ -23,7 +24,7 @@ function LoginDashboard() {
 		{
 			id: 2,
 			title: "Se data",
-			navigation: "/see_data",
+			navigation: "/data",
 		},
 	]
 

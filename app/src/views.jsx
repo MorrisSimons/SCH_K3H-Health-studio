@@ -17,7 +17,7 @@ import DoTestPage from "./components/DoTestPage"
 import AddForm from "./components/AddForm"
 import ManageForms from "./components/ManageForms"
 const API_PATH = process.env.REACT_APP_API_PATH
-const envirioment =  process.env.REACT_APP_DEV_ENVIRONMENT
+const envirioment =  'True' //process.env.REACT_APP_DEV_ENVIRONMENT
 
 const Views = () => {
 	const [dashboard, setDashboard] = useState(<LoginDashboardA />)
@@ -25,6 +25,7 @@ const Views = () => {
 	const isLoggedIn = user && Object.keys(user).length !== 0
 	async function getDashboard() {
 		if (isLoggedIn) {
+
 			if (envirioment === "False") {
 			const data_2 = "Console log"
 			console.log("End?")
@@ -54,7 +55,7 @@ const Views = () => {
 			}
 			else {
 				// Enter the dashboard you want to develop in here
-				setDashboard(<LoginDashboardC />)
+				setDashboard(<LoginDashboardP />)
 			}
 
 		} else {
