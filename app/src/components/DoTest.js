@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./DoTest.css";
+const API_PATH = process.env.REACT_APP_API_PATH;
 
 function DoTest(props) {
   const [formFields, setFormFields] = useState(props.data);
@@ -92,7 +93,7 @@ function DoTest(props) {
       };
       console.log(addIntoTable);
 
-      fetch("http://localhost:5000/api/addIntoTable", addIntoTable)
+      fetch(API_PATH + "api/addIntoTable", addIntoTable)
         .then((response) => response.json())
         .then((data) => console.log(data));
 

@@ -1,62 +1,74 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import "./LoginDashboard_c.css";
 import { Link } from "react-router-dom";
+const API_PATH = process.env.REACT_APP_API_PATH;
 
 function LoginDashboard() {
+  const user = JSON.parse(localStorage.getItem("user"))
+  const [data, setData] = useState([]);
+
   function handleSignOut() {
     localStorage.removeItem("user");
     window.location.reload();
   }
 
-  const user = JSON.parse(localStorage.getItem("user"));
   console.log("user: " + user);
+  useEffect(() => {
+    (async () => {
+			await getTeam()
+		  })();
+  }, []);
 
-  const data = [
-    {
-      id: 1,
-      status: "active",
-      name: "Joe Doe",
-      navigation: "/joe_doe_coach1",
-    },
-    {
-      id: 2,
-      status: "inactive",
-      name: "John Smith",
-      navigation: "/john_smith_coach2",
-    },
-    {
-      id: 3,
-      status: "active",
-      name: "Emma Johnson",
-      navigation: "/emma_johnson_coach2",
-    },
-    {
-      id: 4,
-      status: "inactive",
-      name: "Michael Brown",
-      navigation: "/michael_brown_coach2",
-    },
-    {
-      id: 5,
-      status: "pending",
-      name: "Sarah Lee",
-      navigation: "/sarah_lee_coach2",
-    },
-    {
-      id: 6,
-      status: "pending",
-      name: "David Garcia",
-      navigation: "/david_garcia_coach2",
-    },
-    {
-      id: 7,
-      status: "active",
-      name: "Emily Davis",
-      navigation: "/emily_davis_coach2",
-    },
-  ];
+  async function getTeam() {
+    fetch(API_PATH +"api/getTeam", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        email: user.email,
+        }),
+      })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        console.log(response);
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data);
+        getTeamMembers(data.name);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  async function getTeamMembers(team) {
+    fetch(API_PATH +"api/getTeamStatus", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        teamName: team,
+      }),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log(team)
+        console.log("Team members:")
+        setData(data);
+        console.log(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 
   return (
     <div>
@@ -76,7 +88,7 @@ function LoginDashboard() {
     
 
     <div className="panel-container">
-    <Link to="/se_data"><button className="coach_panel_btn">Se data</button></Link>
+    <Link to="/data"><button className="coach_panel_btn">Se data</button></Link>
     <Link to="/analys"><button className="coach_panel_btn"> analys</button></Link>
     <Link to="/add_user"><button className="coach_panel_btn">Lägg till spelare</button></Link>
     <div></div>

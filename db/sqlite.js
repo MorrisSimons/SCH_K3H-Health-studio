@@ -286,6 +286,61 @@ async function getUserType(email) {
 	})
 }
 
+async function getTeam(email) {
+	return new Promise((acc, rej) => {
+		try {
+			req_text = "SELECT * FROM team WHERE emails = \"" + email + "\"";
+			
+			db.all(req_text, (err, rows) => {
+				if (err) return rej(err)
+				acc(rows)
+			})
+		} catch (err) {
+			rej(err)
+		}
+	})
+}
+
+async function getDataWhere(table) {
+	return new Promise((acc, rej) => {
+		try {
+			tableNames = table.names
+			tableColumns = table.columns
+			whereStatment = table.where
+			req_text = "SELECT "
+			// Loop through the tabels and get the data from each one
+			for (i = 0; i < tableColumns.length; i++) {
+				req_text += tableColumns[i]
+				if (i != tableColumns.length - 1) {
+					req_text += ", "
+				}
+			}
+			console.log(req_text)
+			req_text += " FROM "
+			for (i = 0; i < tableNames.length; i++) {
+				req_text += tableNames[i]
+				if (i != tableNames.length - 1) {
+					req_text += ", "
+				}
+			}
+			// Check if 
+			// Make an inner join between those tabels and team
+			req_text += " INNER JOIN team ON team.emails = " + tableNames[0] + ".email"
+
+			req_text += " WHERE " + whereStatment
+
+			console.log(req_text)
+			const result = db.all(req_text, (err, rows) => {
+				if (err) return rej(err)
+				acc(rows)
+			}
+
+			)
+		} catch (err) {
+			rej(err)
+		}
+	})
+}
 
 module.exports = {
 	init,
@@ -303,4 +358,6 @@ module.exports = {
 	getData,
 	getTeamMembers,
 	getUserType,
+	getTeam,
+	getDataWhere,
 }

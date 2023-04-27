@@ -20,6 +20,11 @@ const getData = require("./api/getData")
 const getTeamMembers = require("./api/getTeamMembers")
 const getUserType = require("./api/getUserType")
 
+const getTeamStatus = require("./api/getTeamStatus")
+const getTeam = require("./api/getTeam")
+const getCoachData = require("./api/getCoachData")
+
+
 //--------------------------------
 // Note app in exspress is diffrent from the app folder in react
 //--------------------------------
@@ -56,8 +61,9 @@ app.use((req, res, next) => {
 })
 
 // This middleware allows cross origin requests
-app.use(cors())
-
+app.use(cors({
+    origin: '*'
+}));
 // This middleware parses incoming requests with JSON payloads
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
@@ -91,7 +97,6 @@ if (process.env.NODE_ENV === "production") {
 }
 
 app.get("/api/getUsers", getUsers)
-
 app.delete("/api/deleteUser", deleteUser)
 app.get("/api/getForms", getForms)
 app.post("/api/getForm", getForm)
@@ -102,6 +107,9 @@ app.post("/api/addIntoTable", addIntoTable)
 app.post("/api/getData", getData)
 app.post("/api/getTeamMembers", getTeamMembers)
 app.post("/api/getUserType", getUserType)
+app.post("/api/getTeamStatus", getTeamStatus)
+app.post("/api/getTeam", getTeam)
+app.post("/api/getCoachData", getCoachData)
 
 // Catch any bad requests
 app.get("*", (req, res) => {

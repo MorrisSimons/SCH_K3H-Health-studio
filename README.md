@@ -37,7 +37,7 @@ https://docs.google.com/spreadsheets/d/1A71pdULP74vXl7q310uMCRC2WnlqLa_422mEqzRx
 
 `npm i @emailjs/browser`
 
-`npm install styled-component`
+`npm install styled-components`
 
 
 ## Node JS SQLITE
