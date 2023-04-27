@@ -6,39 +6,17 @@ import "./Data.css"
 const API_PATH = process.env.REACT_APP_API_PATH;
 
 function Data() {
+
 	const [overview, setOverview] = useState([])
 	const [information, setInformation] = useState([])
 	const [error, setError] = useState(null)
 	const [selectedOption, setSelectedOption] = useState(null)
 	const [options, setOptions] = useState([])
 	const [selectedForms, setSelectedForms] = useState([])
+	const user = JSON.parse(localStorage.getItem("user"))
 
 
 	useEffect(() => {
-		
-		// Fetch the forms from the database using overlord
-		fetch(API_PATH + "api/getData", {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify({
-				names: ["user"],
-				nameFields: ["user.firstName", "user.lastName", "user.email", "user.accountType"],
-			}),
-		})
-			.then((response) => {
-				if (!response.ok) {
-					throw new Error("Network response was not ok")
-				}
-				return response.json()
-			})
-			.then((data) => {
-				setInformation(data)
-			})
-			.catch((error) => {
-				setError(error)
-			})
 		fetch(API_PATH + "api/getForms", { method: "GET" })
 			.then((response) => {
 				if (!response.ok) {
@@ -59,6 +37,84 @@ function Data() {
 				setError(error)
 			})
 	}, [])
+
+
+	async function getAllowed() {
+		fetch(API_PATH + "api/getUserType", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({ email: user.email }),
+		})
+			.then((res) => res.json())
+			.then((data) => {
+				console.log(data)
+				let tempOverview = []
+				for (let i = 0; i < selectedForms.length; i++) {
+					for (let j = 0; j < selectedForms[i].columns.length; j++) {
+						if (selectedForms[i].columns[j].value === true) {
+							tempOverview.push({
+								tableName: selectedForms[i].tableName,
+								columnName: selectedForms[i].columns[j].name,
+							})
+						}
+					}
+				}
+				if (data.accountType === "admin") {
+					const request_body = {
+						names: tempOverview,  
+					}
+					fetchData(request_body);
+				} 
+				else if (data.accountType === "coach") {
+					const request_body = {
+						names: tempOverview,  
+					}
+					fetchData(request_body);
+				}
+				else if (data.accountType === "user") {
+					const request_body = {
+						names: tempOverview,
+					}
+					fetchData(request_body);
+				}
+				else {
+					console.log("Error, not a user")
+				}
+
+
+
+			})
+
+		}
+
+
+
+	async function fetchData(request_body) {
+		fetch(API_PATH + "api/getData", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(request_body),
+		})
+			.then((response) => {
+				if (!response.ok) {
+					throw new Error("Network response was not ok")
+				}
+				return response.json()
+			})
+			.then((data) => {
+				console.log(data)
+				setInformation(data)
+			})
+			.catch((error) => {
+				setError(error)
+			})
+	}
+
+
 
 	const addFormToTable = (e) => {
 		e.preventDefault()
