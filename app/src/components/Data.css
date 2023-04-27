@@ -11,6 +11,7 @@
 	border-spacing: 0;
 	left: 50%;
 }
+
 .trRow {
 	background-color: white;
 	border-bottom: 1px solid #ddd;
@@ -47,30 +48,56 @@
 	border-spacing: 0;
 }
 
+.selectionAndButton {
+	background-color: #1d6976;
+	margin: auto;
+	display: grid;
+	grid-template-columns: 17rem 6rem;
+	grid-column-gap: 0.5rem;
+	padding-top: 1rem;
+	padding-bottom: 1rem;
+	border-radius: 5px;
+	padding-left: 1rem;
+	padding-right: 1rem;
+}
+
 .formSelect {
-	background-color: white;
-	border-collapse: collapse;
-	border-spacing: 0;
+	display: grid;
+	box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+    left: 0;
+    right: 0;
+    margin: auto;
+	width: 27rem;
+	padding-bottom: 12px;
+	border-radius: 5px;
+	padding-top: 0.5rem;
+	margin-bottom: 1rem;
 }
 
 .formSelectLabel {
+	margin-bottom: 0.5rem;
+	text-align: center;
 	background-color: white;
 	border-collapse: collapse;
 	border-spacing: 0;
 }
 
 .formSelectSelection {
-	background-color: white;
 	border-collapse: collapse;
 	border-spacing: 0;
-	max-width: 200px;
 	min-width: 100px;
 }
 
 .formSelectButton {
-	background-color: white;
-	border-collapse: collapse;
-	border-spacing: 0;
+	box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+	background-color: #f1f1f1;
+	border-radius: 5px;
+	display: inline-block;
+	outline: transparent;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #dadada;
+	text-align: center;
 }
 
 .formSelectOption {
@@ -80,6 +107,7 @@
 }
 
 .formOptions {
+	margin-left: 1rem;
 	background-color: white;
 	border-collapse: collapse;
 	border-spacing: 0;
@@ -117,4 +145,8 @@
 	background-color: white;
 	border-collapse: collapse;
 	border-spacing: 0;
+}
+
+.formSelectButton:active {
+	background-color: #dadada;
 }
