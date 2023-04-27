@@ -161,16 +161,18 @@ function Data() {
 			<Header />
 			<div className="form">
 				<div className="formSelect">
-					<label className="formSelectLabel">Select a form:</label>
-					<Select
-						defaultValue={selectedOption}
-						onChange={setSelectedOption}
-						options={options}
-						className="formSelectSelection"
-					/>
-					<button className="formSelectButton" onClick={addFormToTable}>
-						Select
-					</button>
+					<label className="formSelectLabel">Select a form</label>
+					<div className="selectionAndButton">
+						<Select
+							defaultValue={selectedOption}
+							onChange={setSelectedOption}
+							options={options}
+							className="formSelectSelection"
+						/>
+						<button className="formSelectButton" onClick={addFormToTable}>
+							Select
+						</button>
+					</div>	
 				</div>
 				<div className="formOptions">
 					<label className="formOptionsLabel">Selected forms:</label>
