@@ -3,12 +3,10 @@ import * as XLSX from "xlsx";
 import React, { useState } from "react";
 
 function DoTestExcel(props) {
-  //const [formFields, setFormFields] = useState(props.data);
   const [json, setJson] = useState([]);
-  console.log(props.data)
-  console.log("hej")
-  console.log(props.data.length)
-  console.log(props.data.n)
+  const [errorNameList, setErrorNameList] = useState([]);
+  const [errorEmptyList, setErrorEmptyList] = useState([]);
+  
   const readExcel = (file) => {
     console.log(props.data);
     const promise = new Promise((resolve, reject) => {
@@ -25,25 +23,9 @@ function DoTestExcel(props) {
         const ws = wb.Sheets[wsname];
 
         const json = XLSX.utils.sheet_to_json(ws, { header: 1, defval: "" });
-        console.log(json[0]);
         setJson(json);
-        console.log(json);
-        console.log("json[0]");
-
-        //compareNames()
-        const names = [];
-        console.log(props.data)
-        
-        for (let i = 0; i < props.data.length; i++) {
-          //names.push(props.data.name[i]);
-          names.push(props.data[i].name);
-          console.log(String(names))
-          if (names[i] === json[0][i]) {
-            console.log("match");
-          } else {
-            console.log("no Match");
-          }
-        }
+        setErrorEmptyList([]);
+        setErrorNameList([]);
       };
     });
     return promise;
@@ -63,27 +45,68 @@ function DoTestExcel(props) {
     </tr>
   ));
 
+
+
+
   const submit = () => {
-    //Felhantering
-
+    //Error handling
     
-    
-    for (let i = 1; i < json.length; i++) {
-      const addIntoTable = {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: props.formName,
-          fields: json[0],
-          values: json[i],
-        }),
-      };
-      console.log(addIntoTable.body);
+  
+    const names = [];
+    console.log(props.data);
 
-      fetch("http://localhost:5000/api/addIntoTable", addIntoTable)
-        .then((response) => response.json())
-        .then((data) => console.log(data));
+    for (let i = 0; i < props.data.length; i++) {
+      names.push(props.data[i].name);
+
+      if (names[i] === json[0][i]) {
+        console.log("match");
+      } else {
+        setErrorNameList(
+          "Felaktig kolumnnamn i excel. Kollumnen: " +
+            json[0][i] +
+            " Ska vara " +
+            names[i]
+        );
+      }
     }
+    console.log(errorNameList);
+
+    
+
+    for (let i = 1; i < json.length; i++) {
+      for (let j = 0; j < props.data.length; j++) {
+        if (json[i][j] === "") {
+          setErrorEmptyList(
+            "Saknas data i excel. Kollumnen: " + json[0][j] + " Rad: " + i
+          );
+        }
+      }
+    }
+    console.log(errorEmptyList);
+
+    if (errorNameList.length === 0 && errorEmptyList.length === 0) {
+
+      for (let i = 1; i < json.length; i++) {
+        const addIntoTable = {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name: props.formName,
+            fields: json[0],
+            values: json[i],
+          }),
+        };
+        console.log(addIntoTable.body);
+
+        fetch("http://localhost:5000/api/addIntoTable", addIntoTable)
+          .then((response) => response.json())
+          .then((data) => console.log(data));
+      }
+    } else {
+      console.log("error");
+      
+    }
+
   };
 
   return (
@@ -95,9 +118,15 @@ function DoTestExcel(props) {
       <table>
         <tbody>{listItems}</tbody>
       </table>
+
+      <div>
+        {errorEmptyList}
+        {errorNameList}
+      </div>
       <button class="submit_button" onClick={submit}>
         Skicka
       </button>
+
 
       <div
         class="drop"

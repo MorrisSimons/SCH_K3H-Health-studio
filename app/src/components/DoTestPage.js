@@ -43,19 +43,19 @@ function DoTestPage() {
   async function handleSelectChange(selected) {
     setSelectedOption(selected);
 
-    console.log("Updating");
-    console.log(selectedOption);
-    console.log(selected);
-    const tempVariable = await getColumns(selected);
-    // Sleep for 1 second to allow the data to be fetched
-    console.log("Page updated");
-    console.log(page);
-    console.log(formData);
-    console.log(formName);
-    // Sleep for 1 second to allow the data to be fetched
-    console.log(tempVariable);
-
-    setFormData(tempVariable);
+    //console.log("Updating");
+    //console.log(selectedOption);
+    //console.log(selected);
+    await getColumns(selected);
+    //// Sleep for 1 second to allow the data to be fetched
+    //console.log("Page updated");
+    //console.log(page);
+    //console.log(formData);
+    //console.log(formName);
+    //// Sleep for 1 second to allow the data to be fetched
+    //console.log(tempVariable);
+//
+    ////setFormData(tempVariable);
     setShow(false);
 	setShowSwitch(true)
   }
