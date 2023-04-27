@@ -61,35 +61,36 @@ function Data() {
 						}
 					}
 				}
-				if (data.accountType === "admin") {
+
+				if (data[0].accountType === "admin") {
+					console.log("Getting admin data")
 					const request_body = {
 						names: tempOverview,  
 					}
 					fetchData(request_body);
 				} 
-				else if (data.accountType === "coach") {
+				else if (data[0].accountType === "coach") {
+					console.log("Getting coach data")
 					const request_body = {
 						names: tempOverview,  
+						teamName: "hund"
 					}
-					fetchData(request_body);
+					fetchCoachData(request_body);
 				}
-				else if (data.accountType === "user") {
+				else if (data[0].accountType === "user") {
 					const request_body = {
 						names: tempOverview,
+
+
 					}
-					fetchData(request_body);
+					fetchCoachData(request_body);
 				}
 				else {
 					console.log("Error, not a user")
 				}
-
-
-
+				setOverview(tempOverview)
 			})
-
 		}
-
-
 
 	async function fetchData(request_body) {
 		fetch(API_PATH + "api/getData", {
@@ -99,6 +100,32 @@ function Data() {
 			},
 			body: JSON.stringify(request_body),
 		})
+			.then((response) => {
+				if (!response.ok) {
+					throw new Error("Network response was not ok")
+				}
+				return response.json()
+			})
+			.then((data) => {
+				console.log(data)
+				setInformation(data)
+			})
+			.catch((error) => {
+				setError(error)
+			})
+	}
+
+
+	async function fetchCoachData(request_body) {
+		fetch(API_PATH + "api/getCoachData", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(request_body),
+		})
+
+
 			.then((response) => {
 				if (!response.ok) {
 					throw new Error("Network response was not ok")
@@ -162,57 +189,6 @@ function Data() {
 		}
 	}
 
-	const updateOverview = () => {
-		let tempOverview = []
-		for (let i = 0; i < selectedForms.length; i++) {
-			for (let j = 0; j < selectedForms[i].columns.length; j++) {
-				if (selectedForms[i].columns[j].value === true) {
-					tempOverview.push({
-						tableName: selectedForms[i].tableName,
-						columnName: selectedForms[i].columns[j].name,
-					})
-				}
-			}
-		}
-		setOverview(tempOverview)
-		console.log("Overview updated")
-		console.log(overview)
-		updateInformation(overview)
-	}
-
-	const updateInformation = (fields) => {
-		
-		// Using the information found in the overview, get the information from the database
-		fetch (API_PATH + "api/getData", {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify({
-				names: fields,
-				nameFields: fields,
-			}),
-		})
-			.then((response) => {
-				if (!response.ok) {
-					throw new Error("Network response was not ok")
-				}
-				return response.json()
-			})
-			.then((data) => {
-				setInformation(data)
-				console.log(data)
-				console.log("Information updated")
-			})
-			.catch((error) => {
-				setError(error)
-			})
-	}
-	
-
-
-
-
 	return (
 		<div>
 			<Header />
@@ -262,7 +238,7 @@ function Data() {
 															onClick={() => {
 																column.value = !column.value
 																console.log(column.value)
-																updateOverview()
+																getAllowed()
 															}}
 														/>
 													</td>
