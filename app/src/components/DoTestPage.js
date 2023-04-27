@@ -4,6 +4,7 @@ import Footer from "./Footer";
 import DoTest from "./DoTest";
 import DoTestExcel from "./DoTestExcel";
 import Select from "react-select";
+import "./DoTestPage.css"
 
 function DoTestPage() {
   const [error, setError] = useState(null);

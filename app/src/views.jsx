@@ -56,7 +56,7 @@ const Views = () => {
 			}
 			else {
 				// Enter the dashboard you want to develop in here
-				setDashboard(<LoginDashboardP />)
+				setDashboard(<LoginDashboardA />)
 			}
 
 		} else {
