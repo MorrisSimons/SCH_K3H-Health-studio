@@ -22,7 +22,8 @@ const getUserType = require("./api/getUserType")
 
 const getTeamStatus = require("./api/getTeamStatus")
 const getTeam = require("./api/getTeam")
-const getTeam2 = require("./api/getTeam")
+const getCoachData = require("./api/getCoachData")
+
 
 //--------------------------------
 // Note app in exspress is diffrent from the app folder in react
@@ -96,7 +97,6 @@ if (process.env.NODE_ENV === "production") {
 }
 
 app.get("/api/getUsers", getUsers)
-
 app.delete("/api/deleteUser", deleteUser)
 app.get("/api/getForms", getForms)
 app.post("/api/getForm", getForm)
@@ -109,6 +109,7 @@ app.post("/api/getTeamMembers", getTeamMembers)
 app.post("/api/getUserType", getUserType)
 app.post("/api/getTeamStatus", getTeamStatus)
 app.post("/api/getTeam", getTeam)
+app.post("/api/getCoachData", getCoachData)
 
 // Catch any bad requests
 app.get("*", (req, res) => {
