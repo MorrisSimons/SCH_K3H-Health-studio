@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 import Header from "./Header"
 import Footer from "./Footer"
 import Select from "react-select"
+import DataExportExcel from "./DataExportExcel"
 import "./Data.css"
 const API_PATH = process.env.REACT_APP_API_PATH;
 
@@ -195,6 +196,7 @@ function Data() {
 	return (
 		<div>
 			<Header />
+			
 			<div className="form">
 				<div className="formSelect">
 					<label className="formSelectLabel">Select a form</label>
@@ -250,7 +252,9 @@ function Data() {
 												</tr>
 											</tbody>
 										))}
+										<DataExportExcel sheetData={information} sheetName={forms.tableName}/>
 								</table>
+								
 							))}
 					</div>
 				</div>
@@ -287,6 +291,7 @@ function Data() {
 					{error && <div>Error: {error.message}</div>}
 				</center>
 			</div>
+			
 			<Footer />
 		</div>
 	)
