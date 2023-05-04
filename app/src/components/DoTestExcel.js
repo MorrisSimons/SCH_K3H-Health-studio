@@ -1,14 +1,15 @@
 import "./DoTest.css";
 import * as XLSX from "xlsx";
 import React, { useState } from "react";
+//Component requires two props inorder to function: data and formName
 
 function DoTestExcel(props) {
-  const [json, setJson] = useState([]);
-  const [errorNameList, setErrorNameList] = useState([]);
-  const [errorEmptyList, setErrorEmptyList] = useState([]);
-  
+  const [json, setJson] = useState([]); //Variable to save data from excel file.
+  const [errorNameList, setErrorNameList] = useState([]); //Array to store wrong name errors.
+  const [errorEmptyList, setErrorEmptyList] = useState([]); //Array to store missing data in cell errors.
+
+  //Function to handle excel file read
   const readExcel = (file) => {
-    console.log(props.data);
     const promise = new Promise((resolve, reject) => {
       const fileReader = new FileReader();
       fileReader.readAsArrayBuffer(file);
@@ -31,12 +32,14 @@ function DoTestExcel(props) {
     return promise;
   };
 
+  //Handle file selection/drop file
   const handleDrop = (e) => {
     e.preventDefault();
     const file = e.dataTransfer.files[0];
     readExcel(file);
   };
 
+  //Formating of read excel data to render on page
   const listItems = json.map((row, index) => (
     <tr key={index}>
       {row.map((cell, index) => (
@@ -45,19 +48,13 @@ function DoTestExcel(props) {
     </tr>
   ));
 
-
-
-
+  //Handle submit
   const submit = () => {
-    //Error handling
-    
-  
     const names = [];
-    console.log(props.data);
-
     for (let i = 0; i < props.data.length; i++) {
       names.push(props.data[i].name);
 
+      //Check for errors column names not equal to column names in excel.
       if (names[i] === json[0][i]) {
         console.log("match");
       } else {
@@ -71,8 +68,7 @@ function DoTestExcel(props) {
     }
     console.log(errorNameList);
 
-    
-
+    //Check for errors: cells not containg datas in excel file
     for (let i = 1; i < json.length; i++) {
       for (let j = 0; j < props.data.length; j++) {
         if (json[i][j] === "") {
@@ -84,8 +80,8 @@ function DoTestExcel(props) {
     }
     console.log(errorEmptyList);
 
+    //If no errors found add data into database
     if (errorNameList.length === 0 && errorEmptyList.length === 0) {
-
       for (let i = 1; i < json.length; i++) {
         const addIntoTable = {
           method: "POST",
@@ -104,9 +100,7 @@ function DoTestExcel(props) {
       }
     } else {
       console.log("error");
-      
     }
-
   };
 
   return (
@@ -114,7 +108,6 @@ function DoTestExcel(props) {
       <h1>{props.formName}</h1>
 
       <br />
-
       <table>
         <tbody>{listItems}</tbody>
       </table>
@@ -126,7 +119,6 @@ function DoTestExcel(props) {
       <button class="submit_button" onClick={submit}>
         Skicka
       </button>
-
 
       <div
         class="drop"
