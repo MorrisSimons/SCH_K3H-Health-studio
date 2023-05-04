@@ -286,7 +286,6 @@ async function getUserType(email) {
 			console.log(req_text)
 			db.all(req_text, (err, rows) => {
 				if (err) return rej(err)
-				console.log(rows)
 				acc(rows)
 			})
 		} catch (err) {

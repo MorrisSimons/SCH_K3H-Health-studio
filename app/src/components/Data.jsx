@@ -65,28 +65,27 @@ function Data() {
 
 				if (data[0].accountType === "admin") {
 					console.log("Getting admin data")
-					const request_body = {
+					const admin_request = {
 						names: tempOverview,  
 					}
-					fetchData(request_body);
+					fetchData(admin_request);
 				} 
 				else if (data[0].accountType === "coach") {
 					console.log("Getting coach data")
-					const request_body = {
+					const coach_request = {
 						names: tempOverview,  
 						teamName: "hund"
 					}
-					fetchCoachData(request_body);
+					fetchCoachData(coach_request);
 				}
 				else if (data[0].accountType === "user") {
-					const request_body = {
+					const user_request = {
 						names: tempOverview,
-
-
+						teamEmail: user.email
 					}
 					// Should be specfic to user
 					// but be able to get all data
-					fetchData(request_body);
+					fetchUserData(user_request);
 				}
 				else {
 					console.log("Error, not a user")
@@ -121,6 +120,31 @@ function Data() {
 
 	async function fetchCoachData(request_body) {
 		fetch(API_PATH + "api/getCoachData", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(request_body),
+		})
+
+
+			.then((response) => {
+				if (!response.ok) {
+					throw new Error("Network response was not ok")
+				}
+				return response.json()
+			})
+			.then((data) => {
+				console.log(data)
+				setInformation(data)
+			})
+			.catch((error) => {
+				setError(error)
+			})
+	}
+
+	async function fetchUserData(request_body) {
+		fetch(API_PATH + "api/getUserData", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
