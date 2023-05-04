@@ -2,6 +2,8 @@ import { useState } from 'react';
 import './AddForm.css';
 import Header from './Header';
 import Footer from './Footer';
+import IMAGE1 from '../images/image001.jpg'
+import IMAGE3 from '../images/image003.jpg'
 const API_PATH = process.env.REACT_APP_API_PATH;
 
 
@@ -121,61 +123,54 @@ function AddForm() {
 
   return (
     <div>
-    <Header/>
-    <div className="App" class="add_form_container">
-      <div class='nameInput'>
-        
-          <input class='formNameInput'
-
-            name='name'
-            placeholder='Namn på formulär'
-
-            onChange={setName}
-          />
-        
-
-      </div>
-
-
-      <form onSubmit={submit}>
-        {formFields.map((form, index) => { //rendering out each formfield 
-          return (
-            <div className='elementsContainer'>
-              <div key={index} class="add_form_field">
-                <input
-                  class = "add_form_input"
-                  onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }}
-                  name='name'
-                  placeholder='Namn'
-                  onChange={event => handleFormChange(event, index)}
-                  value={form.name}
-                />
-                <select
-                  class = "add_form_select"
-                  name='dataType'
-                  onChange={event => handleFormChange(event, index)}
-                  value={form.dataType}
-                >
-                  <option value=''>Välj datatyp</option>
-                  <option value='int'>Tal</option>
-                  <option value='string'>Text</option>
-                  <option value='Datum'>Datum</option>
-                  <option value='Tid'>Tid</option>
-                </select>
-                
-                <button type="button" onClick={() => removeFields(index)} class="delete">Ta bort fält</button>
+      <Header/>
+      <img className='image1' src={IMAGE1} />
+      <div className="App" class="add_form_container">
+        <div class='nameInput'>
+            <input class='formNameInput'
+              name='name'
+              placeholder='Namn på formulär'
+              onChange={setName}
+            />
+        </div>
+        <form onSubmit={submit}>
+          {formFields.map((form, index) => { //rendering out each formfield 
+            return (
+              <div className='elementsContainer'>
+                <div key={index} class="add_form_field">
+                  <input
+                    class = "add_form_input"
+                    onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }}
+                    name='name'
+                    placeholder='Namn'
+                    onChange={event => handleFormChange(event, index)}
+                    value={form.name}
+                  />
+                  <select
+                    class = "add_form_select"
+                    name='dataType'
+                    onChange={event => handleFormChange(event, index)}
+                    value={form.dataType}
+                  >
+                    <option value=''>Välj datatyp</option>
+                    <option value='int'>Tal</option>
+                    <option value='string'>Text</option>
+                    <option value='Datum'>Datum</option>
+                    <option value='Tid'>Tid</option>
+                  </select>
+                  <button type="button" onClick={() => removeFields(index)} class="delete">Ta bort fält</button>
+                </div>
               </div>
-            </div>
-          )
-        })}
-      </form>
-      <button onClick={addFields} class="add">Lägg till fält</button>
-      <br />
-      <button onClick={submit} class="submit">Skicka</button>
-      <div class="error" id="errorMessage">{errorMessage}</div>
-      
-    </div>
-    <Footer/>
+            )
+          })}
+        </form>
+        <button onClick={addFields} class="add">Lägg till fält</button>
+        <br />
+        <button onClick={submit} class="submit">Skicka</button>
+        <div class="error" id="errorMessage">{errorMessage}</div>
+      </div>
+      <img className='image3' src={IMAGE3} />
+      <Footer/>
     </div>
   );
 }
