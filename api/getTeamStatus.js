@@ -10,7 +10,7 @@ module.exports = async (req, res) => {
             users.forEach(function(user) {
                 response = {
                     "id": user.id,
-                    "status": "active",
+                    "type": user.accountType,
                     "name": user.firstName + " " + user.lastName,
                     "navigation": "/$" + user.id 
                 }
