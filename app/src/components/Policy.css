@@ -1,0 +1,40 @@
+/* Center the content */
+.content_policy {
+    max-width: 800px;
+    margin: 0px auto;
+    padding: 5rem;
+
+  }
+
+  
+  /* Style the headings */
+  h2 {
+    font-size: 28px;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  
+  @import url('https://fonts.googleapis.com/css2?family=Roboto');
+
+  p {
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+  }  
+
+  @media (max-width: 767px) {
+    .content {
+      padding: 2rem;
+    }
+  }
+
+.content_text {
+    margin-top: 2rem;
+    background-color: lavender;
+    border-radius: 15px;
+    padding: 20px;
+}
