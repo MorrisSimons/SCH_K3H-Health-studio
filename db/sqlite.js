@@ -29,7 +29,7 @@ function init() {
 			// Create a team 
 			// Really should use a foreign key, but long story short, It would ruin more than it would help.
 			db.run(
-				"CREATE TABLE IF NOT EXISTS team(name VARCHAR(255), emails VARCHAR(255), PRIMARY KEY (name, emails))",
+				"CREATE TABLE IF NOT EXISTS team(name VARCHAR(255), email VARCHAR(255), PRIMARY KEY (name, email))",
 				(err, result) => {
 					if (err) return rej(err)
 					acc()
@@ -267,7 +267,7 @@ async function addIntoTable(table, data) {
 async function getTeamMembers(teamName) {
 	return new Promise((acc, rej) => {
 		try {
-			req_text = "SELECT * FROM user INNER JOIN team ON user.email = team.emails WHERE team.name = \"" + teamName + "\"";
+			req_text = "SELECT * FROM user INNER JOIN team ON user.email = team.email WHERE team.name = \"" + teamName + "\"";
 
 			db.all(req_text, (err, rows) => {
 				if (err) return rej(err)
@@ -286,7 +286,6 @@ async function getUserType(email) {
 			console.log(req_text)
 			db.all(req_text, (err, rows) => {
 				if (err) return rej(err)
-				console.log(rows)
 				acc(rows)
 			})
 		} catch (err) {
@@ -298,7 +297,7 @@ async function getUserType(email) {
 async function getTeam(email) {
 	return new Promise((acc, rej) => {
 		try {
-			req_text = "SELECT * FROM team WHERE emails = \"" + email + "\"";
+			req_text = "SELECT * FROM team WHERE email = \"" + email + "\"";
 			
 			db.all(req_text, (err, rows) => {
 				if (err) return rej(err)
@@ -334,7 +333,7 @@ async function getDataWhere(table) {
 			}
 			// Check if 
 			// Make an inner join between those tabels and team
-			req_text += " INNER JOIN team ON team.emails = " + tableNames[0] + ".email"
+			req_text += " INNER JOIN team ON team.email = " + tableNames[0] + ".email"
 
 			req_text += " WHERE " + whereStatment
 
@@ -348,6 +347,34 @@ async function getDataWhere(table) {
 		} catch (err) {
 			rej(err)
 		}
+	})
+}
+
+
+async function removeUserFromEverything(email) {
+	return new Promise((acc, rej) => {
+		// Get all the tables
+		db.all("SELECT name FROM sqlite_master WHERE type='table'", (err, rows) => {
+			// Loop through the tables and remove the user from each one
+			try {
+				console.log("Rows:", rows)
+				for (i = 0; i < rows.length; i++) {
+					// Get the name of the table
+					tableName = rows[i].name
+					console.log("Removing user from table: " + tableName)
+					// Remove the user from the table
+					req_text = "DELETE FROM " + tableName + " WHERE email = \"" + email + "\""
+					db.exec(req_text, (err, result) => {
+						if (err) return rej(err)
+					})
+				}
+				acc()
+			}
+			catch (err) {
+				console.log(err)
+				//This should really never happen, but for testing or other purposes it might
+			}
+		})
 	})
 }
 
@@ -369,4 +396,5 @@ module.exports = {
 	getUserType,
 	getTeam,
 	getDataWhere,
+	removeUserFromEverything,
 }

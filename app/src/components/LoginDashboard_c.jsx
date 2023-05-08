@@ -102,10 +102,10 @@ function LoginDashboard() {
 
 
         <div className="container dashboard__container">
-          {data.map(({ id, status, name, navigation }) => {
+          {data.map(({ id, type, name, navigation }) => {
             return (
               <Link key={id} to={navigation}>
-                <button className={`dashboard__article dashboard__article--${status}`}>
+                <button className={`dashboard__article dashboard__article--${type}`}>
                   <h2 className="player__article">{name}</h2>
                 </button>
               </Link>

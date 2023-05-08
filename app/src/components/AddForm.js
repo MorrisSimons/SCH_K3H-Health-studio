@@ -88,12 +88,12 @@ function AddForm() {
       
       //Reset error message
       setErrorMessage("")
-      document.getElementById('error-message').innerText = " ";
+      //document.getElementById('error-message').innerText = " ";
     }
 
     //Else set error message
     else {
-      document.getElementById('error-message').innerText = errorMessage;
+      //document.getElementById('error-message').innerText = errorMessage;
     }
 
   };

@@ -81,7 +81,7 @@ function LoginDashboard() {
 				<div className="main_layout">
 					<div className="playerInfo">
 						<img className="playerPicture" src={icon} alt="icon" />
-						<h2 className="playerName">John Doe</h2>
+						<h2 className="playerName">{user.given_name + " " + user.family_name}</h2>
 						<div className="info">
 							<p>Coach:</p>
 							<p>Tel.nr.:</p>

@@ -1,5 +1,11 @@
 services:
-  app:
+  frontend:
     build: ./app
     ports:
       - "3000:3000"
+  backend:
+    build: .
+    ports:
+      - "8080:8080"
+  
+

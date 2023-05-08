@@ -94,7 +94,7 @@ function Home() {
 							options={options}
 							className="select_box"
 						/>
-						<button type="submit" className="submit_button">
+						<button type="submit" className="add_submit_button">
 							Skicka inbjudan
 						</button>
 						<Link to="/">

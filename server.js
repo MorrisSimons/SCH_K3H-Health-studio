@@ -24,6 +24,8 @@ const getTeamStatus = require("./api/getTeamStatus")
 const getTeam = require("./api/getTeam")
 const getCoachData = require("./api/getCoachData")
 
+const getUserData = require("./api/getUserData")
+
 
 //--------------------------------
 // Note app in exspress is diffrent from the app folder in react
@@ -110,6 +112,7 @@ app.post("/api/getUserType", getUserType)
 app.post("/api/getTeamStatus", getTeamStatus)
 app.post("/api/getTeam", getTeam)
 app.post("/api/getCoachData", getCoachData)
+app.post("/api/getUserData", getUserData)
 
 // Catch any bad requests
 app.get("*", (req, res) => {
