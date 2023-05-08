@@ -25,7 +25,7 @@ module.exports = async (req, res) => {
 		}
 		// Select only the distinct values in tempNames
 		tempNames = [...new Set(tempNames)]
-        tempWhere = "team.emails = \"" + req.body.teamEmail + "\""
+        tempWhere = "team.email = \"" + req.body.teamEmail + "\""
 
         const tables = {
             names: tempNames,
