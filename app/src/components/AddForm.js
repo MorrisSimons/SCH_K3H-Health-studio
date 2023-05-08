@@ -1,8 +1,10 @@
-import { useState } from "react";
-import "./AddForm.css";
-import Header from "./Header";
-import Footer from "./Footer";
-const API_PATH = process.env.REACT_APP_API_PATH; //Path to backend
+import { useState } from 'react';
+import './AddForm.css';
+import Header from './Header';
+import Footer from './Footer';
+import IMAGE1 from '../images/image001.jpg'
+import IMAGE3 from '../images/image003.jpg'
+const API_PATH = process.env.REACT_APP_API_PATH;
 
 function AddForm() {
   const [formFields, setFormFields] = useState([{ name: "", dataType: "" }]); //Containing data for each field
@@ -103,76 +105,54 @@ function AddForm() {
   //Render out form with fields and buttons to add fields and submit form to database
   return (
     <div>
-      <Header />
+      <Header/>
+      <img className='image1' src={IMAGE1} />
       <div className="App" class="add_form_container">
-        <div class="nameInput">
-          <input
-            //Input for formname
-            class="formNameInput"
-            name="name"
-            placeholder="Namn på formulär"
-            onChange={setName}
-          />
+        <div class='nameInput'>
+            <input class='formNameInput'
+              name='name'
+              placeholder='Namn på formulär'
+              onChange={setName}
+            />
         </div>
-
         <form onSubmit={submit}>
-          {formFields.map((form, index) => {
-            //rendering out each formfield
+          {formFields.map((form, index) => { //rendering out each formfield 
             return (
-              <div className="elementsContainer">
+              <div className='elementsContainer'>
                 <div key={index} class="add_form_field">
                   <input
-                    //Input for fieldname
-                    class="add_form_input"
-                    onKeyPress={(e) => {
-                      e.key === "Enter" && e.preventDefault();
-                    }}
-                    name="name"
-                    placeholder="Namn"
-                    onChange={(event) => handleFormChange(event, index)}
+                    class = "add_form_input"
+                    onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }}
+                    name='name'
+                    placeholder='Namn'
+                    onChange={event => handleFormChange(event, index)}
                     value={form.name}
                   />
-
                   <select
-                    //Dropdown for datatype
-                    class="add_form_select"
-                    name="dataType"
-                    onChange={(event) => handleFormChange(event, index)}
+                    class = "add_form_select"
+                    name='dataType'
+                    onChange={event => handleFormChange(event, index)}
                     value={form.dataType}
                   >
-                    <option value="">Välj datatyp</option>
-                    <option value="int">Tal</option>
-                    <option value="string">Text</option>
-                    <option value="Datum">Datum</option>
-                    <option value="Tid">Tid</option>
+                    <option value=''>Välj datatyp</option>
+                    <option value='int'>Tal</option>
+                    <option value='string'>Text</option>
+                    <option value='Datum'>Datum</option>
+                    <option value='Tid'>Tid</option>
                   </select>
-
-                  <button
-                    //Button to remove field
-                    type="button"
-                    onClick={() => removeFields(index)}
-                    class="delete"
-                  >
-                    Ta bort fält
-                  </button>
+                  <button type="button" onClick={() => removeFields(index)} class="delete">Ta bort fält</button>
                 </div>
               </div>
-            );
+            )
           })}
         </form>
-        {/*Buttons to add and submit form*/}
-        <button onClick={addFields} class="add">
-          Lägg till fält
-        </button>
+        <button onClick={addFields} class="add">Lägg till fält</button>
         <br />
-        <button onClick={submit} class="submit">
-          Skicka
-        </button>
-        <div class="error" id="errorMessage">
-          {errorMessage}
-        </div>
+        <button onClick={submit} class="submit">Skicka</button>
+        <div class="error" id="errorMessage">{errorMessage}</div>
       </div>
-      <Footer />
+      <img className='image3' src={IMAGE3} />
+      <Footer/>
     </div>
   );
 }
