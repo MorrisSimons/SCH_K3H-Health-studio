@@ -15,7 +15,7 @@ import LoginDashboardP from "./components/LoginDashboard_p"
 import AddCoach from "./components/AddCoach"
 import DoTestPage from "./components/DoTestPage"
 import AddForm from "./components/AddForm"
-import ManageForms from "./components/ManageForms"
+import ManageForms from "./components/ManageDatabase"
 const API_PATH = process.env.REACT_APP_API_PATH
 const envirioment =  'False' //process.env.REACT_APP_DEV_ENVIRONMENT
 
