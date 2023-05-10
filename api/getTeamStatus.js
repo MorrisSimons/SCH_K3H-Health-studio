@@ -3,6 +3,10 @@ const db = require("../db")
 
 module.exports = async (req, res) => {
 	try {
+        if (!req.body.teamName) {
+            res.status(400).send({ message: "Invalid team name" })
+            return
+        }
         teamName = req.body.teamName
         teamWhere = req.body.teamWhere
         if (!teamWhere) {

@@ -2,21 +2,12 @@ const db = require("../db")
 
 module.exports = async (req, res) => {
 	try {
-		// Make a variable for storing the names of the coloumns
+        if (!req.body.teamName || !req.body.names ) {
+            res.status(400).send({ message: "Bad request" })
+            return
+        }
 		var tempNames = []
-		// Make a variable for storing the names of the tables
 		var tempTables = []
-        // Note for future exploresers the request looks like this:
-        // {
-        //    "names": [
-        //        {
-        //            "tableName": "foo"
-        //            "columnName": "bar"
-        //        },
-        //    ],
-        //    "teamName": "foo"
-        // }
-
 
 		// From the request body get the table names and the columns to get from each table
 		for (i = 0; i < req.body.names.length; i++) {
