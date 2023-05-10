@@ -4,7 +4,11 @@ const db = require("../db")
 module.exports = async (req, res) => {
 	try {
         teamName = req.body.teamName
-		const users = await db.getTeamMembers(teamName)
+        teamWhere = req.body.teamWhere
+        if (!teamWhere) {
+            teamWhere = "";
+        }
+		const users = await db.getTeamMembers(teamName, teamWhere)
         responses = []
         if (users.length != 0) {
             users.forEach(function(user) {

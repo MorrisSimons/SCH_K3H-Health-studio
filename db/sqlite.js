@@ -264,11 +264,11 @@ async function addIntoTable(table, data) {
 	})
 }
 
-async function getTeamMembers(teamName) {
+async function getTeamMembers(teamName, teamWhere) {
 	return new Promise((acc, rej) => {
 		try {
-			req_text = "SELECT * FROM user INNER JOIN team ON user.email = team.email WHERE team.name = \"" + teamName + "\"";
-
+			req_text = "SELECT * FROM user INNER JOIN team ON user.email = team.email WHERE team.name = \"" + teamName + "\" AND user.firstName LIKE \"" + teamWhere + "%\"";
+			console.log(req_text)
 			db.all(req_text, (err, rows) => {
 				if (err) return rej(err)
 				acc(rows)

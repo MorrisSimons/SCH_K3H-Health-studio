@@ -8,6 +8,8 @@ const API_PATH = process.env.REACT_APP_API_PATH;
 function LoginDashboard() {
   const user = JSON.parse(localStorage.getItem("user"))
   const [data, setData] = useState([]);
+  const [where, setWhere] = useState("");
+  const [team, setTeam] = useState("");
 
   function handleSignOut() {
     localStorage.removeItem("user");
@@ -39,6 +41,7 @@ function LoginDashboard() {
       .then((data) => {
         console.log(data);
         getTeamMembers(data.name);
+        setTeam(data.name);
       })
       .catch((error) => {
         console.log(error);
@@ -70,6 +73,33 @@ function LoginDashboard() {
       });
   }
 
+  const getTeamMembersWhere = (team, where) => {
+    fetch(API_PATH +"api/getTeamStatus", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        teamName: team,
+        teamWhere: where,
+      }),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        console.log(response);
+        return response.json();
+      })
+      .then((data) => {
+        console.log("Team members:")
+        setData(data);
+        console.log(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+
   return (
     <div>
        <Header />
@@ -81,8 +111,8 @@ function LoginDashboard() {
     
    
     <div className="search-bar">
-        <input className="search-input" type="text" placeholder="Sök spelare..." />
-        <button className="button-search">Sök</button>
+        <input className="search-input" type="text" placeholder="Sök spelare..." onChange={(e) => setWhere(e.target.value)} />
+        <button className="button-search" onClick={() => getTeamMembersWhere(team, where)}>Sök</button>
     </div>
     
     
@@ -106,6 +136,7 @@ function LoginDashboard() {
             return (
               <Link key={id} to={navigation}>
                 <button className={`dashboard__article dashboard__article--${type}`}>
+                  console.log({type})
                   <h2 className="player__article">{name}</h2>
                 </button>
               </Link>
