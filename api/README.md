@@ -464,12 +464,188 @@ You will get this error if you do not provide the team name.
 }
 ```
 You will get this error if there is an error in the database or server side.
-
-
 ## getTeamStatus.js
+This function will try to get the status of a team from the database. Meaning the id, type, name and where to find more information on the player.
+### Expects
+#### POST
+Example contents
+```
+{
+    "teamName": "team1"
+    "teamWhere": Name*
+}
+* = Optional and if it doesn't not exist it will return all the players in the team.
+```
+### Returns
+#### 200
+```
+{
+    [
+        {
+            "id": "1",
+            "type": "user",
+            "name": "a b",
+            "link": "/id"
+        }*
+    ]
+}
+```
+You will get this message if the status is successfully retrieved from the database. Where * is the number of rows in the table that matches the query.
+#### 400
+```
+{
+    "message": "Bad request"
+}
+```
+You will get this error if you do not provide the team name.
+#### 500
+```
+{
+    "message": "Internal server error"
+}
+```
+You will get this error if there is an error in the database or server side.
 ## getUser.js
+This function will try to get a user from the database with the given email.
+### Expects
+#### POST
+Example contents
+```
+{
+    "email":"a@b.se"
+}
+```
+### Returns
+#### 200
+```
+{
+    {
+        "id": "1",
+        "email": "a@b.se"
+        "firstName": "a",
+        "lastName": "b",
+        "accountType": "coach"
+    }
+}
+```
+You will get this message if the user is successfully retrieved from the database.
+#### 400
+```
+{
+    "message": "Bad request"
+}
+```
+You will get this error if you do not provide the email of the user.
+#### 500
+```
+{
+    "message": "Internal server error"
+}
+```
+You will get this error if there is an error in the database or server side.
 ## getUserData.js
+This function will get data related to the user from the database. I,e the data the is allowed to get from the database.
+### Expects
+#### POST
+Example contents
+```
+{
+    "names": [
+        {
+            "tableName": "foo"
+            "columnName": "bar"
+        },
+    ],
+    "teamEmail": "a@b.se"
+}
+```
+### Returns
+#### 200
+```
+{
+    [
+        {
+            "foo": Value
+        }*
+    ]
+}
+```
+You will get this message if the data is successfully retrieved from the database. Where * is the number of rows in the table that matches the query.
+#### 400
+```
+{
+    "message": "Bad request"
+}
+```
+You will get this error if you do not provide the email or the names of the columns you want to retrieve.
+#### 500
+```
+{
+    "message": "Internal server error"
+}
+```
+You will get this error if there is an error in the database or server side.
+
 ## getUsers.js
+This function will try to get all the users from the database.
+### Expects
+#### GET
+Example contents
+```
+{
+
+}
+```
+### Returns
+#### 200
+```
+{
+    [
+        {
+            "id": "1",
+            "email": "
+            "firstName": "a",
+            "lastName": "b",
+            "accountType": "coach"
+        }*
+    ]
+}
+```
 ## getUserType.js
+This function will try to get the type of a user from the database.
+### Expects
+#### POST
+Example contents
+```
+{
+    "email":"a@b.se"
+}
+```
+### Returns
+#### 200
+```
+{
+    {
+        "accountType": "coach"
+    }
+}
+```
+You will get this message if the type is successfully retrieved from the database.
+#### 400
+```
+{
+    "message": "Bad request"
+}
+```
+You will get this error if you do not provide the email of the user.
+#### 500
+```
+{
+    "message": "Internal server error"
+}
+```
+You will get this error if there is an error in the database or server side.
 ## index.js
+This file is the main file for the api. It will handle where the api functions are located. 
 # Server.js
+This file is the main file for the server. It will handle all the requests and send them to the correct function. As well as have control over the database. Starup, shutdown, etc.
