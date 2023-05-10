@@ -10,6 +10,7 @@ function LoginDashboard() {
   const [data, setData] = useState([]);
   const [where, setWhere] = useState("");
   const [team, setTeam] = useState("");
+  const [error, setError] = useState(null);
 
   function handleSignOut() {
     localStorage.removeItem("user");
@@ -45,6 +46,7 @@ function LoginDashboard() {
       })
       .catch((error) => {
         console.log(error);
+        setError(error);
       });
   }
 
@@ -70,6 +72,7 @@ function LoginDashboard() {
       })
       .catch((error) => {
         console.log(error);
+        setError(error);
       });
   }
 
@@ -96,6 +99,7 @@ function LoginDashboard() {
       })
       .catch((error) => {
         console.log(error);
+        setError(error)
       });
   };
 
@@ -143,7 +147,7 @@ function LoginDashboard() {
             );
           })}
         </div>
-
+        {error && <div>Error: {error.message}</div>}
         <Footer />
     
     </div>
