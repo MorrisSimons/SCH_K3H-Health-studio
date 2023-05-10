@@ -1,3 +1,8 @@
+.gridOptionsTable {
+	display: grid;
+	grid-template-columns: 1fr 6fr;
+}
+
 .table {
 	background-color: white;
 	border-collapse: collapse;

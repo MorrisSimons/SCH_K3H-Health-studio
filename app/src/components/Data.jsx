@@ -210,51 +210,51 @@ function Data() {
 						</button>
 					</div>	
 				</div>
-				<div className="formOptions">
-					<label className="formOptionsLabel">Selected forms:</label>
-					<div className="formOptionsSelection">
-						{selectedForms &&
-							selectedForms.map((forms) => (
-								<table className="formOptionsNameTable" key={forms.id}>
-									<thead>
-										<tr>
-											<th className="formOptionsNameTableText">
-												{forms.tableName}
-											</th>
-											<td className="formOptionsNameTableButton">
-												<button className="formOptionsNameTableButton">
-													X
-												</button>
-											</td>
-										</tr>
-									</thead>
-									{forms.columns &&
-										forms.columns.map((column) => (
-											<tbody key={column.name}>
-												<tr>
-													<td className="formOptionsNameTableText">
-														{column.name}
-													</td>
-													<td className="formOptionsNameTableButton">
-														<input
-															className="formOptionsNameTableButton"
-															type="checkbox"
-															value={column.value}
-															onClick={() => {
-																column.value = !column.value
-																console.log(column.value)
-																getAllowed()
-															}}
-														/>
-													</td>
-												</tr>
-											</tbody>
-										))}
-								</table>
-							))}
+				<div className="gridOptionsTable">
+					<div className="formOptions">
+						<label className="formOptionsLabel">Selected forms:</label>
+						<div className="formOptionsSelection">
+							{selectedForms &&
+								selectedForms.map((forms) => (
+									<table className="formOptionsNameTable" key={forms.id}>
+										<thead>
+											<tr>
+												<th className="formOptionsNameTableText">
+													{forms.tableName}
+												</th>
+												<td className="formOptionsNameTableButton">
+													<button className="formOptionsNameTableButton">
+														X
+													</button>
+												</td>
+											</tr>
+										</thead>
+										{forms.columns &&
+											forms.columns.map((column) => (
+												<tbody key={column.name}>
+													<tr>
+														<td className="formOptionsNameTableText">
+															{column.name}
+														</td>
+														<td className="formOptionsNameTableButton">
+															<input
+																className="formOptionsNameTableButton"
+																type="checkbox"
+																value={column.value}
+																onClick={() => {
+																	column.value = !column.value
+																	console.log(column.value)
+																	getAllowed()
+																}}
+															/>
+														</td>
+													</tr>
+												</tbody>
+											))}
+									</table>
+								))}
+						</div>
 					</div>
-				</div>
-				<center>
 					<div className="table">
 						<table className="tableStriped">
 							<thead>
@@ -279,13 +279,11 @@ function Data() {
 												))}
 										</tr>
 									))}
-
-
 							</tbody>
 						</table>
 					</div>
 					{error && <div>Error: {error.message}</div>}
-				</center>
+				</div>
 			</div>
 			<Footer />
 		</div>
