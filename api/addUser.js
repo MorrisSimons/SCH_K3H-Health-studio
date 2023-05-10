@@ -3,6 +3,10 @@ const { v4: uuid } = require("uuid")
 
 module.exports = async (req, res) => {
 	try {
+		if (!req.body.email || !req.body.firstName || !req.body.lastName || !req.body.accountType) {
+			res.status(400).send({ message: "Bad request" })
+			return
+		}
 		const user = {
 			id: uuid(),
 			email: req.body.email,

@@ -1,6 +1,10 @@
 const db = require("../db")
 
 module.exports = async (req, res) => {
+	if (!req.body.formName) {
+		res.status(400).send({ message: "Bad request" })
+		return
+	}
 	try {
 		const table = {
 			name: req.body.formName,

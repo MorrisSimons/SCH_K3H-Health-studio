@@ -2,13 +2,8 @@ const db = require("../db")
 
 module.exports = async (req, res) => {
 	try {
-		console.log("Getting data from tables")
-		console.log(req.body)
-		console.log(req.body.names)
-		console.log(req.body.names[0])
 		// Make a variable for storing the names of the coloumns
 		var tempNames = []
-
 		// Make a variable for storing the names of the tables
 		var tempTables = []
 		// From the request body get the table names and the columns to get from each table
@@ -23,9 +18,6 @@ module.exports = async (req, res) => {
             names: tempNames,
             columns: tempTables
         }
-		console.log(tables)
-		console.log("Sending data from tables")
-        console.log(tables)
 		res.status(200).send(await db.getData(tables))
 
 	} catch (err) {

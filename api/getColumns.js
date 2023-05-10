@@ -2,8 +2,8 @@ const db = require("../db")
 
 module.exports = async (req, res) => {
 	try {
-		if (!req.body.formId) return res.status(400).send("No form ID provided")
-		const raw_form = await db.getColumns(req.body.formId)
+		if (!req.body.name) return res.status(400).send("No form name provided")
+		const raw_form = await db.getColumns(req.body.name)
 		columns = []
 		types = []
 		// Take the value of sql from the json object
