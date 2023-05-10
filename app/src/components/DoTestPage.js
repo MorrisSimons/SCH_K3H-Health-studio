@@ -5,6 +5,7 @@ import DoTest from "./DoTest";
 import DoTestExcel from "./DoTestExcel";
 import Select from "react-select";
 import "./DoTestPage.css";
+const API_PATH = process.env.REACT_APP_API_PATH; //Path to backend
 
 function DoTestPage() {
   const [error, setError] = useState(null);
@@ -15,7 +16,7 @@ function DoTestPage() {
 
   //Get all tablenames and save into Options
   useEffect(() => {
-    fetch("http://localhost:5000/api/getForms", { method: "GET" })
+    fetch(API_PATH + "api/getForms", { method: "GET" })
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -46,7 +47,7 @@ function DoTestPage() {
 
   //Get Data from table in database
   async function getColumns(selected) {
-    const response = await fetch("http://localhost:5000/api/getColumns", {
+    const response = await fetch(API_PATH + "api/getColumns", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

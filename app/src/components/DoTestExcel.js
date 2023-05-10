@@ -2,6 +2,7 @@ import "./DoTest.css";
 import * as XLSX from "xlsx";
 import React, { useState } from "react";
 //Component requires two props inorder to function: data and formName
+const API_PATH = process.env.REACT_APP_API_PATH; //Path to backend
 
 function DoTestExcel(props) {
   const [json, setJson] = useState([]); //Variable to save data from excel file.
@@ -94,7 +95,7 @@ function DoTestExcel(props) {
         };
         console.log(addIntoTable.body);
 
-        fetch("http://localhost:5000/api/addIntoTable", addIntoTable)
+        fetch(API_PATH+ "api/addIntoTable", addIntoTable)
           .then((response) => response.json())
           .then((data) => console.log(data));
       }
