@@ -26,6 +26,7 @@
 		"body-parser": "^1.20.2",
 		"concurrently": "^7.6.0",
 		"cors": "^2.8.5",
+		"d3": "^7.8.4",
 		"dependencies": "^0.0.1",
 		"emailjs": "^4.0.1",
 		"emailjs-com": "^3.2.0",
@@ -40,6 +41,7 @@
 		"styled-components": "^5.3.10",
 		"uuid": "^9.0.0",
 		"web-vitals": "^3.3.0",
+		"xlsx": "^0.18.5",
 		"xlsx-import": "^2.4.4"
 	},
 	"devDependencies": {

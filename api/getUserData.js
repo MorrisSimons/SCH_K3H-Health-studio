@@ -2,14 +2,11 @@ const db = require("../db")
 
 module.exports = async (req, res) => {
 	try {
-        if (!req.body.teamEmail) {
-            res.status(400).send({ message: "Invalid team email" })
+        if (!req.body.teamEmail || !req.body.names) {
+            res.status(400).send({ message: "Bad request" })
             return
         }
-        if (!req.body.names) {
-            res.status(401).send({ message: "Invalid names" })
-            return
-        }
+
 		// Make a variable for storing the names of the coloumns
 		var tempNames = []
 		// Make a variable for storing the names of the tables

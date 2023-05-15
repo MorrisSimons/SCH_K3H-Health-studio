@@ -39,6 +39,10 @@ https://docs.google.com/spreadsheets/d/1A71pdULP74vXl7q310uMCRC2WnlqLa_422mEqzRx
 
 `npm install styled-components`
 
+`npm install d3`
+
+`npm install xlsx`
+
 
 ## Node JS SQLITE
 
