@@ -6,6 +6,7 @@ import Contact from "./components/Contact"
 import Policy from "./components/Policy"
 import Terms from "./components/Terms"
 import Data from "./components/Data"
+import Analysis from "./components/Analysis"
 //import Add_form from "./components/Add_form_page"
 import LoginDashboardA from "./components/LoginDashboard_a"
 import LoginDashboardC from "./components/LoginDashboard_c"
@@ -31,6 +32,7 @@ const Views = () => {
 			<Route path="/do_test" element={<DoTestPage/>} />
 			<Route path="/createform" element={<AddForm/>} />
 			<Route path="/forms" element={<ManageForms/>} />
+			<Route path="/doanalysis" element={<Analysis/>} />
 			
 		</Routes>
 	)
