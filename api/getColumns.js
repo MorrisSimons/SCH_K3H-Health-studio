@@ -2,8 +2,8 @@ const db = require("../db")
 
 module.exports = async (req, res) => {
 	try {
-		if (!req.body.formId) return res.status(400).send("No form ID provided")
-		const raw_form = await db.getColumns(req.body.formId)
+		if (!req.body.name) return res.status(400).send("No form name provided")
+		const raw_form = await db.getColumns(req.body.name)
 		columns = []
 		types = []
 		// Take the value of sql from the json object
@@ -22,6 +22,10 @@ module.exports = async (req, res) => {
 			//Split using the space as a delimiter
 			array[i] = array[i].split(" ")
 			//Push the first element of the array to the columns array
+			if (array[i][0] === "PRIMARY") {
+				// Break the loop if the primary key is found
+				break
+			}
 			columns.push(array[i][0])
 			//Push the second element of the array to the types array
 			types.push(array[i][1])

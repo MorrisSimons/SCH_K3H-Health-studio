@@ -1,8 +1,8 @@
 From node:18-alpine
-RUN mkdir /app
-WORKDIR /app
-COPY package.json /app
+RUN mkdir /frontend
+WORKDIR /frontend
+COPY package.json /frontend
 RUN npm install
-COPY . /app
+COPY . /frontend
 EXPOSE 3000
 CMD ["npm", "start"]

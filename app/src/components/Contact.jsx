@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import { useRef } from "react";
 import emailjs from "@emailjs/browser";
 import styled from "styled-components";
 import Header from "./Header"
@@ -6,7 +6,7 @@ import Footer from "./Footer"
 
 // npm i @emailjs/browser
 
-const Contact = () => {
+function Contact() {
   const form = useRef();
 
   const sendEmail = (e) => {

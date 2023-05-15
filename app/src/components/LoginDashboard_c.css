@@ -97,16 +97,17 @@
   .dashboard__article:hover {
     transform: translateY(-5px);
   }
-  .dashboard__article--active {
+
+  .dashboard__article--user {
     border-left: 10px solid #8bc34a;
   }
   
-  .dashboard__article--inactive {
-    border-left: 10px solid #ff5722;
+  .dashboard__article--coach {
+    border-left: 10px solid #f44336;
   }
 
-  .dashboard__article--pending {
-    border-left: 10px solid #ff9800;
+  .dashboard__article--admin {
+    border-left: 10px solid #2196f3;; 
   }
 
 

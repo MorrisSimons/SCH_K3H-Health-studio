@@ -17,6 +17,15 @@ const dropTable = require("./api/dropTable")
 const addIntoTable = require("./api/addIntoTable")
 
 const getData = require("./api/getData")
+const getTeamMembers = require("./api/getTeamMembers")
+const getUserType = require("./api/getUserType")
+
+const getTeamStatus = require("./api/getTeamStatus")
+const getTeam = require("./api/getTeam")
+const getCoachData = require("./api/getCoachData")
+
+const getUserData = require("./api/getUserData")
+
 
 //--------------------------------
 // Note app in exspress is diffrent from the app folder in react
@@ -54,34 +63,15 @@ app.use((req, res, next) => {
 })
 
 // This middleware allows cross origin requests
-app.use(cors())
-
+app.use(cors({
+    origin: '*'
+}));
 // This middleware parses incoming requests with JSON payloads
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
 //handel errors for add users
-app.post("/api/addUser", (req, res) => {
-	const { email, firstName, lastName, accountType } = req.body
-	// Validate the email
-	const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-	if (!emailRegex.test(email)) {
-		return res.status(400).json({ message: "Invalid email" })
-	}
-
-	// Validate the first name and last name
-	const nameRegex = /^[a-zA-Z]+$/
-	if (!nameRegex.test(firstName) || !nameRegex.test(lastName)) {
-		return res.status(400).json({ message: "Invalid name, dont use numbers" })
-	}
-
-	// Validate the account type
-	const allowedTypes = ["user", "admin", "coach"]
-	if (!allowedTypes.includes(accountType)) {
-		return res.status(400).json({ message: "Invalid account type" })
-	}
-	addUser(req, res)
-})
+app.post("/api/addUser", addUser)
 
 // This middleware informs the express application to serve our compiled React files
 if (process.env.NODE_ENV === "production") {
@@ -89,15 +79,20 @@ if (process.env.NODE_ENV === "production") {
 }
 
 app.get("/api/getUsers", getUsers)
-
 app.delete("/api/deleteUser", deleteUser)
 app.get("/api/getForms", getForms)
-app.get("/api/getForm", getForm)
+app.post("/api/getForm", getForm)
 app.post("/api/getColumns", getColumns)
 app.post("/api/addTable", addTable)
 app.delete("/api/dropTable", dropTable)
 app.post("/api/addIntoTable", addIntoTable)
 app.post("/api/getData", getData)
+app.post("/api/getTeamMembers", getTeamMembers)
+app.post("/api/getUserType", getUserType)
+app.post("/api/getTeamStatus", getTeamStatus)
+app.post("/api/getTeam", getTeam)
+app.post("/api/getCoachData", getCoachData)
+app.post("/api/getUserData", getUserData)
 
 // Catch any bad requests
 app.get("*", (req, res) => {

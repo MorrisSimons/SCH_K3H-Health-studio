@@ -35,6 +35,11 @@ https://docs.google.com/spreadsheets/d/1A71pdULP74vXl7q310uMCRC2WnlqLa_422mEqzRx
 
 `npm install emailjs-com`
 
+`npm i @emailjs/browser`
+
+`npm install styled-components`
+
+
 ## Node JS SQLITE
 
 docs: https://github.com/TryGhost/node-sqlite3/wiki/API

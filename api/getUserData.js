@@ -2,6 +2,14 @@ const db = require("../db")
 
 module.exports = async (req, res) => {
 	try {
+        if (!req.body.teamEmail) {
+            res.status(400).send({ message: "Invalid team email" })
+            return
+        }
+        if (!req.body.names) {
+            res.status(401).send({ message: "Invalid names" })
+            return
+        }
 		// Make a variable for storing the names of the coloumns
 		var tempNames = []
 		// Make a variable for storing the names of the tables
@@ -13,12 +21,14 @@ module.exports = async (req, res) => {
 		}
 		// Select only the distinct values in tempNames
 		tempNames = [...new Set(tempNames)]
+        tempWhere = "team.email = \"" + req.body.teamEmail + "\""
 
         const tables = {
             names: tempNames,
-            columns: tempTables
+            columns: tempTables,
+            where: tempWhere
         }
-		res.status(200).send(await db.getData(tables))
+		res.status(200).send(await db.getDataWhere(tables))
 
 	} catch (err) {
 		res.status(500).send(err)

@@ -3,6 +3,28 @@ const { v4: uuid } = require("uuid")
 
 module.exports = async (req, res) => {
 	try {
+		if (!req.body.email || !req.body.firstName || !req.body.lastName || !req.body.accountType) {
+			res.status(400).send({ message: "Bad request" })
+			return
+		}
+		const { email, firstName, lastName, accountType } = req.body
+		// Validate the email
+		const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+		if (!emailRegex.test(email)) {
+			return res.status(400).json({ message: "Invalid email" })
+		}
+	
+		// Validate the first name and last name
+		const nameRegex = /^[a-zA-Z]+$/
+		if (!nameRegex.test(firstName) || !nameRegex.test(lastName)) {
+			return res.status(400).json({ message: "Invalid name, dont use numbers" })
+		}
+	
+		// Validate the account type
+		const allowedTypes = ["user", "admin", "coach"]
+		if (!allowedTypes.includes(accountType)) {
+			return res.status(400).json({ message: "Invalid account type" })
+		}
 		const user = {
 			id: uuid(),
 			email: req.body.email,

@@ -8,6 +8,7 @@ import { useRef } from "react"
 import emailjs from "emailjs-com"
 import Select from "react-select"
 import { useState } from "react"
+const API_PATH = process.env.REACT_APP_API_PATH
 
 function Home() {
 	// select options
@@ -44,7 +45,7 @@ function Home() {
 			}),
 		}
 
-		fetch("http://localhost:5000/api/addUser", addUser)
+		fetch(API_PATH + "api/addUser", addUser)
 			.then((response) => response.json())
 			.then((data) => console.log(data))
 		console.log(addUser)
@@ -93,7 +94,7 @@ function Home() {
 							options={options}
 							className="select_box"
 						/>
-						<button type="submit" className="submit_button">
+						<button type="submit" className="add_submit_button">
 							Skicka inbjudan
 						</button>
 						<Link to="/">

@@ -2,14 +2,27 @@
 	text-align: center;
 }
 
+.image1 {
+	float: left;
+  	border-radius: 8px;
+	width: 26%;
+	margin-left: 1%;
+}
+
 .add_form_container {
 	box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
-    left: 0;
-    right: 0;
-    margin: auto;
-	width: 36rem;
+	width: auto;
 	padding-bottom: 10px;
 	border-radius: 5px;
+	float: left;
+	margin-left: 3%;
+}
+
+.image3 {
+	float: right;
+	border-radius: 8px;
+	width: 26%;
+	margin-right: 1%;
 }
 
 .elementsContainer {
@@ -25,8 +38,8 @@
 .add_form_field {
 	text-align: justify;
 	background-color: #1d6976;
-	width: 33.5rem;
 	margin-left: 1rem;
+	margin-right: 1rem;
 	height: 50px;
 	margin-bottom: 5px;
 	padding: 5px;
@@ -68,6 +81,8 @@
 }
 
 .delete {
+	background-color: #ffffff;
+	margin-right: 1rem;
 	margin-left: 1rem;
 	padding: 5px 16px;
 	width: 7rem;

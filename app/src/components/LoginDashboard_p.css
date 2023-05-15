@@ -1,0 +1,82 @@
+div {
+    font-family: 'kanit-thin', sans-serif;
+}
+
+.title {
+    margin-top: -30px;
+    font-size: 20px;
+}
+
+.main_layout {
+    display: grid;
+    grid-template-columns: 20% 56% 20%;
+    grid-column-gap: 1%;
+}
+
+.playerInfo {
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    margin: 1rem 1rem 1rem;
+    padding-top: 1rem;
+    width: 100%;
+    height: fit-content;
+}
+
+.playerPicture {
+    scale: 120%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.playerName {
+    font-weight: 400;
+    text-align: center;
+}
+
+.info p {
+    margin-left: 2%;
+    text-align: left;
+    font-weight: 100;
+}
+
+.side_buttons {
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    margin: 1rem 1rem 1rem;
+    padding-top: 0.5rem;
+    width: 100%;
+    height: fit-content;
+}
+
+.tests {
+    text-align: center;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    margin: 1rem 1rem 1rem;
+    width: 100%;
+}
+
+.tests h2 {
+    font-weight: 400;
+}
+
+.test_buttons_background {
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    margin-left: 1%;
+    padding-top: 10px;
+    background-color:#1d6976;
+    width: 98%;
+}
+
+.test_buttons {
+    display: grid;
+    grid-template-columns: repeat(3, calc(100%/3));
+}
+
+.load_button {
+    margin-top: 2%;
+    margin-left: 25%;
+    width: 50%;
+}
