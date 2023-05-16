@@ -2,7 +2,8 @@ import { useState, useEffect } from "react"
 import Header from "./Header"
 import Footer from "./Footer"
 import "./ManageForms.css"
-
+import IMAGE2 from '../images/image002.jpg'
+import IMAGE6 from '../images/image006.jpg'
 const API_PATH = process.env.REACT_APP_API_PATH;
 
 function ManageForms() {
@@ -67,6 +68,7 @@ function ManageForms() {
 	return (
 		<div>
 			<Header />
+			<img className='image2' src={IMAGE2} />
 			<div class="manageform_container">
 				{tables.map((table) => {
 					return (
@@ -84,6 +86,7 @@ function ManageForms() {
 				})}
 			{error && <div>{error.message}</div>}
 			</div>
+			<img className='image6' src={IMAGE6} />
 			<Footer />
 		</div>
 	)
