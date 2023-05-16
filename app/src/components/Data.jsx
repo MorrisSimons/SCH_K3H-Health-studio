@@ -186,7 +186,7 @@ function Data() {
 					"Content-Type": "application/json",
 				},
 				body: JSON.stringify({
-					formId: selectedOption.value,
+					name: selectedOption.value,
 				}),
 			})
 				.then((response) => {
