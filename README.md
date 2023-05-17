@@ -126,3 +126,15 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+# Future features and improvements
+
+This section contains improvement ideas and potential new feutures for the web app
+
+### Improvements 
+- Styling and CSS for every page
+- Error handling on excel upload (DoTestExcel.js)
+- Overall resposiveness and feedack of website. ex. If a form is removed the website should update directly and not have to be refreshed.
+- 
+
+### New features
