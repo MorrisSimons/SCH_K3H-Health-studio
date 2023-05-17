@@ -26,11 +26,12 @@ module.exports = async (req, res) => {
 			return res.status(400).json({ message: "Invalid account type" })
 		}
 		const user = {
-			id: uuid(),
-			email: req.body.email,
-			firstName: req.body.firstName,
-			lastName: req.body.lastName,
-			accountType: req.body.accountType,
+		    id: uuid(),
+		    email: req.body.email,
+		    firstName: req.body.firstName,
+		    lastName: req.body.lastName,
+		    teamName: req.body.teamName,
+		    accountType: req.body.accountType,
 		}
 
 		await db.addUser(user)
