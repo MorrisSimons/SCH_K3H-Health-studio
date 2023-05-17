@@ -41,8 +41,10 @@ function Home() {
 				email: form.current.mailto.value,
 				firstName: form.current.FirstName.value,
 				lastName: form.current.LastName.value,
+				teamName: form.current.LagNamn.value,
 				accountType: selectedOption.value,
 			}),
+
 		}
 
 		fetch(API_PATH + "api/addUser", addUser)
