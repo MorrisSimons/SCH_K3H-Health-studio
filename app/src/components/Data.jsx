@@ -4,6 +4,8 @@ import Footer from "./Footer"
 import Select from "react-select"
 import DataExportExcel from "./DataExportExcel"
 import "./Data.css"
+import IMAGE4 from '../images/image004.jpg'
+import IMAGE5 from '../images/image005.jpg'
 const API_PATH = process.env.REACT_APP_API_PATH;
 
 function Data() {
@@ -222,6 +224,7 @@ function Data() {
 			<Header />
 			
 			<div className="form">
+				<img className='image4' src={IMAGE4} />
 				<div className="formSelect">
 					<label className="formSelectLabel">Select a form</label>
 					<div className="selectionAndButton">
@@ -236,53 +239,55 @@ function Data() {
 						</button>
 					</div>	
 				</div>
-				<div className="formOptions">
-					<label className="formOptionsLabel">Selected forms:</label>
-					<div className="formOptionsSelection">
-						{selectedForms &&
-							selectedForms.map((forms) => (
-								<table className="formOptionsNameTable" key={forms.id}>
-									<thead>
-										<tr>
-											<th className="formOptionsNameTableText">
-												{forms.tableName}
-											</th>
-											<td className="formOptionsNameTableButton">
-												<button className="formOptionsNameTableButton">
-													X
-												</button>
-											</td>
-										</tr>
-									</thead>
-									{forms.columns &&
-										forms.columns.map((column) => (
-											<tbody key={column.name}>
-												<tr>
-													<td className="formOptionsNameTableText">
-														{column.name}
-													</td>
-													<td className="formOptionsNameTableButton">
-														<input
-															className="formOptionsNameTableButton"
-															type="checkbox"
-															value={column.value}
-															onClick={() => {
-																column.value = !column.value
-																console.log(column.value)
-																getAllowed()
-															}}
-														/>
-													</td>
-												</tr>
-											</tbody>
-										))}
-										<DataExportExcel sheetData={information} sheetName={forms.tableName}/>
-								</table>
-								
-							))}
-					</div>
+				<img className='image5' src={IMAGE5} />
 				</div>
-				<center>
+				<div className="gridOptionsTable">
+					<div className="formOptions">
+						<label className="formOptionsLabel">Selected forms:</label>
+						<div className="formOptionsSelection">
+							{selectedForms &&
+								selectedForms.map((forms) => (
+									<table className="formOptionsNameTable" key={forms.id}>
+										<thead>
+											<tr>
+												<th className="formOptionsNameTableText">
+													{forms.tableName}
+												</th>
+												<td className="formOptionsNameTableButton">
+													<button className="formOptionsNameTableButton">
+														X
+													</button>
+												</td>
+											</tr>
+										</thead>
+										{forms.columns &&
+											forms.columns.map((column) => (
+												<tbody key={column.name}>
+													<tr>
+														<td className="formOptionsNameTableText">
+															{column.name}
+														</td>
+														<td className="formOptionsNameTableButton">
+															<input
+																className="formOptionsNameTableButton"
+																type="checkbox"
+																value={column.value}
+																onClick={() => {
+																	column.value = !column.value
+																	console.log(column.value)
+																	getAllowed()
+																}}
+															/>
+														</td>
+													</tr>
+												</tbody>
+											))}
+											<DataExportExcel sheetData={information} sheetName={forms.tableName}/>
+								</table>
+									
+							))}
+						</div>
+					</div>
 					<div className="table">
 						<table className="tableStriped">
 							<thead>
@@ -307,14 +312,11 @@ function Data() {
 												))}
 										</tr>
 									))}
-
-
 							</tbody>
 						</table>
 					</div>
 					{error && <div>Error: {error.message}</div>}
-				</center>
-			</div>
+				</div>
 			
 			<Footer />
 		</div>

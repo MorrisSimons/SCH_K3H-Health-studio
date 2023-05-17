@@ -1,6 +1,23 @@
 .manageform_container {
-    padding: 2rem;
+    float: left;
+    width: 50%;
+    margin-top: -1rem;
 }
+
+.image2 {
+    float: left;
+    border-radius: 8px;
+    width: 24%;
+    margin-left: 1%;
+}
+
+.image6 {
+    float: right;
+    border-radius: 8px;
+    width: 24%;
+    margin-right: 1%;
+}
+
 
 .manageform_field {
     background-color: #1d6976;
@@ -10,7 +27,7 @@
 }
 
 
-    
+
 .manageform_text {
     width: 20rem;
     font-size: x-large;

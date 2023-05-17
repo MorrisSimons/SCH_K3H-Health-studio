@@ -1,8 +1,14 @@
 import { useState, useEffect } from "react"
 import Header from "./Header"
 import Footer from "./Footer"
+<<<<<<< HEAD:app/src/components/ManageDatabase.jsx
 import "./ManageDatabase.css"
 
+=======
+import "./ManageForms.css"
+import IMAGE2 from '../images/image002.jpg'
+import IMAGE6 from '../images/image006.jpg'
+>>>>>>> add_images:app/src/components/ManageForms.jsx
 const API_PATH = process.env.REACT_APP_API_PATH;
 
 function ManageDatabase() {
@@ -95,6 +101,7 @@ function ManageDatabase() {
 	return (
 		<div>
 			<Header />
+			<img className='image2' src={IMAGE2} />
 			<div class="manageform_container">
 				{tables.map((table) => {
 					return (
@@ -127,7 +134,11 @@ function ManageDatabase() {
 			</div>
 			{error && <div>{error.message}</div>}
 			</div>
+<<<<<<< HEAD:app/src/components/ManageDatabase.jsx
 
+=======
+			<img className='image6' src={IMAGE6} />
+>>>>>>> add_images:app/src/components/ManageForms.jsx
 			<Footer />
 		</div>
 	)
