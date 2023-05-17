@@ -53,7 +53,7 @@ function DoTestPage() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        formId: selected.value,
+        name: selected.value,
       }),
     });
     const data = await response.json(); //Await to get data from database in right order

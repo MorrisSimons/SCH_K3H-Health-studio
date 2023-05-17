@@ -3,6 +3,7 @@ const db = require("../db")
 module.exports = async (req, res) => {
 	try {
 		if (!req.body.name) return res.status(400).send("No form name provided")
+		
 		const raw_form = await db.getColumns(req.body.name)
 		columns = []
 		types = []
