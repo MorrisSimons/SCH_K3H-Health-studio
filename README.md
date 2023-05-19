@@ -8,41 +8,6 @@ https://www.figma.com/file/SEQnpyUGgkIsYSH9ZHfZpy/Untitled?node-id=1%3A2&t=qcgGl
 
 https://docs.google.com/spreadsheets/d/1A71pdULP74vXl7q310uMCRC2WnlqLa_422mEqzRx7qQ/edit#gid=215556197
 
-## library/requirements
-`npm install create-react-app`
-
-`npm install react-router-dom`
-
-`npm install jwt-decode`
-
-`npm install react-scripts --save-dev`
-
-`npm install express`
-
-`npm install sqlite3`
-
-`npm install uuid`
-
-`npm install nodemon`
-
-`npm install web-vitals`
-
-`npm install concurrently`
-
-`npm install file-regex -S`
-
-`npm i --save react-select`
-
-`npm install emailjs-com`
-
-`npm i @emailjs/browser`
-
-`npm install styled-components`
-
-`npm install d3`
-
-`npm install xlsx`
-
 
 ## Node JS SQLITE
 
