@@ -61,7 +61,6 @@ function DoTestPage() {
     const tempData = data.fields.map((field, index) => {
       return {
         name: field,
-        value: false,
         dataType: data.types[index],
       };
     });
