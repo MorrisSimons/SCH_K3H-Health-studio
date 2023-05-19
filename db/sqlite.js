@@ -27,12 +27,13 @@ function init() {
 		}
 		// Create a user table with columns for id, email, firstName, lastName, and accountType.
 		db.run(
-		  	"CREATE TABLE IF NOT EXISTS user(id varchar(36), email VARCHAR(255) primary key, firstName VARCHAR(255), lastName VARCHAR(255), accountType VARCHAR(255))",
+		  	"CREATE TABLE IF NOT EXISTS user(id varchar(36), email VARCHAR(255) primary key, firstName VARCHAR(255), lastName VARCHAR(255), teamName VARCHAR(255), accountType VARCHAR(255))",
 		  	(err, result) => {
 			// If there is an error creating the table, reject the Promise with the error object.
 			if (err) return rej(err);
 			// If the table is created successfully, resolve the Promise with no value.
 			acc();
+				
 		  }
 		);
 		// Create a team table with columns for name and email, and a primary key on (name, email).
@@ -87,34 +88,36 @@ async function getUser(email) {
 
 // This function adds a new user to the user table in the SQLite database.
 async function addUser(user) {
-	return new Promise((acc, rej) => {
-		// If any required properties of the user object are missing, return a 400 Bad Request error.
-		if (!user.id || !user.email || !user.firstName || !user.lastName) {
-			const error = new Error("Missing required user information.");
-			error.statusCode = 400;
-			return rej(error);
-		}
-		db.run(
-			"INSERT INTO user (id, email, firstName, lastName, accountType) VALUES (?, ?, ?, ?, ?)",
-			[
-				user.id,
-				user.email,
-				user.firstName,
-				user.lastName,
-				user.accountType || "user", // If the accountType property is not provided, default to "user".
-			],
-			(err) => {
-				if (err) {
-					console.error(err.message);
-					const error = new Error("Failed to add user to database.");
-					error.statusCode = 500;
-					return rej(error);
-				}
-				acc();
-			}
-	  	);
-	});
+    return new Promise((acc, rej) => {
+	// If any required properties of the user object are missing, return a 400 Bad Request error.
+        if (!user.id || !user.email || !user.firstName || !user.lastName) {
+            const error = new Error("Missing required user information.")
+            error.statusCode = 400
+            return rej(error)
+        }
+        db.run(
+            "INSERT INTO user (id, email, firstName, lastName, teamName, accountType) VALUES (?, ?, ?, ?, ?, ?)",
+            [
+                user.id,
+                user.email,
+                user.firstName,
+                user.lastName,
+                user.teamName,
+                user.accountType || "user",  // If the accountType property is not provided, default to "user".
+            ],
+            (err) => {
+                if (err) {
+                    console.error(err.message) // log the specific error message
+                    const error = new Error("Failed to add user to database.")
+                    error.statusCode = 500
+                    return rej(error)
+                }
+                acc()
+            }
+        )
+    })
 }
+
 
 // This function removes a user from the user table in the SQLite database with a matching email address.
 async function removeUser(email) {

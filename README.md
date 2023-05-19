@@ -126,3 +126,24 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+# Future features and improvements
+
+This section contains improvement ideas and potential new feutures for the web app
+
+### Improvements 
+- Styling and CSS for every page
+- The footer should not block any information on the page, it should be fixed to the bottom of the page
+- Error handling on excel upload (DoTestExcel.js), now it gives error message when the column names are in the wrong order, but it sends the data correct to database. And more.
+- Overall resposiveness and feedack of website. ex. If a form is removed the website should update directly and not have to be refreshed.
+- Enable choosing data from more than one form in data.js
+- Add to the analysis.jsx page, enable choosing data and form to be analyzed in graphs
+- If email is missing in excel file the user should be able to add it in doTestExcel.js
+- Improve overall security and gdpr-handling
+- Possibly fix own login function instead of using google gmail
+- Enable editing of forms and data
+- Enable having accepted interval in the forms data, remove extreme values, for example not accept a weight of 2000kg in benchpress
+
+
+
+### New features
