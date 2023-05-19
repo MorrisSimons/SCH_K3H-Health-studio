@@ -1,7 +1,7 @@
 # Table of contents
--DB
---Index.js 
---SQLITE.js
+- DB
+    - [Index.js](#indexjs) 
+    - [SQLITE.js](#sqlitejs)
 
 
 ## Index.js

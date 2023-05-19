@@ -27,7 +27,7 @@ function init() {
 		}
 		// Create a user table with columns for id, email, firstName, lastName, and accountType.
 		db.run(
-		  	"CREATE TABLE IF NOT EXISTS user(id varchar(36), email VARCHAR(255) primary key, firstName VARCHAR(255), lastName VARCHAR(255), teamName VARCHAR(255), accountType VARCHAR(255))",
+		  	"CREATE TABLE IF NOT EXISTS user(id varchar(36), email VARCHAR(255), firstName VARCHAR(255), lastName VARCHAR(255), accountType VARCHAR(255), PRIMARY KEY(email))",
 		  	(err, result) => {
 			// If there is an error creating the table, reject the Promise with the error object.
 			if (err) return rej(err);
@@ -96,13 +96,12 @@ async function addUser(user) {
             return rej(error)
         }
         db.run(
-            "INSERT INTO user (id, email, firstName, lastName, teamName, accountType) VALUES (?, ?, ?, ?, ?, ?)",
+            "INSERT INTO user (id, email, firstName, lastName, accountType) VALUES (?, ?, ?, ?, ?)",
             [
                 user.id,
                 user.email,
                 user.firstName,
                 user.lastName,
-                user.teamName,
                 user.accountType || "user",  // If the accountType property is not provided, default to "user".
             ],
             (err) => {
@@ -273,6 +272,8 @@ async function addIntoTable(table, data) {
 		// Use the db.run() function to execute a SQL query that inserts a new table into the database with the values from the table object.
 		try {
 			console.log("Adding data into table " + table.name)
+			console.log(data)
+			console.log(table)
 			req_text = "INSERT INTO " + table.name + " ("
 			for (i = 0; i < table.fields.length; i++) {
 				req_text += table.fields[i]
@@ -295,7 +296,6 @@ async function addIntoTable(table, data) {
 				}
 			}
 			req_text += ")"
-			console.log(req_text)
 			db.exec(req_text, (err, result) => {
 				if (err) return rej(err)
 			})

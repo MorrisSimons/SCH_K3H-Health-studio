@@ -3,7 +3,7 @@ const { v4: uuid } = require("uuid")
 
 module.exports = async (req, res) => {
 	try {
-		if (!req.body.email || !req.body.firstName || !req.body.lastName || !req.body.accountType) {
+		if (!req.body.email || !req.body.firstName || !req.body.lastName || !req.body.accountType || !req.body.teamName) {
 			res.status(400).send({ message: "Bad request" })
 			return
 		}
@@ -30,10 +30,18 @@ module.exports = async (req, res) => {
 		    email: req.body.email,
 		    firstName: req.body.firstName,
 		    lastName: req.body.lastName,
-		    teamName: req.body.teamName,
 		    accountType: req.body.accountType,
 		}
 
+		const table = {
+			name: "team",
+			fields: ["name", "email"]
+		}
+		const data = {
+			values: [req.body.teamName, req.body.email]
+		}
+
+		await db.addIntoTable(table, data)
 		await db.addUser(user)
 		res.send(user)
 	} catch (err) {
