@@ -21,24 +21,25 @@
 - [NotFound.jsx](#notfoundjsx)
 - [Policy.js](#policyjs)
 - [Terms.js](#termsjs)
+- [Login.js](#loginjs)
 - [App.js](#appjs)
 - [App.test.js](#apptestjs)
 - [reportWebVitals.js](#reportwebvitalsjs)
 - [setupTests.js](#setuptestsjs)
-- [view.js](#viewjs)
-- [Login.js](#loginjs)
+- [views.jsx](#viewsjsx)
+
 
 
 # FRONTEND
 
 ## About.js
-#### A page that displays information about the project and the team behind it.
+#### A page that displays information about the project and the team behind it. Can be reached from the footer.
 
 ## AddCoach.jsx
-#### A page that allows the user to add a coach to the database. The coach will receive an email with a link to the login page.
+#### A page that allows the admin to add a coach to the database. The coach will receive an email with a link to the login page, but can also just log in.
 
 ## AddForm.js
-#### A page that allows the user to add a form to the database. The form will be available for the admin to fill in, in doTest.
+#### A page that allows the user to add a form(table) to the database. The form will be available for the admin to fill in, in doTest.
 #### The data that is sent to the database
 ```
 {
@@ -50,7 +51,7 @@ ataType: dataTypeList,
 #### FieldsList and dataTypeList must be the same length. The list is converted from this format: {name: "", dataType: "" }
 
 ## Analysis.js
-#### A page that allows the user to view the analysis of the data. -----
+#### A page that allows the user to view the analysis of the data. Currently showing a dummy page. Should be able to choose which data to show in the graph.
 
 ## Contact.jsx
 #### A page that allows the user to contact the team behind the project by sending an email. 
@@ -127,7 +128,7 @@ formName = "exampleTableName"
 
 
 ## Footer.js
-#### A page that displays the footer. Footer contains links to the privacy policy and terms of use.
+#### A page that displays the footer. Footer contains links to About us, Contact us, Privacy policy and Terms of use.
 
 ## Header.js
 #### A page that displays the header. Header contains the logo and profile picture. Pressing the logo will take the user to the home page.
@@ -139,16 +140,16 @@ formName = "exampleTableName"
 #### A page that displays the line chart. Currently showing a dummy chart.
 
 ## LoginDashboard_a.jsx
-#### A page that allows the admin to see the admin specific pages.
+#### A page that allows the admin to see the admin specific pages. Only the admin can make and remove forms, do tests, see alla data and add coaches.
 
 ## LoginDashboard_c.jsx
-#### A page that allows the coach to see the coach specific pages.
+#### A page that allows the coach to see the coach specific pages. A coach can can see the teams data.
 
 ## LoginDashboard_p.jsx
-#### A page that allows the participant to see the participant specific pages.
+#### A page that allows the participant to see the participant specific pages. A participant can only see their own data.
 
 ## ManageDatabase.jsx
-#### A page that allows the user to manage the database.
+#### A page that allows the user to manage the database. Currently only able to remove form/table in database.
 
 ## NotFound.jsx
 #### A page that displays a 404 error.
@@ -157,28 +158,27 @@ formName = "exampleTableName"
 #### A page that displays the privacy policy.
 
 ## Terms.js
-#### A page that displays the terms of use. Currently showing a dummy page.
+#### A page that displays the terms of service. Currently showing a dummy page.
+
+## Login.js
+#### A page that allows the user to login. The user can login with google to then be directed to correct page.
 
 ## App.js
-#### The main page of the web app. Contains the routing for the web app. And the path to views.js, which is the main page of the web app.
+#### The main file of the web app. Contains the routing for the web app. And the path to views.js, which cointains the routing for every page of the web app.
 
-## views.js
-#### A page that allows the user to view the views. Contains the routing for every page of the web app. Here you can change if you want to see the webapp in admin, coach or participant mode.
+## views.jsx
+#### Contains the routing for every page of the web app. Here you can change as a developer if you want to see the webapp in admin, coach or participant mode.
 
 ## App.test.js
 
 
 ## reportWebVitals.js
-#### A page that allows the user to view the web vitals.
 
 ## setupTests.js
 #### A page that allows the user to setup the tests.
 
 
 
-## Login.js
 
-## server.js
 
-## server.test.js
 
