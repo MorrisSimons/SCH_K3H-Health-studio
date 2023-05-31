@@ -1,53 +1,53 @@
-import { useRef } from "react";
-import emailjs from "@emailjs/browser";
-import styled from "styled-components";
-import Header from "./Header"
-import Footer from "./Footer"
+import { useRef } from 'react'
+import emailjs from '@emailjs/browser'
+import styled from 'styled-components'
+import Header from './Header'
+import Footer from './Footer'
 
 // npm i @emailjs/browser
 
-function Contact() {
-  const form = useRef();
+function Contact () {
+  const form = useRef()
 
   const sendEmail = (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
     emailjs
       .sendForm(
-        "service_thku59c",
-        "template_8wk6pdi",
+        'service_thku59c',
+        'template_8wk6pdi',
         form.current,
-        "8sejxXdF6c9GA9HHI"
+        '8sejxXdF6c9GA9HHI'
       )
       .then(
         (result) => {
-          console.log(result.text);
-          console.log("message sent");
+          console.log(result.text)
+          console.log('message sent')
         },
         (error) => {
-          console.log(error.text);
+          console.log(error.text)
         }
-      );
-  };
+      )
+  }
 
   return (
     <StyledContactForm>
       <Header />
       <form ref={form} onSubmit={sendEmail}>
         <label>Name</label>
-        <input type="text" name="user_name" />
+        <input type='text' name='user_name' />
         <label>Email</label>
-        <input type="email" name="user_email" />
+        <input type='email' name='user_email' />
         <label>Message</label>
-        <textarea name="message" />
-        <input type="submit" value="Send" />
+        <textarea name='message' />
+        <input type='submit' value='Send' />
       </form>
       <Footer />
     </StyledContactForm>
-  );
+  )
 };
 
-export default Contact;
+export default Contact
 
 const StyledContactForm = styled.div`
   form {
@@ -93,4 +93,4 @@ const StyledContactForm = styled.div`
     color: white;
     border: none;
   }  
-  `;
+  `

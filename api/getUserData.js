@@ -1,33 +1,32 @@
-const db = require("../db")
+const db = require('../db')
 
 module.exports = async (req, res) => {
-	try {
-        if (!req.body.teamEmail || !req.body.names) {
-            res.status(400).send({ message: "Bad request" })
-            return
-        }
+  try {
+    if (!req.body.teamEmail || !req.body.names) {
+      res.status(400).send({ message: 'Bad request' })
+      return
+    }
 
-		// Make a variable for storing the names of the coloumns
-		var tempNames = []
-		// Make a variable for storing the names of the tables
-		var tempTables = []
-		// From the request body get the table names and the columns to get from each table
-		for (i = 0; i < req.body.names.length; i++) {
-			tempNames.push(req.body.names[i].tableName)
-			tempTables.push(req.body.names[i].tableName + "." + req.body.names[i].columnName)
-		}
-		// Select only the distinct values in tempNames
-		tempNames = [...new Set(tempNames)]
-        tempWhere = "team.email = \"" + req.body.teamEmail + "\""
+    // Make a variable for storing the names of the coloumns
+    let tempNames = []
+    // Make a variable for storing the names of the tables
+    const tempTables = []
+    // From the request body get the table names and the columns to get from each table
+    for (i = 0; i < req.body.names.length; i++) {
+      tempNames.push(req.body.names[i].tableName)
+      tempTables.push(req.body.names[i].tableName + '.' + req.body.names[i].columnName)
+    }
+    // Select only the distinct values in tempNames
+    tempNames = [...new Set(tempNames)]
+    tempWhere = 'team.email = "' + req.body.teamEmail + '"'
 
-        const tables = {
-            names: tempNames,
-            columns: tempTables,
-            where: tempWhere
-        }
-		res.status(200).send(await db.getDataWhere(tables))
-
-	} catch (err) {
-		res.status(500).send(err)
-	}
+    const tables = {
+      names: tempNames,
+      columns: tempTables,
+      where: tempWhere
+    }
+    res.status(200).send(await db.getDataWhere(tables))
+  } catch (err) {
+    res.status(500).send(err)
+  }
 }

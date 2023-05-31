@@ -1,135 +1,136 @@
-import { useState } from 'react';
-import './AddForm.css';
-import Header from './Header';
-import Footer from './Footer';
+import { useState } from 'react'
+import './AddForm.css'
+import Header from './Header'
+import Footer from './Footer'
 import IMAGE1 from '../images/image001.jpg'
 import IMAGE3 from '../images/image003.jpg'
-const API_PATH = process.env.REACT_APP_API_PATH;
+const API_PATH = process.env.REACT_APP_API_PATH
 
-function AddForm() {
-  const [formFields, setFormFields] = useState([{ name: "", dataType: "" }]); //Containing data for each field
+function AddForm () {
+  const [formFields, setFormFields] = useState([{ name: '', dataType: '' }]) // Containing data for each field
 
-  //Handle value changes. Updates field with correct value and datatype
+  // Handle value changes. Updates field with correct value and datatype
   const handleFormChange = (event, index) => {
-    let data = [...formFields];
-    const { name, value } = event.target;
-    data[index][name] = value;
-    setFormFields(data);
-  };
+    const data = [...formFields]
+    const { name, value } = event.target
+    data[index][name] = value
+    setFormFields(data)
+  }
 
-  const [formName, setFormName] = useState("");
+  const [formName, setFormName] = useState('')
 
-  const [errorMessage, setErrorMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState('')
 
-  //Handle submit
+  // Handle submit
   const submit = (e) => {
-    let error = 0;
+    let error = 0
     formFields.forEach((field, index) => {
-      //Check if field is empty
-      if (field.name.trim() === "") {
-        setErrorMessage(`Field number ${index + 1} has an empty name.`);
-        error = 1;
+      // Check if field is empty
+      if (field.name.trim() === '') {
+        setErrorMessage(`Field number ${index + 1} has an empty name.`)
+        error = 1
       }
-      //Check if datatype is selected
-      else if (field.dataType.trim() === "") {
-        setErrorMessage(`Missing datatype at field number ${index + 1}`);
-        error = 1;
+      // Check if datatype is selected
+      else if (field.dataType.trim() === '') {
+        setErrorMessage(`Missing datatype at field number ${index + 1}`)
+        error = 1
       }
-      //Check if formname is empty
-      else if (formName === "") {
-        console.log("Name of form missing");
-        setErrorMessage("Name of form missing");
-        error = 1;
+      // Check if formname is empty
+      else if (formName === '') {
+        console.log('Name of form missing')
+        setErrorMessage('Name of form missing')
+        error = 1
       }
-    });
-    //If no errors Submit form to database
+    })
+    // If no errors Submit form to database
     if (error === 0) {
-      //create object to store fieldnames and datatypes
-      const bodyData = {};
-      //iterate each field and store into bodydata
+      // create object to store fieldnames and datatypes
+      const bodyData = {}
+      // iterate each field and store into bodydata
       formFields.forEach((i) => {
-        bodyData[i.name] = i.dataType;
-      });
+        bodyData[i.name] = i.dataType
+      })
 
-      const fieldsList = Object.keys(bodyData);
-      const dataTypeList = Object.values(bodyData);
+      const fieldsList = Object.keys(bodyData)
+      const dataTypeList = Object.values(bodyData)
 
-      //Send data to database
+      // Send data to database
       const addTable = {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           name: formName,
           fields: fieldsList,
-          dataType: dataTypeList,
-        }),
-      };
+          dataType: dataTypeList
+        })
+      }
 
-      fetch(API_PATH + "api/addTable", addTable)
+      fetch(API_PATH + 'api/addTable', addTable)
         .then((response) => response.json())
-        .then((data) => console.log(data));
+        .then((data) => console.log(data))
 
-      //Reset error message
-      setErrorMessage("")
-      //document.getElementById('error-message').innerText = " ";
+      // Reset error message
+      setErrorMessage('')
+      // document.getElementById('error-message').innerText = " ";
     }
 
-    //Else set error message
+    // Else set error message
     else {
-      //document.getElementById('error-message').innerText = errorMessage;
+      // document.getElementById('error-message').innerText = errorMessage;
     }
-  };
+  }
 
-  //create new field
+  // create new field
   const addFields = () => {
-    let object = {
-      name: "",
-      dataType: "",
-    };
+    const object = {
+      name: '',
+      dataType: ''
+    }
 
-    setFormFields([...formFields, object]);
-  };
+    setFormFields([...formFields, object])
+  }
 
-  //Remove field
+  // Remove field
   const removeFields = (index) => {
-    let data = [...formFields];
-    data.splice(index, 1);
-    setFormFields(data);
-  };
+    const data = [...formFields]
+    data.splice(index, 1)
+    setFormFields(data)
+  }
 
-  //Set name of form
+  // Set name of form
   const setName = (event) => {
-    setFormName(event.target.value);
-  };
+    setFormName(event.target.value)
+  }
 
-  //Render out form with fields and buttons to add fields and submit form to database
+  // Render out form with fields and buttons to add fields and submit form to database
   return (
     <div>
-      <Header/>
+      <Header />
       <img className='image1' src={IMAGE1} />
-      <div className="App" class="add_form_container">
+      <div className='App' class='add_form_container'>
         <div class='nameInput'>
-            <input class='formNameInput'
-              name='name'
-              placeholder='Namn på formulär'
-              onChange={setName}
-            />
+          <input
+            class='formNameInput'
+            name='name'
+            placeholder='Namn på formulär'
+            onChange={setName}
+          />
         </div>
         <form onSubmit={submit}>
-          {formFields.map((form, index) => { //rendering out each formfield 
+          {formFields.map((form, index) => { // rendering out each formfield
             return (
               <div className='elementsContainer'>
-                <div key={index} class="add_form_field">
+                <div key={index} class='add_form_field'>
                   <input
-                    class = "add_form_input"
-                    onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }}
+                    class='add_form_input'
+                    onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault() }}
                     name='name'
                     placeholder='Namn'
                     onChange={event => handleFormChange(event, index)}
                     value={form.name}
                   />
                   <select
-                    class = "add_form_select"
+                    class='add_form_select'
                     name='dataType'
                     onChange={event => handleFormChange(event, index)}
                     value={form.dataType}
@@ -140,20 +141,20 @@ function AddForm() {
                     <option value='Datum'>Datum</option>
                     <option value='Tid'>Tid</option>
                   </select>
-                  <button type="button" onClick={() => removeFields(index)} class="delete">Ta bort fält</button>
+                  <button type='button' onClick={() => removeFields(index)} class='delete'>Ta bort fält</button>
                 </div>
               </div>
             )
           })}
         </form>
-        <button onClick={addFields} class="add">Lägg till fält</button>
+        <button onClick={addFields} class='add'>Lägg till fält</button>
         <br />
-        <button onClick={submit} class="submit">Skicka</button>
-        <div class="error" id="errorMessage">{errorMessage}</div>
+        <button onClick={submit} class='submit'>Skicka</button>
+        <div class='error' id='errorMessage'>{errorMessage}</div>
       </div>
       <img className='image3' src={IMAGE3} />
-      <Footer/>
+      <Footer />
     </div>
-  );
+  )
 }
-export default AddForm;
+export default AddForm
