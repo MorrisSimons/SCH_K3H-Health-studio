@@ -1,0 +1,13 @@
+sub: Welcome {{FirstName}} {{LastName}}
+
+cont: Du har blivit inbjuden till K3H Health Studio, där K3H kommer att spara dina hälsodata för att kunna analysera dem. Om du vill ta bort eller få tillgång till dina data kan du göra det genom att logga in på ditt konto: {{mailto}}
+
+Ta mig till inloggningssidan
+
+Bara en påminnelse om att den allmänna dataskyddsförordningen (GDPR) gäller för vårt företag. Denna förordning infördes av Europeiska unionen för att säkerställa att företag och organisationer är transparenta och ansvariga för sin användning av personuppgifter. Som ett företag som verkar inom EU tar vi GDPR på allvar och är engagerade i att skydda våra kunders integritet och rättigheter. Om du har några frågor eller funderingar om GDPR är du välkommen att kontakta oss. Tack för din uppmärksamhet på denna viktiga fråga.
+
+Vänliga hälsningar, K3H Health Studio
+
+to {{mailto}}
+
+from K3H Health studio
